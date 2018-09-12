@@ -1,0 +1,30 @@
+<div class="login-page" [@routerTransition]>
+    <div class="row justify-content-md-center">
+        <div class="col-md-4">
+            <img src="assets/images/logo.png" width="150px" class="user-avatar" />
+            <h1>SB Admin BS4 Angular5</h1>
+
+            <div *ngIf="isLoginError" class="red-text center error-message">
+                <i class="material-icons">error</i> Incorrect username or password
+            </div>
+
+
+            
+            
+            <form [formGroup]='loginFrm' role="form" (ngSubmit)="onLoggedin()" >
+                <div class="form-content">
+                    <div class="md-form" style="padding:5px 0px;">
+                        <input type="text"  formControlName="email" class="form-control  input-lg" id="" placeholder="Email" >
+                        
+                    </div>
+
+                    <div class="md-form" style="padding:5px 0px;">
+                        <input type="password" formControlName="password" class="form-control  input-lg" id="" placeholder="Password">
+                    </div>
+                </div>
+                <button class="btn btn-block btn-primary" type="submit" >Login</button>
+                
+            </form>
+        </div>
+    </div>
+</div>

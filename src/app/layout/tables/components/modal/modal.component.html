@@ -1,0 +1,80 @@
+<button class="btn btn-primary" (click)="open(content)">Large modal</button>
+
+
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Modal title1</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        
+        <form role="form" [formGroup]='formData' (ngSubmit)="doSend()">
+
+                
+            <fieldset class="form-group">
+                <label>Text Input</label>
+                <input class="form-control" formControlName="email">
+                <p class="help-block">Example block-level help text here.</p>
+            </fieldset>
+
+            <div class="form-group">
+                <div class="input-group datepicker-input">
+                    <input  class="form-control" placeholder="yyyy-mm-dd"
+                          formControlName="date1" ngbDatepicker #d1="ngbDatepicker" >
+                    <button class="input-group-addon" (click)="d1.toggle()" type="button">
+                        <!-- <img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/> -->
+                        <span class="fa fa-calendar"></span>
+                    </button>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="input-group datepicker-input">
+                    <input class="form-control" placeholder="yyyy-mm-dd"
+                        formControlName="date2" ngbDatepicker #d2="ngbDatepicker">
+                    <button class="input-group-addon" (click)="d2.toggle()" type="button">
+                        <!-- <img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/> -->
+                        <span class="fa fa-calendar"></span>
+                    </button>
+                </div>
+            </div>
+
+            
+            <div class="form-group">
+            <select  class='form-control' 
+            (change)="ChangingValue($event)" [value]='45'>
+             <option value='47'>47</option>
+             <option value='46'>46</option>
+            <option value='45'>45</option>
+    </select>
+</div>
+
+
+            <fieldset class="form-group">
+                <label for="exampleInputFile">File input</label>
+                <input type="file" class="form-control-file" id="exampleInputFile" (change)="handleFileInput($event.target.files)">
+            </fieldset>
+
+            <fieldset class="form-group">
+                <label>Text area</label>
+                <textarea class="form-control" rows="3"></textarea>
+            </fieldset> 
+
+   
+      
+   
+
+            
+            <div class="modal-footer">
+                    <button type="submit" class="btn btn-secondary">Submit Button</button>
+                    <button type="reset" class="btn btn-secondary">Reset Button</button>
+                    <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+            </div>
+        </form>
+    </div>
+    
+</ng-template>
