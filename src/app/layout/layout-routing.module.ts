@@ -12,6 +12,7 @@ const routes: Routes = [
             { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' , canActivate: [AuthGuard]},
             { path: 'charts', loadChildren: './charts/charts.module#ChartsModule' },
             { path: 'tables', loadChildren: './tables/tables.module#TablesModule' },
+            { path: 'tyres', loadChildren: './tyres/tyres.module#TyresModule' },
             { path: 'forms', loadChildren: './form/form.module#FormModule' },
             { path: 'bs-element', loadChildren: './bs-element/bs-element.module#BsElementModule' },
             { path: 'grid', loadChildren: './grid/grid.module#GridModule' },

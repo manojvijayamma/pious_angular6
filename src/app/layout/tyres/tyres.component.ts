@@ -3,18 +3,18 @@ import { routerTransition } from '../../router.animations';
 
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { UserService } from '../../shared/services/user.service';
+import { TyreService } from '../../shared/services/tyre.service';
 import { ResponseService } from '../../shared/services/response.service';
 import { SpinnerService } from  '../../shared/services/spinner.service';
 
 
 @Component({
     selector: 'app-tables',
-    templateUrl: './tables.component.html',
-    styleUrls: ['./tables.component.scss'],
+    templateUrl: './tyres.component.html',
+    styleUrls: ['./tyres.component.scss'],
     animations: [routerTransition()]
 })
-export class TablesComponent implements OnInit {
+export class TyresComponent implements OnInit {
     userData: any;
     
     pager: {startSI:'',endSI:'',totalRecords:'',totalPages:'',prev:'',next:'',page:'',rowsize:10,sortField:'Name',sortOrder:'ASC'};    
@@ -22,7 +22,7 @@ export class TablesComponent implements OnInit {
     angularForm: FormGroup; 
     sHeight : any;
 
-    constructor(private userService : UserService,
+    constructor(private tyreService : TyreService,
         private frmBuilder: FormBuilder,
         private responseService: ResponseService,
         private spinnerService: SpinnerService) {
@@ -37,10 +37,10 @@ export class TablesComponent implements OnInit {
             page:[""]     
         });
         
-        this.userService.getUserData(this.searchData).subscribe((data: any) => {
-            console.log(data.users.current_page);
-            this.userData = data.users.data;
-            this.pager=data.users.data;
+        this.tyreService.getData(this.searchData).subscribe((data: any) => {
+            console.log(data.tyres.current_page);
+            this.userData = data.tyres.data;
+            this.pager=data.tyres.data;
             this.angularForm.setValue({
                 page:10
             });    
@@ -53,11 +53,7 @@ export class TablesComponent implements OnInit {
     }
 
     doPager(){
-        alert(1);
-    }
-
-    pagination(){
-        alert(2);
+        
     }
 
     ngAfterViewInit(){
