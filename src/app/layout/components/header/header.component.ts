@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
     selector: 'app-header',
@@ -9,8 +10,10 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class HeaderComponent implements OnInit {
     pushRightClass: string = 'push-right';
+    display='none'; 
+    formData: FormGroup; 
 
-    constructor(private translate: TranslateService, public router: Router) {
+    constructor(private translate: TranslateService, public router: Router, private frmBuilder: FormBuilder) {
 
         this.translate.addLangs(['en', 'fr', 'ur', 'es', 'it', 'fa', 'de', 'zh-CHS']);
         this.translate.setDefaultLang('en');
@@ -28,7 +31,17 @@ export class HeaderComponent implements OnInit {
         });
     }
 
-    ngOnInit() {}
+    ngOnInit() {
+        
+        this.formData = this.frmBuilder.group({            
+            email:[null, [Validators.required,Validators.minLength(3),Validators.maxLength(15)]],
+            password:["", [Validators.required]],        
+            date1 : [""],
+            date2 : new Date(1990, 0, 1),
+            file : new Date(1990, 0, 1)
+        });
+
+    }
 
     isToggled(): boolean {
         const dom: Element = document.querySelector('body');
@@ -47,6 +60,19 @@ export class HeaderComponent implements OnInit {
 
     onLoggedout() {
         localStorage.removeItem('isLoggedin');
+    }
+
+
+    doSend(){
+       console.log(this.formData.value);
+    }
+
+    openModalDialog(){
+        this.display='block'; //Set block css
+    } 
+
+    closeModalDialog(){
+        this.display='none'; //set none css after close dialog
     }
 
     changeLang(language: string) {

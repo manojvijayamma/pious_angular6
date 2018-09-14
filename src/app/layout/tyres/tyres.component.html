@@ -23,21 +23,20 @@
 
                 </div>
     </div>
+
+
+    <form [formGroup]="searchForm"  (ngSubmit)="doSearch()">
     <div class="row" >
-            <div class="col col-xl-6 col-lg-6">
+            <div class="col col-xl-4 col-lg-4">
                     <div class="form-group">
                             <div class="input-group datepicker-input">
-                                <input  class="form-control" placeholder="yyyy-mm-dd"
-                                      formControlName="date1" ngbDatepicker #d1="ngbDatepicker" >
-                                <button class="input-group-addon" (click)="d1.toggle()" type="button">
-                                    <!-- <img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/> -->
-                                    <span class="fa fa-calendar"></span>
-                                </button>
+                                <input  class="form-control" 
+                                      formControlName="title"  >                                
                             </div>
                         </div>
             </div> 
             
-            <div class="col col-xl-6 col-lg-6">
+            <div class="col col-xl-4 col-lg-4">
                     <div class="form-group">
                             <div class="input-group datepicker-input">
                                 <input  class="form-control" placeholder="yyyy-mm-dd"
@@ -49,7 +48,18 @@
                             </div>
                         </div>
             </div> 
-    </div>    
+
+            <div class="col col-xl-4 col-lg-4">
+                <div class="form-group">
+                        <div class="input-group datepicker-input">
+                            <button type="submit" class="btn btn-secondary">Submit Button</button>
+                        </div>
+                    </div>
+        </div>
+    </div>  
+    </form>
+    
+
             
     <div class="row" >
         <div class="col col-xl-12 col-lg-12">
@@ -77,14 +87,14 @@
                 </table>
             </div>
 
-            <form [formGroup]="angularForm">
+            <form [formGroup]="pagerForm">
             <table class="table table-bordered table-striped table-condensed cf" style="margin-bottom:2px;">
                 <tr>
                 <td style="width:70%">Displaying <b>{{pager.startSI}}</b> to <b>{{pager.endSI}}</b> of <b>{{pager.totalRecords}}</b> records </td>
                 <td class="text-center">Total pages : <b>{{pager.totalPages}}</b></td>
                 <td><a href="javascript:void(0)" ng-click="pagination(1)"><img src="assets/images/page_first.gif" ></a></td>
                 <td><a href="javascript:void(0)" ng-click="pagination(pager.prev)"><img src="assets/images/page_prev.gif" ></a></td>
-                <td style="padding:3px 5px;"><input type="text" class="form-control " style="width:50px;height:30px;" (keydown)="doPager()" (blur)="doPager()"  formControlName="page" ></td>
+                <td style="padding:3px 5px;"><input type="text" class="form-control " style="width:50px;height:30px;" (keyup)="doPager()" (blur)="doPager()"  formControlName="pageNo" ></td>
                 <td><a href="javascript:void(0)" ng-click="pagination(pager.next)"><img src="assets/images/page_next.gif" ></a></td>
                 <td><a href="javascript:void(0)" ng-click="pagination(pager.totalPages)"><img src="assets/images/page_last.gif" ></a></td>
                 </tr>

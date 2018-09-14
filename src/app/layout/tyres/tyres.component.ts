@@ -17,9 +17,10 @@ import { SpinnerService } from  '../../shared/services/spinner.service';
 export class TyresComponent implements OnInit {
     userData: any;
     
-    pager: {startSI:'',endSI:'',totalRecords:'',totalPages:'',prev:'',next:'',page:'',rowsize:10,sortField:'Name',sortOrder:'ASC'};    
-    searchData = {Name:'',rowsize:10,sortField:'Name',sortOrder:'ASC'} ;
-    angularForm: FormGroup; 
+    pager: {startSI:'',endSI:'',totalRecords:'',totalPages:'',prev:'',next:'',pageNo:'',rowsize:10,sortField:'Name',sortOrder:'ASC'};    
+    
+    pagerForm: FormGroup; 
+    searchForm: FormGroup;
     sHeight : any;
 
     constructor(private tyreService : TyreService,
@@ -30,30 +31,61 @@ export class TyresComponent implements OnInit {
     }
 
     ngOnInit() {
+
+        this.spinnerService.show();
+
+        //update grid height
         this.sHeight=(screen.availHeight-330)+"px";
         document.getElementById("gridPanel").style.height=this.sHeight;
-        this.spinnerService.show();
-        this.angularForm = this.frmBuilder.group({            
-            page:[""]     
-        });
         
-        this.tyreService.getData(this.searchData).subscribe((data: any) => {
-            console.log(data.tyres.current_page);
-            this.userData = data.tyres.data;
-            this.pager=data.tyres.data;
-            this.angularForm.setValue({
-                page:10
-            });    
-            console.log(this.pager);
-        }, error => {
-            this.responseService.checkStatus(error);
-               
-            
+        //pagination form
+        this.pagerForm = this.frmBuilder.group({            
+            pageNo:[""]     
         });
+
+        //search form
+        this.searchForm = this.frmBuilder.group({            
+            title:[null],
+            category_id:[""],        
+            type_id : [""]  ,
+            rowsize:10,
+            sortField:'Name',
+            sortOrder:'ASC' ,
+            pageNo:''          
+        });
+
+        this.loadGridData(1);
+        
     }
 
     doPager(){
+       // console.log(this.pagerForm.get('pageNo').value);
+        this.loadGridData(this.pagerForm.get('pageNo').value); 
+    }
+
+    pagination(pageNo){
+        this.loadGridData(pageNo); 
+    }
+
+    doSearch(){
+        //console.log(this.searchForm.value);
+        this.loadGridData(1);    
+    }
+
+    loadGridData(pageNo){
         
+        //this.searchForm.patchValue(pageNo : pageNo);
+        this.searchForm.controls["pageNo"].setValue(pageNo);
+        
+        this.tyreService.getData(this.searchForm.value).subscribe((data: any) => {
+            console.log(data.tyres.current_page);
+            this.userData = data.tyres.data;
+            this.pager=data.tyres.data;
+                
+            //console.log(this.pager);
+        }, error => {
+            this.responseService.checkStatus(error);           
+        });
     }
 
     ngAfterViewInit(){

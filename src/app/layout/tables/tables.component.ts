@@ -56,7 +56,7 @@ export class TablesComponent implements OnInit {
         alert(1);
     }
 
-    pagination(){
+    pagination(page){
         alert(2);
     }
 

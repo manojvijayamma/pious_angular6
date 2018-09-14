@@ -17,11 +17,13 @@ export class TyreService {
 
   getData(searchData){
     
-    let params = new HttpParams(); 
-    params=params.append('rowsize', searchData.rowsize);
-    params=params.append('sortField', searchData.sortField);
-          
-    return  this.http.get(this.rootUrl+'tyre', {params});
+      let params = new HttpParams(); 
+      //params=params.append('rowsize', searchData.rowsize);
+      //params=params.append('sortField', searchData.sortField);
+      for (let key in searchData) {
+         params=params.append(key, searchData[key]);
+      }           
+      return  this.http.get(this.rootUrl+'tyre', {params});
   }
 
  
