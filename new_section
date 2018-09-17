@@ -1,0 +1,31 @@
+1. layout-routing.module.ts  - add new route
+
+2. copy any of one folder
+
+	1. rename tyres.component.html
+	2. tyres.component.scss
+	3. tyres.component.spec.ts
+		1. rename TyresComponent
+
+	4.tyres.component.ts
+		1. update templateUrl
+		2. styleUrls
+		3. class name  :TyresComponent
+		4. update servicename: TyreService
+
+	5.tyres.module.spec.ts
+		1. update TyresModule, tyres , tyresModule
+	
+	6. tyres.module.ts
+		1.TyresModule , TyresComponent
+
+	7. tyres-routing.module.ts
+		1.TyresComponent
+		2. TyresRoutingModule
+
+
+3. create model
+5. create new service
+6. add new service to app modules
+
+
