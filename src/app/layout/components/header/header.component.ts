@@ -3,6 +3,10 @@ import { Router, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
+import { UserService } from '../../../shared/services/user.service';
+import { AlertService } from '../../../shared/services/alert.service';
+import { ResponseService } from '../../../shared/services/response.service';
+
 @Component({
     selector: 'app-header',
     templateUrl: './header.component.html',
@@ -10,10 +14,13 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class HeaderComponent implements OnInit {
     pushRightClass: string = 'push-right';
-    display='none'; 
+    profiledisplay='none'; 
+    passworddisplay='none';
     formData: FormGroup; 
 
-    constructor(private translate: TranslateService, public router: Router, private frmBuilder: FormBuilder) {
+    constructor(private translate: TranslateService, public router: Router, private frmBuilder: FormBuilder,  private userService : UserService,
+    private alertService : AlertService,
+    private responseService :ResponseService ) {
 
         this.translate.addLangs(['en', 'fr', 'ur', 'es', 'it', 'fa', 'de', 'zh-CHS']);
         this.translate.setDefaultLang('en');
@@ -34,12 +41,11 @@ export class HeaderComponent implements OnInit {
     ngOnInit() {
         
         this.formData = this.frmBuilder.group({            
-            email:[null, [Validators.required,Validators.minLength(3),Validators.maxLength(15)]],
-            password:["", [Validators.required]],        
-            date1 : [""],
-            date2 : new Date(1990, 0, 1),
-            file : new Date(1990, 0, 1)
+            email:[null, [Validators.required,Validators.minLength(3),Validators.maxLength(15)]],                 
+            name : [""]           
         });
+
+
 
     }
 
@@ -63,16 +69,63 @@ export class HeaderComponent implements OnInit {
     }
 
 
-    doSend(){
-       console.log(this.formData.value);
+    doSendProfile(){
+        console.log(this.formData.value);
+        document.getElementById("spinner").style.display="block";       
+        
+        this.userService.updateProfile(this.formData.value).subscribe((data : any)=>{
+            console.log(data);
+            if(data.text){
+                this.profiledisplay='none';
+                this.alertService.success("Success");
+            }  
+            else{
+                
+            }  
+          }
+          , error => {
+           
+            this.responseService.checkStatus(error);   
+            
+          });        
     }
 
-    openModalDialog(){
-        this.display='block'; //Set block css
+    doSendPassword(){
+        console.log(this.formData.value);
+        document.getElementById("spinner").style.display="block";       
+        
+        this.userService.updatePassword(this.formData.value).subscribe((data : any)=>{
+            console.log(data);
+            if(data.text){
+                this.profiledisplay='none';
+            }  
+            else{
+                
+            }  
+          }, error => {
+           
+            this.responseService.checkStatus(error);   
+            
+          });        
+    }
+
+
+
+    openModalDialogProfile(){
+        this.profiledisplay='block'; //Set block css
+        this.passworddisplay='none';
     } 
 
-    closeModalDialog(){
-        this.display='none'; //set none css after close dialog
+    openModalDialogPassword(){
+        this.passworddisplay='block'; //Set block css
+        this.profiledisplay='none';
+    } 
+
+    closeModalDialogProfile(){
+        this.profiledisplay='none'; //set none css after close dialog
+    }
+    closeModalDialogPassword(){
+        this.passworddisplay='none'; //set none css after close dialog
     }
 
     changeLang(language: string) {

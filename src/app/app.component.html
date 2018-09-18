@@ -1,14 +1,23 @@
 
 <router-outlet></router-outlet>
 
-<div id="snackbar" class="show" >
-        
+<div class="snackbar" id="alert_success" style="display:none" >        
         <div class="alert alert-success">
-                        <button type="button" class="close" aria-label="Close" style="position:absolute;top:0px;right:5px;" (click)="closeAlert();">
-                                        <span aria-hidden="true">&times;</span>
-                        </button>
-                        &nbsp;
-                        <strong>Success!</strong> Indicates a successful or positive action.
+                <button type="button" class="close" aria-label="Close" style="position:absolute;top:0px;right:5px;" (click)="closeAlert();">
+                                <span aria-hidden="true">&times;</span>
+                </button>
+                &nbsp;
+                <span id="alert_success_message">Indicates a successful or positive action.</span>
+        </div>
+</div>
+
+<div class="snackbar" id="alert_error" style="display:none" >        
+        <div class="alert alert-danger">
+                <button type="button" class="close" aria-label="Close" style="position:absolute;top:0px;right:5px;" (click)="closeAlert();">
+                                <span aria-hidden="true">&times;</span>
+                </button>
+                &nbsp;
+                <strong><i class="glyphicon glyphicon-ok"></i></strong><span id="alert_error_message">Indicates a successful or positive action.</span>
         </div>
 </div>
 

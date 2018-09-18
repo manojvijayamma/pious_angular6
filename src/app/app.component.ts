@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { AlertService } from './shared/services/alert.service';
 
 @Component({
     selector: 'app-root',
@@ -8,10 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
     public hideSpinner : true;
-    constructor() {
-        setTimeout (() => {
-            document.getElementById("snackbar").style.display="none";
-         }, 5000);
+    constructor(private alertService : AlertService) {
+        
     }
 
 
@@ -20,7 +18,7 @@ export class AppComponent implements OnInit {
     }
 
     closeAlert(){
-        document.getElementById("snackbar").style.display="none";
+        this.alertService.close();        
     }
 
     

@@ -15,9 +15,8 @@ import { SpinnerService } from  '../../shared/services/spinner.service';
     animations: [routerTransition()]
 })
 export class TyresComponent implements OnInit {
-    userData: any;
-    
-    pager: {startSI:'',endSI:'',totalRecords:'',totalPages:'',prev:'',next:'',pageNo:'',rowsize:10,sortField:'Name',sortOrder:'ASC'};    
+    gridData: any;    
+    pager: {startSI:'',endSI:'',totalRecords:'',totalPages:'',prev:'',next:'',pageNo:''};    
     
     pagerForm: FormGroup; 
     searchForm: FormGroup;
@@ -64,6 +63,7 @@ export class TyresComponent implements OnInit {
     }
 
     pagination(pageNo){
+        alert(1);
         this.loadGridData(pageNo); 
     }
 
@@ -78,9 +78,9 @@ export class TyresComponent implements OnInit {
         this.searchForm.controls["pageNo"].setValue(pageNo);
         
         this.tyreService.getData(this.searchForm.value).subscribe((data: any) => {
-            console.log(data.tyres.current_page);
-            this.userData = data.tyres.data;
-            this.pager=data.tyres.data;
+           // console.log(data.tyres.current_page);
+            this.gridData = data.gridData.data;
+            this.pager=data.pager; 
                 
             //console.log(this.pager);
         }, error => {

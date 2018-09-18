@@ -16,7 +16,7 @@ export class DashboardComponent implements OnInit {
 
     dashboardData: any;
     headerData:any;
-    constructor(private userService : UserService, private router: Router) {
+    constructor(private userService : UserService, private router: Router, private responseService: ResponseService) {
        
     }
 
@@ -28,7 +28,7 @@ export class DashboardComponent implements OnInit {
 
         }, error => {
            
-            this.userService.checkStatus(error);   
+            this.responseService.checkStatus(error);   
             
         });
           

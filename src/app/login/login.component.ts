@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { routerTransition } from '../router.animations';
 
 import { UserService } from '../shared/services/user.service';
-
+import { AlertService } from '../shared/services/alert.service';
 
 
 @Component({
@@ -25,7 +25,8 @@ export class LoginComponent implements OnInit {
     @Output() hideSpinnerChanged: EventEmitter<boolean> = new EventEmitter();
     
 
-    constructor(private frmBuilder: FormBuilder, public router: Router, private userService : UserService) {}
+    constructor(private frmBuilder: FormBuilder, public router: Router, private userService : UserService,
+    private alertService : AlertService) {}
   
     ngOnInit() {        
         this.loginFrm = this.frmBuilder.group({            
@@ -37,6 +38,10 @@ export class LoginComponent implements OnInit {
     }
 
     onLoggedin() {
+        if(this.loginFrm.value.email==''){
+            this.alertService.error("Enter email");
+            return false;
+        }
         document.getElementById("spinner").style.display="block";
         console.log(this.loginFrm.value);
         var userData=this.loginFrm.value;

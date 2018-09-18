@@ -44,11 +44,21 @@ export class UserService {
     return  this.http.get(this.rootUrl+'user', {params});
   }
 
+
+  /*
   checkStatus(error){
     if (error.status === 401) {
         this.router.navigateByUrl('/login');
-    } 
+    }  
+  }*/
   
+
+  updateProfile(data){     
+      return this.http.post(this.rootUrl+'profile' , data);
+  }
+
+  updatePassword(data){     
+    return this.http.post(this.rootUrl+'password' , data);
   }
 
 }

@@ -18,6 +18,7 @@ import { AuthInterceptor } from './shared';
 import { UserService } from './shared/services/user.service';
 import { ResponseService } from './shared/services/response.service';
 import { SpinnerService } from './shared/services/spinner.service';
+import { AlertService } from './shared/services/alert.service';
 import { TyreService } from './shared/services/tyre.service';
 
 
@@ -51,7 +52,7 @@ export const createTranslateLoader = (http: HttpClient) => {
         AppRoutingModule
     ],
     declarations: [AppComponent],
-    providers: [UserService, ResponseService,SpinnerService, AuthGuard, TyreService,
+    providers: [UserService, ResponseService,SpinnerService, AuthGuard, TyreService, AlertService,
         {
             provide : HTTP_INTERCEPTORS,
             useClass : AuthInterceptor,
