@@ -6,6 +6,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../../../shared/services/user.service';
 import { AlertService } from '../../../shared/services/alert.service';
 import { ResponseService } from '../../../shared/services/response.service';
+import { SpinnerService } from  '../../../shared/services/spinner.service';
 
 @Component({
     selector: 'app-header',
@@ -17,10 +18,12 @@ export class HeaderComponent implements OnInit {
     profiledisplay='none'; 
     passworddisplay='none';
     formData: FormGroup; 
+    passwordFormData: FormGroup; 
 
     constructor(private translate: TranslateService, public router: Router, private frmBuilder: FormBuilder,  private userService : UserService,
     private alertService : AlertService,
-    private responseService :ResponseService ) {
+    private responseService :ResponseService,
+    private spinnerService: SpinnerService ) {
 
         this.translate.addLangs(['en', 'fr', 'ur', 'es', 'it', 'fa', 'de', 'zh-CHS']);
         this.translate.setDefaultLang('en');
@@ -43,6 +46,12 @@ export class HeaderComponent implements OnInit {
         this.formData = this.frmBuilder.group({            
             email:[null, [Validators.required,Validators.minLength(3),Validators.maxLength(15)]],                 
             name : [""]           
+        });
+
+        this.passwordFormData = this.frmBuilder.group({            
+            current_password:[null, [Validators.required,Validators.minLength(3),Validators.maxLength(15)]],                 
+            new_password : [null, [Validators.required,Validators.minLength(3),Validators.maxLength(15)]],
+            confirm_password : [null, [Validators.required,Validators.minLength(3),Validators.maxLength(15)]],         
         });
 
 
@@ -71,13 +80,23 @@ export class HeaderComponent implements OnInit {
 
     doSendProfile(){
         console.log(this.formData.value);
-        document.getElementById("spinner").style.display="block";       
+        if(this.formData.value.name==null){
+            this.alertService.error("Enter name");
+            return false;
+        }
+        if(this.formData.value.email==null){
+            this.alertService.error("Enter email");
+            return false;
+        }
+
+        this.spinnerService.show();       
         
         this.userService.updateProfile(this.formData.value).subscribe((data : any)=>{
             console.log(data);
             if(data.text){
                 this.profiledisplay='none';
                 this.alertService.success("Success");
+                this.spinnerService.hide();
             }  
             else{
                 
@@ -91,16 +110,34 @@ export class HeaderComponent implements OnInit {
     }
 
     doSendPassword(){
-        console.log(this.formData.value);
-        document.getElementById("spinner").style.display="block";       
+        //console.log(this.passwordFormData.value);
         
-        this.userService.updatePassword(this.formData.value).subscribe((data : any)=>{
+        if(this.passwordFormData.value.current_password==null){
+            this.alertService.error("Enter current password");
+            return false;
+        }
+        if(this.passwordFormData.value.new_password==null){
+            this.alertService.error("Enter new password");
+            return false;
+        }
+        if(this.passwordFormData.value.confirm_password==null){
+            this.alertService.error("Enter confirm password");
+            return false;
+        }
+
+
+        this.spinnerService.show();          
+        
+        this.userService.updatePassword(this.passwordFormData.value).subscribe((data : any)=>{
             console.log(data);
-            if(data.text){
-                this.profiledisplay='none';
+            if(data.status=='error'){               
+                this.alertService.error(data.text);
+                this.spinnerService.hide();
             }  
             else{
-                
+                this.passworddisplay='none';
+                this.alertService.success(data.text);
+                this.spinnerService.hide();
             }  
           }, error => {
            
@@ -111,9 +148,30 @@ export class HeaderComponent implements OnInit {
 
 
 
-    openModalDialogProfile(){
-        this.profiledisplay='block'; //Set block css
-        this.passworddisplay='none';
+    openModalDialogProfile(){ 
+
+          this.spinnerService.show();    
+          this.userService.getProfile('').subscribe((data : any)=>{            
+            if(data.status=='error'){               
+                this.alertService.error(data.text);
+            }  
+            else{
+                this.profiledisplay='block'; //Set block css
+                this.passworddisplay='none';
+                
+                this.formData.setValue({
+                    name:data.profileData.name,
+                    email:data.profileData.email,
+                });
+
+                this.spinnerService.hide();   
+            }  
+          }, error => {
+           
+            this.responseService.checkStatus(error);               
+            
+          });
+        
     } 
 
     openModalDialogPassword(){

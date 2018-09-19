@@ -3,30 +3,26 @@ import { routerTransition } from '../../router.animations';
 
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { TyreService } from '../../shared/services/tyre.service';
+import { OrderService } from '../../shared/services/order.service';
 import { ResponseService } from '../../shared/services/response.service';
 import { SpinnerService } from  '../../shared/services/spinner.service';
 
 
 @Component({
     selector: 'app-tables',
-    templateUrl: './tyres.component.html',
-    styleUrls: ['./tyres.component.scss'],
+    templateUrl: './orders.component.html',
+    styleUrls: ['./orders.component.scss'],
     animations: [routerTransition()]
 })
-export class TyresComponent implements OnInit {
-    gridData: any;
-    categoryData : any;
-    typeData : any;  
-    pager : any;  
-    //pager: {startSI:'',endSI:'',totalRecords:'',totalPages:'',prev:'',next:'',pageNo:''};    
-    //pager : any;
+export class OrdersComponent implements OnInit {
+    gridData: any;    
+    pager: {startSI:'',endSI:'',totalRecords:'',totalPages:'',prev:'',next:'',pageNo:''};    
     
     pagerForm: FormGroup; 
     searchForm: FormGroup;
     sHeight : any;
 
-    constructor(private tyreService : TyreService,
+    constructor(private orderService : OrderService,
         private frmBuilder: FormBuilder,
         private responseService: ResponseService,
         private spinnerService: SpinnerService) {
@@ -43,22 +39,20 @@ export class TyresComponent implements OnInit {
         
         //pagination form
         this.pagerForm = this.frmBuilder.group({            
-            pageNo:[""] 
+            pageNo:[""]     
         });
 
         //search form
-        this.searchForm = this.frmBuilder.group({            
-            title:[null],
-            category_id:[""],        
-            type_id : [""]  ,
-            rowsize:10,
+        this.searchForm = this.frmBuilder.group({         
+            
+            from_date:[""],        
+            to_date : [""]  ,
+            tyre_id:'',
             sortField:'Name',
             sortOrder:'ASC' ,
             pageNo:''          
         });
 
-        this.loadCategory();
-        this.loadType();
         this.loadGridData(1);
         
     }
@@ -83,37 +77,18 @@ export class TyresComponent implements OnInit {
         //this.searchForm.patchValue(pageNo : pageNo);
         this.searchForm.controls["pageNo"].setValue(pageNo);
         
-        this.tyreService.getData(this.searchForm.value).subscribe((data: any) => {
-            // console.log(data.tyres.current_page);
+        this.orderService.getData(this.searchForm.value).subscribe((data: any) => {
+           
             this.gridData = data.gridData.data;
-            this.pager=data.pager;                
+            this.pager=data.pager; 
+                
             //console.log(this.pager);
         }, error => {
             this.responseService.checkStatus(error);           
         });
     }
 
-    loadCategory(){
-        this.tyreService.getCategory().subscribe((data: any) => {            
-             
-            this.categoryData = data.categories;           
-                 
-            
-         }, error => {
-             this.responseService.checkStatus(error);           
-         });
-    }
-
-    loadType(){
-        this.tyreService.getType().subscribe((data: any) => {            
-             
-            this.typeData = data.types;           
-                 
-            
-         }, error => {
-             this.responseService.checkStatus(error);           
-         });
-    }
+    
 
     ngAfterViewInit(){
         this.spinnerService.hide();       

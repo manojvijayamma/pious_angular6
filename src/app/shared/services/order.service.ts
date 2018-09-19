@@ -3,13 +3,13 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Response } from "@angular/http";
 import { Observable } from 'rxjs';
 
-import { Tyre } from '../models/tyre.model';
+import { Order } from '../models/order.model';
 
 import { environment } from '../../../environments/environment';
 import { Router } from "@angular/router";
 
 @Injectable()
-export class TyreService {
+export class OrderService {
   readonly rootUrl = `${environment.api_url}`;
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -23,21 +23,15 @@ export class TyreService {
       for (let key in searchData) {
          params=params.append(key, searchData[key]);
       }           
-      return  this.http.get(this.rootUrl+'tyre', {params});
+      return  this.http.get(this.rootUrl+'order', {params});
   }
 
   getDetails(id){
-    
-    return  this.http.get(this.rootUrl+'tyreDetails/'+id);
+      return  this.http.get(this.rootUrl+'order/'+id);
   }
 
-
-  getCategory(){             
-    return  this.http.get(this.rootUrl+'category');
-  }
-
-  getType(){             
-    return  this.http.get(this.rootUrl+'type');
+  saveOrder(formData){
+      return this.http.post(this.rootUrl+'order' , formData);
   }
 
  

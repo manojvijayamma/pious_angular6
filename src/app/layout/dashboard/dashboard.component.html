@@ -1,54 +1,7 @@
 <div [@routerTransition]>
  
    
-    <div class="row">        
-        
-        <div class="col-xl-3 col-lg-6" style="margin-top:20px;"  *ngFor="let data of dashboardData">
-            <!--<app-stat [bgClass]="'primary'" [icon]="'fa-comments'" [count]="26" [label]="{{data.name}}" ></app-stat>-->
-
-            <div class="card text-white bg-primary">
-                <div class="card-header">
-                    <div class="row">
-                        <div class="col col-xs-3">
-                            <i class="fa fa-comments fa-5x"></i>
-                        </div>
-                        <div class="col col-xs-9 text-right">
-                            <div class="d-block huge">{{count}}</div>
-                            <div class="d-block">{{data.name}}</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <span class="float-left">View Details {{data}}</span>
-                    <a href="javascript:void(0)" class="float-right card-inverse">
-                        <span ><i class="fa fa-arrow-circle-right"></i></span>
-                    </a>
-                </div>
-            </div>
-            
-        </div> 
-
-
-
-    </div>
-
-
-
-    <div class="row">
-            
-            <div style="padding:20px;width:100%;">
-                    <table class="table table-bordered">
-                    <tr *ngFor="let data of dashboardData">
-                            <td *ngFor="let d of data" style="height:150px;">{{d}}
-                                <ul>
-                                    <li style="background-color:#fff;padding:2px;color:#fff;font-size:9px">hai</li>
-                                    <li style="background-color:#fff;padding:2px;color:#fff;font-size:9px">hai</li>
-                                </ul>
-                            </td>
-                    </tr>
-                    </table>
-            </div> 
-    </div>
+    
 
 
 

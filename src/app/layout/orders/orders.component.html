@@ -27,47 +27,14 @@
 
     <form [formGroup]="searchForm"  (ngSubmit)="doSearch()">
     <div class="row" >
-            <div class="col col-xl-4 col-lg-4">
-                    <div class="form-group">
-                            <div class="input-group datepicker-input">
-                                <input  class="form-control" 
-                                      formControlName="title"  >                                
-                            </div>
-                        </div>
-            </div> 
-
-            <div class="col col-xl-4 col-lg-4">
-                <div class="form-group">
-                        <div class="input-group datepicker-input">
-                            <select  class='form-control'   formControlName="category_id" >
-                                    <option value="0">--All--</option>
-                                    <option *ngFor="let cat of categoryData" value={{cat.id}}>
-                                            {{cat.title}}
-                                     </option>
-                            </select>                             
-                        </div>
-                    </div>
-            </div> 
-
-            <div class="col col-xl-4 col-lg-4">
-                    <div class="form-group">
-                            <div class="input-group datepicker-input">
-                                <select  class='form-control'   formControlName="type_id">
-                                        <option value="0">--All--</option>
-                                        <option *ngFor="let cat of typeData" value={{cat.id}}>
-                                                {{cat.title}}
-                                         </option>
-                                </select>                             
-                            </div>
-                        </div>
-            </div> 
+           
             
-            <div class="col col-xl-4 col-lg-4">
+            <div class="col col-xl-3 col-lg-4">
                     <div class="form-group">
                             <div class="input-group datepicker-input">
                                 <input  class="form-control" placeholder="yyyy-mm-dd"
-                                      formControlName="" ngbDatepicker #d2="ngbDatepicker" >
-                                <button class="input-group-addon" (click)="d2.toggle()" type="button">
+                                      formControlName="from_date" ngbDatepicker #d1="ngbDatepicker" dateFormat="dd-MMM-yyyy" >
+                                <button class="input-group-addon" (click)="d1.toggle()" type="button">
                                     <!-- <img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/> -->
                                     <span class="fa fa-calendar"></span>
                                 </button>
@@ -75,7 +42,36 @@
                         </div>
             </div> 
 
-            <div class="col col-xl-4 col-lg-4">
+            <div class="col col-xl-3 col-lg-4">
+                    <div class="form-group">
+                            <div class="input-group datepicker-input">
+                                <input  class="form-control" placeholder="yyyy-mm-dd"
+                                      formControlName="to_date" ngbDatepicker #d2="ngbDatepicker" dateFormat="dd-MMM-yyyy">
+                                <button class="input-group-addon" (click)="d2.toggle()" type="button">
+                                    <!-- <img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/> -->
+                                    <span class="fa fa-calendar"></span>
+                                </button>
+                            </div>
+                        </div>
+            </div>
+
+            <div class="col col-xl-3 col-lg-4">
+                    <div class="form-group">
+                            <div class="input-group datepicker-input">
+                                <select  class='form-control'   formControlName="tyre_id" >
+                                        <option value="0">--All --</option>
+                                        <option *ngFor="let cat of tyreData" value={{cat.id}}>
+                                                {{cat.title}}
+                                         </option>
+                                </select>                             
+                            </div>
+                        </div>
+                </div> 
+    
+          
+
+
+            <div class="col col-xl-2 col-lg-4">
                 <div class="form-group">
                         <div class="input-group datepicker-input">
                             <button type="submit" class="btn btn-secondary">Submit Button</button>
@@ -95,21 +91,18 @@
                     <thead>
                     <tr>
                         <th>#</th>
-                        <th>Title 1</th>
-                        <th>Title 2</th>
-                        <th>Title 3</th>
-                        <th>Title 4</th>
-                        <th>Title 4</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>User Role</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr *ngFor="let data of gridData">
                         <th scope="row">1</th>
-                        <td>{{data.title}}</td>
-                        <td>{{data.category.title}}</td>
-                        <td>{{data.type.title}}</td>
-                        <td>{{data.model}}</td>
-                        <td><app-modal [title]=data.id></app-modal></td>
+                        <td>{{data.id}}</td>
+                        <td>Otto</td>
+                        <td>@mdo<app-modal [title]=data.id></app-modal></td>
                     </tr>
                     
                     </tbody>

@@ -61,4 +61,8 @@ export class UserService {
     return this.http.post(this.rootUrl+'password' , data);
   }
 
+  getProfile(params){
+      return  this.http.get(this.rootUrl+'profile', {params});
+  }
+
 }

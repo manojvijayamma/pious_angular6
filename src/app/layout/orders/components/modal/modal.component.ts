@@ -2,7 +2,6 @@ import { Component,Input } from '@angular/core';
 import { NgbModal, ModalDismissReasons, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { TyreService } from '../../../../shared/services/tyre.service';
 import { OrderService } from '../../../../shared/services/order.service';
 import { ResponseService } from '../../../../shared/services/response.service';
 import { SpinnerService } from  '../../../../shared/services/spinner.service';
@@ -22,10 +21,9 @@ export class ModalComponent {
     event: any;
     fileToUpload: File  = null;
 
-    constructor(private modalService: NgbModal, private frmBuilder: FormBuilder, public router: Router, private tyreService : TyreService,
-    private responseService : ResponseService,
-    private spinnerService: SpinnerService,
-    private orderService : OrderService  ) { }
+    constructor(private modalService: NgbModal, private frmBuilder: FormBuilder, public router: Router, private orderService : OrderService,
+        private responseService : ResponseService,
+        private spinnerService: SpinnerService,) { }
 
     ngOnInit() {
         
@@ -45,15 +43,7 @@ export class ModalComponent {
       }
 
     doSend(){
-        console.log(this.formData.value); 
-        this.spinnerService.show(); 
-        this.orderService.saveOrder(this.formData.value).subscribe((data: any) => { 
-            this.spinnerService.hide();   
-             
-         }, error => {
-             this.responseService.checkStatus(error);           
-         });
-
+        console.log(this.formData.value);   
         this.modalReference.dismiss();     
     }
 
@@ -63,8 +53,14 @@ export class ModalComponent {
           if(this.title>0){
             this.spinnerService.show();
             this.loadData();
-          }        
-           
+          }  
+         
+          this.formData.patchValue({
+                email: 'Nancy',
+                date1 : { year: 2018, month: 9, day: 16 },
+                date2 : { year: 2018, month: 9, day: 26 }
+
+          });  
 
           this.modalReference = this.modalService.open(content);
           //this.modalReference = this.modalService.open(content, { size: 'lg' });
@@ -93,7 +89,7 @@ export class ModalComponent {
     }
 
     loadData(){
-        this.tyreService.getDetails(this.title).subscribe((data: any) => {            
+        this.orderService.getDetails(this.title).subscribe((data: any) => {            
             
             this.formData.patchValue({
                 email: data.formData.title,
@@ -108,5 +104,4 @@ export class ModalComponent {
              this.responseService.checkStatus(error);           
          });
     }
-
 }
