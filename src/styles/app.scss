@@ -10,3 +10,33 @@
         display: none !important;
     }
 }
+
+
+.gridBorder{
+    border:1px solid #ccc;
+}
+
+.modal-header{
+    background-color:red;
+    border-radius:0px;
+}
+
+.list-group-item{
+    border:none;
+    
+    border-radius:none;
+}
+.list-group-item:hover{
+    background-color:red;
+    border-radius:0px !important;
+}
+
+.dropdown-menu{
+    padding:0px;
+    border-radius:0px !important;
+    left:6px;
+}
+
+.dropdown-divider{
+    margin:1px;
+}

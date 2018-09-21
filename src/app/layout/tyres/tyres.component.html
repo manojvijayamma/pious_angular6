@@ -1,6 +1,6 @@
 
 
-<div [@routerTransition]>
+<div  class="gridBorder">
     
 
     <div class="row" >
@@ -12,7 +12,7 @@
                        <!-- <li class="breadcrumb-item">
                             <i class="fa fa-dashboard"></i> <a href="Javascript:void(0)" [routerLink]="['/dashboard']">Dashboard</a>
                         </li> -->
-                        <li class="breadcrumb-item active" style="font-weight:bold;font-size:22px;"><i class="fa "></i> D</li>
+                        <li class="breadcrumb-item active" style="font-weight:bold;font-size:22px;"><i class="fa fa-table "></i> D</li>
                         
                     </ol>
                     <div class="pull-right" style="position:absolute;top:10px;right:20px;">
@@ -27,7 +27,7 @@
 
     <form [formGroup]="searchForm"  (ngSubmit)="doSearch()">
     <div class="row" >
-            <div class="col col-xl-4 col-lg-4">
+            <div class="col col-xl-2 col-lg-2">
                     <div class="form-group">
                             <div class="input-group datepicker-input">
                                 <input  class="form-control" 
@@ -36,11 +36,11 @@
                         </div>
             </div> 
 
-            <div class="col col-xl-4 col-lg-4">
+            <div class="col col-xl-2 col-lg-2">
                 <div class="form-group">
                         <div class="input-group datepicker-input">
                             <select  class='form-control'   formControlName="category_id" >
-                                    <option value="0">--All--</option>
+                                    <option value="">--All--</option>
                                     <option *ngFor="let cat of categoryData" value={{cat.id}}>
                                             {{cat.title}}
                                      </option>
@@ -49,11 +49,11 @@
                     </div>
             </div> 
 
-            <div class="col col-xl-4 col-lg-4">
+            <div class="col col-xl-2 col-lg-2">
                     <div class="form-group">
                             <div class="input-group datepicker-input">
                                 <select  class='form-control'   formControlName="type_id">
-                                        <option value="0">--All--</option>
+                                        <option value="">--All--</option>
                                         <option *ngFor="let cat of typeData" value={{cat.id}}>
                                                 {{cat.title}}
                                          </option>
@@ -62,26 +62,40 @@
                         </div>
             </div> 
             
-            <div class="col col-xl-4 col-lg-4">
-                    <div class="form-group">
-                            <div class="input-group datepicker-input">
-                                <input  class="form-control" placeholder="yyyy-mm-dd"
-                                      formControlName="" ngbDatepicker #d2="ngbDatepicker" >
-                                <button class="input-group-addon" (click)="d2.toggle()" type="button">
-                                    <!-- <img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/> -->
-                                    <span class="fa fa-calendar"></span>
-                                </button>
-                            </div>
-                        </div>
-            </div> 
-
-            <div class="col col-xl-4 col-lg-4">
+            <div class="col col-xl-2 col-lg-2">
                 <div class="form-group">
                         <div class="input-group datepicker-input">
-                            <button type="submit" class="btn btn-secondary">Submit Button</button>
+                            <select  class='form-control'   formControlName="type_id">
+                                    <option value="">--All--</option>
+                                    <option *ngFor="let cat of brandData" value={{cat.id}}>
+                                            {{cat.title}}
+                                     </option>
+                            </select>                             
                         </div>
                     </div>
         </div>
+
+        <div class="col col-xl-2 col-lg-2">
+            <div class="form-group">
+                    <div class="input-group datepicker-input">
+                        <select  class='form-control'   formControlName="type_id">
+                                <option value="">--All--</option>
+                                <option *ngFor="let cat of originData" value={{cat.id}}>
+                                        {{cat.title}}
+                                 </option>
+                        </select>                             
+                    </div>
+                </div>
+        </div>
+
+        <div class="col col-xl-2 col-lg-2">
+                <div class="form-group">
+                        <div class="input-group datepicker-input">
+                            <button type="submit" class="btn btn-secondary"><i class="fa fa-search "></i> Search</button>
+                        </div>
+                    </div>
+        </div>
+
     </div>  
     </form>
     
@@ -119,13 +133,13 @@
             <form [formGroup]="pagerForm">
             <table class="table table-bordered table-striped table-condensed cf" style="margin-bottom:2px;">
                 <tr>
-                <td style="width:70%">Displaying <b>{{pager.startSI}}</b> to <b>{{pager.endSI}}</b> of <b>{{pager.totalRecords}}</b> records </td>
-                <td class="text-center">Total pages : <b>{{pager.totalPages}}</b></td>
-                <td><a href="javascript:void(0)" (click)="pagination(1)"><img src="assets/images/page_first.gif" ></a></td>
-                <td><a href="javascript:void(0)" (click)="pagination(pager.prev)"><img src="assets/images/page_prev.gif" ></a></td>
-                <td style="padding:3px 5px;"><input type="text" class="form-control " style="width:50px;height:30px;" (keyup)="doPager()" (blur)="doPager()"  formControlName="pageNo" ></td>
-                <td><a href="javascript:void(0)" (click)="pagination(pager.next)"><img src="assets/images/page_next.gif" ></a></td>
-                <td><a href="javascript:void(0)" (click)="pagination(pager.totalPages)"><img src="assets/images/page_last.gif" ></a></td>
+                <td class="col-sm-6" style="width:70%">Displaying <b>{{pager.startSI}}</b> to <b>{{pager.endSI}}</b> of <b>{{pager.totalRecords}}</b> records </td>
+                <td class="text-center col-sm-6">Total pages : <b>{{pager.totalPages}}</b></td>
+                <td class="col-sm-1"><a href="javascript:void(0)" (click)="pagination(1)"><img src="assets/images/page_first.gif" ></a></td>
+                <td class="col-sm-1"><a href="javascript:void(0)" (click)="pagination(pager.prev)"><img src="assets/images/page_prev.gif" ></a></td>
+                <td class="col-sm-1" style="padding:8px 5px;"><input type="text" class="form-control " style="width:50px;height:30px;" (keyup)="doPager()" (blur)="doPager()"  formControlName="pageNo" ></td>
+                <td class="col-sm-1"><a href="javascript:void(0)" (click)="pagination(pager.next)"><img src="assets/images/page_next.gif" ></a></td>
+                <td class="col-sm-1"><a href="javascript:void(0)" (click)="pagination(pager.totalPages)"><img src="assets/images/page_last.gif" ></a></td>
                 </tr>
             </table> 
         </form>

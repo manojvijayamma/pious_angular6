@@ -18,6 +18,8 @@ export class TyresComponent implements OnInit {
     gridData: any;
     categoryData : any;
     typeData : any;  
+    brandData : any; 
+    originData : any;   
     pager : any;  
     //pager: {startSI:'',endSI:'',totalRecords:'',totalPages:'',prev:'',next:'',pageNo:''};    
     //pager : any;
@@ -48,7 +50,7 @@ export class TyresComponent implements OnInit {
 
         //search form
         this.searchForm = this.frmBuilder.group({            
-            title:[null],
+            title:'',
             category_id:[""],        
             type_id : [""]  ,
             rowsize:10,
@@ -59,6 +61,8 @@ export class TyresComponent implements OnInit {
 
         this.loadCategory();
         this.loadType();
+        this.loadBrand();
+        this.loadOrigin();
         this.loadGridData(1);
         
     }
@@ -108,6 +112,28 @@ export class TyresComponent implements OnInit {
         this.tyreService.getType().subscribe((data: any) => {            
              
             this.typeData = data.types;           
+                 
+            
+         }, error => {
+             this.responseService.checkStatus(error);           
+         });
+    }
+
+    loadBrand(){
+        this.tyreService.getBrand().subscribe((data: any) => {            
+             
+            this.brandData = data.brands;           
+                 
+            
+         }, error => {
+             this.responseService.checkStatus(error);           
+         });
+    }
+
+    loadOrigin(){
+        this.tyreService.getOrigin().subscribe((data: any) => {            
+             
+            this.originData = data.origins;           
                  
             
          }, error => {

@@ -1,6 +1,6 @@
 
 
-<div [@routerTransition]>
+<div  class="gridBorder">
     
 
     <div class="row" >
@@ -29,11 +29,11 @@
     <div class="row" >
            
             
-            <div class="col col-xl-3 col-lg-4">
+            <div class="col col-xl-2 col-lg-2">
                     <div class="form-group">
                             <div class="input-group datepicker-input">
-                                <input  class="form-control" placeholder="yyyy-mm-dd"
-                                      formControlName="from_date" ngbDatepicker #d1="ngbDatepicker" dateFormat="dd-MMM-yyyy" >
+                               &nbsp;&nbsp; <input  class="form-control" placeholder="yyyy-mm-dd"
+                                      formControlName="from_date" ngbDatepicker #d1="ngbDatepicker"  >
                                 <button class="input-group-addon" (click)="d1.toggle()" type="button">
                                     <!-- <img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/> -->
                                     <span class="fa fa-calendar"></span>
@@ -42,11 +42,11 @@
                         </div>
             </div> 
 
-            <div class="col col-xl-3 col-lg-4">
+            <div class="col col-xl-2 col-lg-2">
                     <div class="form-group">
                             <div class="input-group datepicker-input">
                                 <input  class="form-control" placeholder="yyyy-mm-dd"
-                                      formControlName="to_date" ngbDatepicker #d2="ngbDatepicker" dateFormat="dd-MMM-yyyy">
+                                      formControlName="to_date" ngbDatepicker #d2="ngbDatepicker" >
                                 <button class="input-group-addon" (click)="d2.toggle()" type="button">
                                     <!-- <img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/> -->
                                     <span class="fa fa-calendar"></span>
@@ -112,13 +112,13 @@
             <form [formGroup]="pagerForm">
             <table class="table table-bordered table-striped table-condensed cf" style="margin-bottom:2px;">
                 <tr>
-                <td style="width:70%">Displaying <b>{{pager.startSI}}</b> to <b>{{pager.endSI}}</b> of <b>{{pager.totalRecords}}</b> records </td>
-                <td class="text-center">Total pages : <b>{{pager.totalPages}}</b></td>
-                <td><a href="javascript:void(0)" (click)="pagination(1)"><img src="assets/images/page_first.gif" ></a></td>
-                <td><a href="javascript:void(0)" (click)="pagination(pager.prev)"><img src="assets/images/page_prev.gif" ></a></td>
-                <td style="padding:3px 5px;"><input type="text" class="form-control " style="width:50px;height:30px;" (keyup)="doPager()" (blur)="doPager()"  formControlName="pageNo" ></td>
-                <td><a href="javascript:void(0)" (click)="pagination(pager.next)"><img src="assets/images/page_next.gif" ></a></td>
-                <td><a href="javascript:void(0)" (click)="pagination(pager.totalPages)"><img src="assets/images/page_last.gif" ></a></td>
+                <td class="col-sm-6" style="width:70%">Displaying <b>{{pager.startSI}}</b> to <b>{{pager.endSI}}</b> of <b>{{pager.totalRecords}}</b> records </td>
+                <td class="text-center col-sm-6">Total pages : <b>{{pager.totalPages}}</b></td>
+                <td class="col-sm-1"><a href="javascript:void(0)" (click)="pagination(1)"><img src="assets/images/page_first.gif" ></a></td>
+                <td class="col-sm-1"><a href="javascript:void(0)" (click)="pagination(pager.prev)"><img src="assets/images/page_prev.gif" ></a></td>
+                <td class="col-sm-1" style="padding:8px 5px;"><input type="text" class="form-control " style="width:50px;height:30px;" (keyup)="doPager()" (blur)="doPager()"  formControlName="pageNo" ></td>
+                <td class="col-sm-1"><a href="javascript:void(0)" (click)="pagination(pager.next)"><img src="assets/images/page_next.gif" ></a></td>
+                <td class="col-sm-1"><a href="javascript:void(0)" (click)="pagination(pager.totalPages)"><img src="assets/images/page_last.gif" ></a></td>
                 </tr>
             </table> 
         </form>

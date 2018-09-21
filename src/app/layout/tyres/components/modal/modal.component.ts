@@ -30,8 +30,8 @@ export class ModalComponent {
     ngOnInit() {
         
         this.formData = this.frmBuilder.group({            
-            email:[null, [Validators.required,Validators.minLength(3),Validators.maxLength(15)]],
-            password:["", [Validators.required]],        
+            title:["", [Validators.required]],
+            category:["", [Validators.required]],        
             date1 : [""],
             date2 : new Date(1990, 0, 1),
             file : new Date(1990, 0, 1)
@@ -66,8 +66,8 @@ export class ModalComponent {
           }        
            
 
-          this.modalReference = this.modalService.open(content);
-          //this.modalReference = this.modalService.open(content, { size: 'lg' });
+          //this.modalReference = this.modalService.open(content);
+          this.modalReference = this.modalService.open(content, { size: 'lg' });
           this.modalReference.result.then((result) => {
             this.closeResult = `Closed with: ${result}`;
           }, (reason) => {
@@ -96,7 +96,8 @@ export class ModalComponent {
         this.tyreService.getDetails(this.title).subscribe((data: any) => {            
             
             this.formData.patchValue({
-                email: data.formData.title,
+                title: data.formData.title,
+                category:data.formData.category.title
                 //date1 : { year: 2018, month: 9, day: 16 },
                // date2 : { year: 2018, month: 9, day: 26 }
 

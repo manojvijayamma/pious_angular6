@@ -40,6 +40,14 @@ export class TyreService {
     return  this.http.get(this.rootUrl+'type');
   }
 
+  getBrand(){             
+    return  this.http.get(this.rootUrl+'brand');
+  }
+
+  getOrigin(){             
+    return  this.http.get(this.rootUrl+'origin');
+  }
+
  
 
 }

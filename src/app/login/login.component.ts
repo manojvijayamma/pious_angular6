@@ -38,30 +38,40 @@ export class LoginComponent implements OnInit {
     }
 
     onLoggedin() {
+
         if(this.loginFrm.value.email==''){
-            this.alertService.error("Enter email");
+            this.alertService.error("Please enter email");
             return false;
         }
+        if(this.loginFrm.value.password==''){
+            this.alertService.error("Please enter password");
+            return false;
+        }
+
         document.getElementById("spinner").style.display="block";
         console.log(this.loginFrm.value);
         var userData=this.loginFrm.value;
         this.userService.userAuthentication(userData.email,userData.password).subscribe((data : any)=>{
-            console.log(data);
+            
+            if(data.response=='error'){
+                this.isLoginError = true;               
+                document.getElementById("spinner").style.display="none";
+                this.alertService.error("Invalid username or password");
+                return false;
+            }
             if(data.result.token){
                 localStorage.setItem('userToken',data.result.token);
                 localStorage.setItem('isLoggedin', 'true');
                 this.router.navigate(['/dashboard']);
             }  
-            else{
-                this.isLoginError = true;
-            }  
+            
           },
           (err : HttpErrorResponse)=>{
+              
             this.isLoginError = true;
           });
 
-
-        localStorage.setItem('isLoggedin', 'true');
+         
     }
 
     ngAfterViewInit(){
