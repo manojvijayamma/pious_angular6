@@ -34,7 +34,7 @@ export class OrdersComponent implements OnInit {
         this.spinnerService.show();
 
         //update grid height
-        this.sHeight=(screen.availHeight-330)+"px";
+        this.sHeight=(screen.availHeight-320)+"px";
         document.getElementById("gridPanel").style.height=this.sHeight;
         
         //pagination form
@@ -63,7 +63,7 @@ export class OrdersComponent implements OnInit {
     }
 
     pagination(pageNo){
-        alert(1);
+       // alert(1);
         this.loadGridData(pageNo); 
     }
 

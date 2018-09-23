@@ -40,7 +40,7 @@ export class TyresComponent implements OnInit {
         this.spinnerService.show();
 
         //update grid height
-        this.sHeight=(screen.availHeight-330)+"px";
+        this.sHeight=(screen.availHeight-315)+"px";
         document.getElementById("gridPanel").style.height=this.sHeight;
         
         //pagination form
@@ -73,7 +73,7 @@ export class TyresComponent implements OnInit {
     }
 
     pagination(pageNo){
-        alert(1);
+       // alert(1);
         this.loadGridData(pageNo); 
     }
 
@@ -83,7 +83,7 @@ export class TyresComponent implements OnInit {
     }
 
     loadGridData(pageNo){
-        
+        this.spinnerService.show();  
         //this.searchForm.patchValue(pageNo : pageNo);
         this.searchForm.controls["pageNo"].setValue(pageNo);
         
@@ -92,6 +92,7 @@ export class TyresComponent implements OnInit {
             this.gridData = data.gridData.data;
             this.pager=data.pager;                
             //console.log(this.pager);
+            this.spinnerService.hide();  
         }, error => {
             this.responseService.checkStatus(error);           
         });

@@ -12,11 +12,11 @@
                        <!-- <li class="breadcrumb-item">
                             <i class="fa fa-dashboard"></i> <a href="Javascript:void(0)" [routerLink]="['/dashboard']">Dashboard</a>
                         </li> -->
-                        <li class="breadcrumb-item active" style="font-weight:bold;font-size:22px;"><i class="fa fa-table "></i> D</li>
+                        <li class="breadcrumb-item active" style="font-weight:bold;font-size:18px;color:#fff"><i class="fa fa-table "></i> Products</li>
                         
                     </ol>
                     <div class="pull-right" style="position:absolute;top:10px;right:20px;">
-                        <app-modal ></app-modal>  
+                       <!-- <app-modal ></app-modal>  -->
                    </div>                 
                     <!--<app-date-picker [dateName]="'from_date'"></app-date-picker>
                     <app-date-picker [dateName]="'to_date'"></app-date-picker>-->
@@ -26,12 +26,12 @@
 
 
     <form [formGroup]="searchForm"  (ngSubmit)="doSearch()">
-    <div class="row" >
+    <div class="row " >
             <div class="col col-xl-2 col-lg-2">
                     <div class="form-group">
                             <div class="input-group datepicker-input">
-                                <input  class="form-control" 
-                                      formControlName="title"  >                                
+                                &nbsp;&nbsp;<input  class="form-control" 
+                                      formControlName="title" placeholder="Title" >                                
                             </div>
                         </div>
             </div> 
@@ -91,7 +91,7 @@
         <div class="col col-xl-2 col-lg-2">
                 <div class="form-group">
                         <div class="input-group datepicker-input">
-                            <button type="submit" class="btn btn-secondary"><i class="fa fa-search "></i> Search</button>
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-search "></i> Search</button>
                         </div>
                     </div>
         </div>
@@ -108,17 +108,17 @@
                 <table class="table table-bordered">
                     <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Title 1</th>
-                        <th>Title 2</th>
-                        <th>Title 3</th>
-                        <th>Title 4</th>
-                        <th>Title 4</th>
+                        <th class="col-sm-1" style="width:3%">#</th>
+                        <th class="col-sm-2">Product</th>
+                        <th class="col-sm-2">Category</th>
+                        <th class="col-sm-2">Type</th>
+                        <th class="col-sm-2">Model</th>
+                        <th class="col-sm-1">Actions</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr *ngFor="let data of gridData">
-                        <th scope="row">1</th>
+                    <tr *ngFor="let data of gridData;let i=index">
+                        <th scope="row">{{pager.startSI + i}}</th>
                         <td>{{data.title}}</td>
                         <td>{{data.category.title}}</td>
                         <td>{{data.type.title}}</td>
@@ -130,14 +130,14 @@
                 </table>
             </div>
 
-            <form [formGroup]="pagerForm">
-            <table class="table table-bordered table-striped table-condensed cf" style="margin-bottom:2px;">
+            <form [formGroup]="pagerForm" >
+            <table class="table table-bordered table-striped table-condensed cf pagefont" style="margin-bottom:2px;">
                 <tr>
                 <td class="col-sm-6" style="width:70%">Displaying <b>{{pager.startSI}}</b> to <b>{{pager.endSI}}</b> of <b>{{pager.totalRecords}}</b> records </td>
                 <td class="text-center col-sm-6">Total pages : <b>{{pager.totalPages}}</b></td>
                 <td class="col-sm-1"><a href="javascript:void(0)" (click)="pagination(1)"><img src="assets/images/page_first.gif" ></a></td>
                 <td class="col-sm-1"><a href="javascript:void(0)" (click)="pagination(pager.prev)"><img src="assets/images/page_prev.gif" ></a></td>
-                <td class="col-sm-1" style="padding:8px 5px;"><input type="text" class="form-control " style="width:50px;height:30px;" (keyup)="doPager()" (blur)="doPager()"  formControlName="pageNo" ></td>
+                <td class="col-sm-1" style="padding:8px 5px;"><input type="text" class="form-control " style="width:50px;height:25px;" (keyup)="doPager()" (blur)="doPager()"  formControlName="pageNo" ></td>
                 <td class="col-sm-1"><a href="javascript:void(0)" (click)="pagination(pager.next)"><img src="assets/images/page_next.gif" ></a></td>
                 <td class="col-sm-1"><a href="javascript:void(0)" (click)="pagination(pager.totalPages)"><img src="assets/images/page_last.gif" ></a></td>
                 </tr>

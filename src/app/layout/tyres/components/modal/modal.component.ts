@@ -6,7 +6,8 @@ import { TyreService } from '../../../../shared/services/tyre.service';
 import { OrderService } from '../../../../shared/services/order.service';
 import { ResponseService } from '../../../../shared/services/response.service';
 import { SpinnerService } from  '../../../../shared/services/spinner.service';
-
+import { AlertService } from  '../../../../shared/services/alert.service';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
     selector: 'app-modal',
@@ -21,20 +22,32 @@ export class ModalComponent {
     @Input() title: number; 
     event: any;
     fileToUpload: File  = null;
+    productImage: any;
+    readonly imageUrl = `${environment.image_url}`;
 
     constructor(private modalService: NgbModal, private frmBuilder: FormBuilder, public router: Router, private tyreService : TyreService,
     private responseService : ResponseService,
     private spinnerService: SpinnerService,
-    private orderService : OrderService  ) { }
+    private orderService : OrderService ,
+    private alertService :AlertService ) { }
 
     ngOnInit() {
         
         this.formData = this.frmBuilder.group({            
             title:["", [Validators.required]],
-            category:["", [Validators.required]],        
-            date1 : [""],
-            date2 : new Date(1990, 0, 1),
-            file : new Date(1990, 0, 1)
+            category:["", [Validators.required]], 
+            type:["", [Validators.required]],   
+            pattern:["", [Validators.required]],
+            origin:["", [Validators.required]],  
+            brand:["", [Validators.required]],
+            model:["", [Validators.required]],    
+            price:["", [Validators.required]], 
+            stock:["", [Validators.required]], 
+            order_quantity:'',  
+            description:'',          
+           // date1 : [""],
+           // date2 : new Date(1990, 0, 1),
+           // file : new Date(1990, 0, 1)
         });
 
     }
@@ -42,14 +55,23 @@ export class ModalComponent {
     ChangingValue(event) {
         this.event = event;
         console.log(this.event);
-      }
+    }
 
     doSend(){
+        if(this.formData.value.order_quantity==''){
+            this.alertService.error("Please enter order quantity");
+            return false;
+        }
+        if(this.formData.value.order_quantity>this.formData.value.stock){
+            this.alertService.error("Order quantity is not available.");
+            return false;
+        }
+            
         console.log(this.formData.value); 
         this.spinnerService.show(); 
         this.orderService.saveOrder(this.formData.value).subscribe((data: any) => { 
             this.spinnerService.hide();   
-             
+            this.alertService.success(data.text); 
          }, error => {
              this.responseService.checkStatus(error);           
          });
@@ -97,12 +119,22 @@ export class ModalComponent {
             
             this.formData.patchValue({
                 title: data.formData.title,
-                category:data.formData.category.title
+                category:data.formData.category.title,
+                type:data.formData.type.title,
+                origin:data.formData.origin.title,
+                pattern:data.formData.pattern.title,
+                brand:data.formData.brand.title,
+                model:data.formData.model,
+                price:data.formData.price1,
+                stock:data.formData.stock,
+                order_quantity:'',  
+                description:data.formData.description            
                 //date1 : { year: 2018, month: 9, day: 16 },
                // date2 : { year: 2018, month: 9, day: 26 }
 
             }); 
-
+            //this.imgname= require(this.imageUrl+data.formData.image);
+            this.productImage=this.imageUrl+data.formData.image;
             this.spinnerService.hide();   
              
          }, error => {

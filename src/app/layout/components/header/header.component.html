@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg fixed-top">
-    <a class="navbar-brand" href="#">SB Admin Angular5 BS4 </a>
+    <a class="navbar-brand" href="#">Customer App</a>
     <button class="navbar-toggler" type="button" (click)="toggleSidebar()">
         <!-- <span class="navbar-toggler-icon"></span> -->
         <i class="fa fa-bars text-muted" aria-hidden="true"></i>
@@ -32,13 +32,17 @@
           </div>
         -->
 
-        <button type="button" class="btn btn-primary" (click)="openModalDialogProfile()">
-            Open modal
-       </button>
+        <a class="nav-link" style="color:#fff" [routerLink]="['/tyres']" [routerLinkActive]="['router-link-active']" (click)="showSpinner()">
+            
+                <i class="fa fa-table "></i> Products
+         
+        </a> 
        &nbsp;
-       <button type="button" class="btn btn-primary" (click)="openModalDialogPassword()">
-            Open modal
-      </button>
+       <a class="nav-link" style="color:#fff" [routerLink]="['/orders']" [routerLinkActive]="['router-link-active']" (click)="showSpinner()">
+       
+        <i class="fa fa-list "></i> Orders
+      
+    </a> 
 
 
                   <ul class="navbar-nav ml-auto">
@@ -105,16 +109,16 @@
                     
                     <li class="nav-item dropdown" ngbDropdown>
                         <a href="javascript:void(0)" class="nav-link" ngbDropdownToggle>
-                            <i class="fa fa-user"></i> John Smith <b class="caret"></b>
+                            <i class="fa fa-user"></i> {{loggedUser}} <b class="caret"></b>
                         </a>
 
                         <div class="dropdown-menu-right" ngbDropdownMenu>  
                 
-                            <a [routerLink]="['/tables']" [routerLinkActive]="['router-link-active']" class="list-group-item"><li><i class="fa fa-fw fa-gear"></i> Tables</li></a>
+                            <a href="javascript:void();" (click)="openModalDialogProfile()"   class="list-group-item"><li><i class="fa fa-fw fa-user"></i> Profile</li></a>
                             <li class="dropdown-divider"></li>
-                            <a [routerLink]="['/tyres']" [routerLinkActive]="['router-link-active']" class="list-group-item"><li><i class="fa fa-fw fa-gear"></i>Table2</li></a>
+                            <a href="javascript:void();" (click)="openModalDialogPassword()" class="list-group-item"><li><i class="fa fa-fw fa-key"></i> Password</li></a>
                             <li class="dropdown-divider"></li>
-                            <a [routerLink]="['/orders']" [routerLinkActive]="['router-link-active']" class="list-group-item"><li><i class="fa fa-fw fa-gear"></i>Table 3</li></a>
+                            <a href="javascript:void();" (click)="onLoggedout()" class="list-group-item"><li><i class="fa fa-fw fa-sign-out"></i>Logout</li></a>
                           </div>
 
                    
@@ -141,7 +145,7 @@
 
             <!-- Modal Header -->
             <div class="modal-header">
-                <h4 class="modal-title">Modal Heading</h4>
+                <h4 class="modal-title"><i class="fa fa-fw fa-address-card "></i>&nbsp;My Profile</h4>
                 <button type="button" class="close" data-dismiss="modal" (click)="closeModalDialogProfile()" >&times;</button>
             </div>
 
@@ -151,8 +155,16 @@
                    
                             <div class="form-group">
                                     <div class="input-group datepicker-input">
-                                        <input  class="form-control" placeholder="Name"
-                                              formControlName="name"  >
+                                        <input  class="form-control" placeholder="First Name"
+                                              formControlName="firstname"  >
+                                        
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group datepicker-input">
+                                        <input  class="form-control" placeholder="Last Name"
+                                              formControlName="lastname"  >
                                         
                                     </div>
                                 </div>
@@ -164,15 +176,31 @@
                                             formControlName="email" >
                                         
                                     </div>
-                                </div>                               
+                                </div>  
+                                
+                                <div class="form-group">
+                                    <div class="input-group datepicker-input">
+                                        <input  class="form-control" placeholder="Phone"
+                                              formControlName="phone"  >
+                                        
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group datepicker-input">
+                                        <textarea  class="form-control" placeholder="Address"
+                                              formControlName="address"  ></textarea>
+                                        
+                                    </div>
+                                </div>
                            
                         
             </div>
 
             <!-- Modal footer -->
             <div class="modal-footer">
-                    <button class="btn btn-block btn-primary" type="submit" >Login</button>
-                <button type="button" class="btn btn-danger" (click)="closeModalDialogProfile()" >Close</button>
+                    <button class="btn  btn-primary" type="submit" ><i class="fa fa-fw fa-save "></i>&nbsp;Save</button>
+                <button type="button" class="btn btn-danger" (click)="closeModalDialogProfile()" ><i class="fa fa-fw fa-close "></i>&nbsp;Close</button>
             </div>
 
         </form>
@@ -191,7 +219,7 @@
 
             <!-- Modal Header -->
             <div class="modal-header">
-                <h4 class="modal-title">Modal Heading</h4>
+                <h4 class="modal-title"><i class="fa fa-fw fa-address-card "></i>&nbsp;Change Password</h4>
                 <button type="button" class="close" data-dismiss="modal" (click)="closeModalDialogPassword()" >&times;</button>
             </div>
 
@@ -229,8 +257,8 @@
 
             <!-- Modal footer -->
             <div class="modal-footer">
-                    <button class="btn btn-block btn-primary" type="submit" >Login</button>
-                <button type="button" class="btn btn-danger" (click)="closeModalDialogPassword()" >Close</button>
+                    <button class="btn  btn-primary" type="submit" ><i class="fa fa-fw fa-save "></i>&nbsp;Submit</button>
+                <button type="button" class="btn btn-danger" (click)="closeModalDialogPassword()" ><i class="fa fa-fw fa-close "></i>&nbsp;Close</button>
             </div>
 
         </form>
