@@ -44,7 +44,8 @@ export class ModalComponent {
             price:["", [Validators.required]], 
             stock:["", [Validators.required]], 
             order_quantity:'',  
-            description:'',          
+            description:'',  
+            comment:''        
            // date1 : [""],
            // date2 : new Date(1990, 0, 1),
            // file : new Date(1990, 0, 1)
@@ -122,19 +123,23 @@ export class ModalComponent {
                 category:data.formData.category.title,
                 type:data.formData.type.title,
                 origin:data.formData.origin.title,
-                pattern:data.formData.pattern.title,
+                pattern:data.formData.pattern ? data.formData.pattern.title : '',
                 brand:data.formData.brand.title,
                 model:data.formData.model,
                 price:data.formData.price1,
                 stock:data.formData.stock,
                 order_quantity:'',  
-                description:data.formData.description            
+                description:data.formData.description,
+                comment:''           
                 //date1 : { year: 2018, month: 9, day: 16 },
                // date2 : { year: 2018, month: 9, day: 26 }
 
             }); 
             //this.imgname= require(this.imageUrl+data.formData.image);
-            this.productImage=this.imageUrl+data.formData.image;
+            console.log(data.formData.image);
+            this.productImage=data.formData.image ? this.imageUrl+data.formData.image  : this.imageUrl+"sorry-image-not-available.png";
+          
+            
             this.spinnerService.hide();   
              
          }, error => {
