@@ -16,7 +16,7 @@ import { SpinnerService } from  '../../shared/services/spinner.service';
 })
 export class OrdersComponent implements OnInit {
     gridData: any;    
-    pager: {startSI:'',endSI:'',totalRecords:'',totalPages:'',prev:'',next:'',pageNo:''};    
+    pager: {startSI:'',endSI:'',totalRecords:'',totalPages:'',prev:'',next:'',page:''};    
     
     pagerForm: FormGroup; 
     searchForm: FormGroup;
@@ -34,12 +34,12 @@ export class OrdersComponent implements OnInit {
         this.spinnerService.show();
 
         //update grid height
-        this.sHeight=(screen.availHeight-330)+"px";
+        this.sHeight=(screen.availHeight-320)+"px";
         document.getElementById("gridPanel").style.height=this.sHeight;
         
         //pagination form
         this.pagerForm = this.frmBuilder.group({            
-            pageNo:[""]     
+            page:[""]     
         });
 
         //search form
@@ -50,7 +50,7 @@ export class OrdersComponent implements OnInit {
             tyre_id:'',
             sortField:'Name',
             sortOrder:'ASC' ,
-            pageNo:''          
+            page:''          
         });
 
         this.loadGridData(1);
@@ -58,13 +58,13 @@ export class OrdersComponent implements OnInit {
     }
 
     doPager(){
-       // console.log(this.pagerForm.get('pageNo').value);
-        this.loadGridData(this.pagerForm.get('pageNo').value); 
+       // console.log(this.pagerForm.get('page').value);
+        this.loadGridData(this.pagerForm.get('page').value); 
     }
 
-    pagination(pageNo){
-        alert(1);
-        this.loadGridData(pageNo); 
+    pagination(page){
+       // alert(1);
+        this.loadGridData(page); 
     }
 
     doSearch(){
@@ -72,10 +72,10 @@ export class OrdersComponent implements OnInit {
         this.loadGridData(1);    
     }
 
-    loadGridData(pageNo){
+    loadGridData(page){
         
-        //this.searchForm.patchValue(pageNo : pageNo);
-        this.searchForm.controls["pageNo"].setValue(pageNo);
+        //this.searchForm.patchValue(page : page);
+        this.searchForm.controls["page"].setValue(page);
         
         this.orderService.getData(this.searchForm.value).subscribe((data: any) => {
            

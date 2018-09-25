@@ -11,14 +11,33 @@
     }
 }
 
-
+#gridPanel{
+    overflow-y: scroll;background-color:#fff;border-bottom:1px solid #65bbbf;
+}
 .gridBorder{
-    border:1px solid #ccc;
+    border:1px solid #00979d;
 }
 
 .modal-header{
-    background-color:red;
+    background-color:#086266;
     border-radius:0px;
+    border:1px solid #086266;
+    color:#fff;
+    padding:8px;
+    font-size:18px;
+}
+
+.modal-content{
+    border-radius:0px;
+    border:1px solid #086266;
+}
+.modal-body{
+    padding-bottom:0px;
+}
+
+.modal-footer{
+    padding:5px;
+    background-color:#dee2e6
 }
 
 .list-group-item{
@@ -27,7 +46,7 @@
     border-radius:none;
 }
 .list-group-item:hover{
-    background-color:red;
+    background-color:#70d6d8;
     border-radius:0px !important;
 }
 
@@ -39,4 +58,32 @@
 
 .dropdown-divider{
     margin:1px;
+}
+
+
+
+.form-control{
+    border-radius:0px;
+}
+
+.breadcrumb{
+    padding:5px;
+    background-color:#00979d;
+    border-radius:0px;
+    color:#fff;
+    font-size:18px;
+}
+
+.table td{
+    vertical-align:middle;
+    padding:0px 5px;
+}
+.pagefont{
+    font-size:13px;
+}
+
+.table th{
+    vertical-align:middle;
+    background-color:#eff7f7;
+    padding:5px 3px;
 }

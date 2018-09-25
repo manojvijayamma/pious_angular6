@@ -12,11 +12,11 @@
                        <!-- <li class="breadcrumb-item">
                             <i class="fa fa-dashboard"></i> <a href="Javascript:void(0)" [routerLink]="['/dashboard']">Dashboard</a>
                         </li> -->
-                        <li class="breadcrumb-item active" style="font-weight:bold;font-size:22px;"><i class="fa "></i> D</li>
+                        <li class="breadcrumb-item active" style="font-weight:bold;font-size:18px;color:#fff"><i class="fa fa-table "></i> Orders</li>
                         
                     </ol>
                     <div class="pull-right" style="position:absolute;top:10px;right:20px;">
-                        <app-modal ></app-modal>  
+                        <!--<app-modal ></app-modal> --> 
                    </div>                 
                     <!--<app-date-picker [dateName]="'from_date'"></app-date-picker>
                     <app-date-picker [dateName]="'to_date'"></app-date-picker>-->
@@ -54,7 +54,7 @@
                             </div>
                         </div>
             </div>
-
+            <!--
             <div class="col col-xl-3 col-lg-4">
                     <div class="form-group">
                             <div class="input-group datepicker-input">
@@ -67,7 +67,7 @@
                             </div>
                         </div>
                 </div> 
-    
+                -->
           
 
 
@@ -110,7 +110,7 @@
             </div>
 
             <form [formGroup]="pagerForm">
-            <table class="table table-bordered table-striped table-condensed cf" style="margin-bottom:2px;">
+            <table class="table table-bordered table-striped table-condensed cf pagefont" style="margin-bottom:2px;">
                 <tr>
                 <td class="col-sm-6" style="width:70%">Displaying <b>{{pager.startSI}}</b> to <b>{{pager.endSI}}</b> of <b>{{pager.totalRecords}}</b> records </td>
                 <td class="text-center col-sm-6">Total pages : <b>{{pager.totalPages}}</b></td>

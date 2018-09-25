@@ -19,6 +19,7 @@ export class HeaderComponent implements OnInit {
     passworddisplay='none';
     formData: FormGroup; 
     passwordFormData: FormGroup; 
+    loggedUser :any;
 
     constructor(private translate: TranslateService, public router: Router, private frmBuilder: FormBuilder,  private userService : UserService,
     private alertService : AlertService,
@@ -45,7 +46,11 @@ export class HeaderComponent implements OnInit {
         
         this.formData = this.frmBuilder.group({            
             email:[null, [Validators.required,Validators.minLength(3),Validators.maxLength(15)]],                 
-            name : [""]           
+            firstname : [""] ,
+            lastname : [""] ,
+            phone : [""] ,
+            address : [""] ,
+
         });
 
         this.passwordFormData = this.frmBuilder.group({            
@@ -53,6 +58,27 @@ export class HeaderComponent implements OnInit {
             new_password : [null, [Validators.required,Validators.minLength(3),Validators.maxLength(15)]],
             confirm_password : [null, [Validators.required,Validators.minLength(3),Validators.maxLength(15)]],         
         });
+
+
+        this.userService.getProfile('').subscribe((data : any)=>{            
+            if(data.status=='error'){               
+                this.alertService.error(data.text);
+                this.spinnerService.hide(); 
+            }  
+            else{
+               
+                this.loggedUser=data.profileData.firstname+' '+data.profileData.lastname;
+                
+                this.spinnerService.hide();   
+            }  
+          }, error => {
+           
+            this.responseService.checkStatus(error);               
+            this.spinnerService.hide(); 
+          });
+
+
+
 
 
 
@@ -75,17 +101,30 @@ export class HeaderComponent implements OnInit {
 
     onLoggedout() {
         localStorage.removeItem('isLoggedin');
+        this.router.navigateByUrl('/login');
     }
 
 
     doSendProfile(){
         console.log(this.formData.value);
-        if(this.formData.value.name==null){
-            this.alertService.error("Enter name");
+        if(this.formData.value.firstname==null){
+            this.alertService.error("Enter firstname");
+            return false;
+        }
+        if(this.formData.value.lastname==null){
+            this.alertService.error("Enter lastname");
             return false;
         }
         if(this.formData.value.email==null){
             this.alertService.error("Enter email");
+            return false;
+        }
+        if(this.formData.value.phone==null){
+            this.alertService.error("Enter phone number");
+            return false;
+        }
+        if(this.formData.value.address==null){
+            this.alertService.error("Enter address");
             return false;
         }
 
@@ -95,16 +134,19 @@ export class HeaderComponent implements OnInit {
             console.log(data);
             if(data.text){
                 this.profiledisplay='none';
-                this.alertService.success("Success");
+                this.loggedUser=this.formData.value.firstname+' '+this.formData.value.lastname;
+                
+                this.alertService.success(data.text);
                 this.spinnerService.hide();
             }  
             else{
-                
+                this.spinnerService.hide(); 
             }  
           }
           , error => {
            
-            this.responseService.checkStatus(error);   
+            this.responseService.checkStatus(error); 
+            this.spinnerService.hide();   
             
           });        
     }
@@ -154,14 +196,18 @@ export class HeaderComponent implements OnInit {
           this.userService.getProfile('').subscribe((data : any)=>{            
             if(data.status=='error'){               
                 this.alertService.error(data.text);
+                this.spinnerService.hide(); 
             }  
             else{
                 this.profiledisplay='block'; //Set block css
                 this.passworddisplay='none';
-                
+                console.log(data);
                 this.formData.setValue({
-                    name:data.profileData.name,
+                    firstname:data.profileData.firstname,
+                    lastname:data.profileData.lastname,
                     email:data.profileData.email,
+                    phone:data.profileData.phone,
+                    address:data.profileData.address,
                 });
 
                 this.spinnerService.hide();   
@@ -169,7 +215,7 @@ export class HeaderComponent implements OnInit {
           }, error => {
            
             this.responseService.checkStatus(error);               
-            
+            this.spinnerService.hide(); 
           });
         
     } 
@@ -181,6 +227,7 @@ export class HeaderComponent implements OnInit {
 
     closeModalDialogProfile(){
         this.profiledisplay='none'; //set none css after close dialog
+        this.spinnerService.hide(); 
     }
     closeModalDialogPassword(){
         this.passworddisplay='none'; //set none css after close dialog
@@ -188,5 +235,9 @@ export class HeaderComponent implements OnInit {
 
     changeLang(language: string) {
         this.translate.use(language);
+    }
+
+    showSpinner(){
+        this.spinnerService.show();  
     }
 }

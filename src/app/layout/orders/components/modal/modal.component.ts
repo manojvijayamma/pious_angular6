@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { OrderService } from '../../../../shared/services/order.service';
 import { ResponseService } from '../../../../shared/services/response.service';
 import { SpinnerService } from  '../../../../shared/services/spinner.service';
+import { environment } from '../../../../../environments/environment';
 
 
 @Component({
@@ -16,10 +17,12 @@ export class ModalComponent {
     closeResult: string;
     formData: FormGroup; 
     private modalReference : NgbModalRef;
+    productImage: any;
 
     @Input() title: number; 
     event: any;
     fileToUpload: File  = null;
+    readonly imageUrl = `${environment.image_url}`;
 
     constructor(private modalService: NgbModal, private frmBuilder: FormBuilder, public router: Router, private orderService : OrderService,
         private responseService : ResponseService,
@@ -28,11 +31,25 @@ export class ModalComponent {
     ngOnInit() {
         
         this.formData = this.frmBuilder.group({            
-            email:[null, [Validators.required,Validators.minLength(3),Validators.maxLength(15)]],
-            password:["", [Validators.required]],        
-            date1 : [""],
-            date2 : new Date(1990, 0, 1),
-            file : new Date(1990, 0, 1)
+            title:["", [Validators.required]],
+            category:["", [Validators.required]], 
+            type:["", [Validators.required]],   
+            pattern:["", [Validators.required]],
+            origin:["", [Validators.required]],  
+            brand:["", [Validators.required]],
+            model:["", [Validators.required]],    
+            price:["", [Validators.required]], 
+            stock:["", [Validators.required]], 
+            order_quantity:'',  
+            description:'',  
+            comment:'' ,
+            firstName:'',
+            lastName:'',
+            email:'',
+            phone:''       
+           // date1 : [""],
+           // date2 : new Date(1990, 0, 1),
+           // file : new Date(1990, 0, 1)
         });
 
     }
@@ -54,13 +71,14 @@ export class ModalComponent {
             this.spinnerService.show();
             this.loadData();
           }  
-         
+
+         /*
           this.formData.patchValue({
                 email: 'Nancy',
                 date1 : { year: 2018, month: 9, day: 16 },
                 date2 : { year: 2018, month: 9, day: 26 }
 
-          });  
+          });*/
 
           this.modalReference = this.modalService.open(content);
           //this.modalReference = this.modalService.open(content, { size: 'lg' });
@@ -92,11 +110,28 @@ export class ModalComponent {
         this.orderService.getDetails(this.title).subscribe((data: any) => {            
             
             this.formData.patchValue({
-                email: data.formData.title,
-                //date1 : { year: 2018, month: 9, day: 16 },
-               // date2 : { year: 2018, month: 9, day: 26 }
+                title: data.formData.title,
+                category:data.formData.category.title,
+                type:data.formData.type.title,
+                origin:data.formData.origin.title,
+                pattern:data.formData.pattern ? data.formData.pattern.title : '',
+                brand:data.formData.brand.title,
+                model:data.formData.model,
+                price:data.formData.price1,
+                stock:data.formData.stock,
+                order_quantity:'',  
+                description:data.formData.description,
+                comment:'',           
+                firstName:'',
+                lastName:'',
+                email:'',
+                phone:''
 
             }); 
+            //this.imgname= require(this.imageUrl+data.formData.image);
+            console.log(data.formData.image);
+            this.productImage=data.formData.image ? this.imageUrl+data.formData.image  : this.imageUrl+"sorry-image-not-available.png";
+          
 
             this.spinnerService.hide();   
              

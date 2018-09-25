@@ -21,7 +21,7 @@ export class TyresComponent implements OnInit {
     brandData : any; 
     originData : any;   
     pager : any;  
-    //pager: {startSI:'',endSI:'',totalRecords:'',totalPages:'',prev:'',next:'',pageNo:''};    
+    //pager: {startSI:'',endSI:'',totalRecords:'',totalPages:'',prev:'',next:'',page:''};    
     //pager : any;
     
     pagerForm: FormGroup; 
@@ -40,12 +40,12 @@ export class TyresComponent implements OnInit {
         this.spinnerService.show();
 
         //update grid height
-        this.sHeight=(screen.availHeight-330)+"px";
+        this.sHeight=(screen.availHeight-315)+"px";
         document.getElementById("gridPanel").style.height=this.sHeight;
         
         //pagination form
         this.pagerForm = this.frmBuilder.group({            
-            pageNo:[""] 
+            page:[""] 
         });
 
         //search form
@@ -56,7 +56,7 @@ export class TyresComponent implements OnInit {
             rowsize:10,
             sortField:'Name',
             sortOrder:'ASC' ,
-            pageNo:''          
+            page:''          
         });
 
         this.loadCategory();
@@ -68,13 +68,13 @@ export class TyresComponent implements OnInit {
     }
 
     doPager(){
-       // console.log(this.pagerForm.get('pageNo').value);
-        this.loadGridData(this.pagerForm.get('pageNo').value); 
+       // console.log(this.pagerForm.get('page').value);
+        this.loadGridData(this.pagerForm.get('page').value); 
     }
 
-    pagination(pageNo){
-        alert(1);
-        this.loadGridData(pageNo); 
+    pagination(page){
+       // alert(1);
+        this.loadGridData(page); 
     }
 
     doSearch(){
@@ -82,16 +82,17 @@ export class TyresComponent implements OnInit {
         this.loadGridData(1);    
     }
 
-    loadGridData(pageNo){
-        
-        //this.searchForm.patchValue(pageNo : pageNo);
-        this.searchForm.controls["pageNo"].setValue(pageNo);
+    loadGridData(page){
+        this.spinnerService.show();  
+        //this.searchForm.patchValue(page : page);
+        this.searchForm.controls["page"].setValue(page);
         
         this.tyreService.getData(this.searchForm.value).subscribe((data: any) => {
             // console.log(data.tyres.current_page);
             this.gridData = data.gridData.data;
             this.pager=data.pager;                
             //console.log(this.pager);
+            this.spinnerService.hide();  
         }, error => {
             this.responseService.checkStatus(error);           
         });
