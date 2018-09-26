@@ -73,7 +73,7 @@ export class ModalComponent {
         this.spinnerService.show(); 
         this.orderService.saveOrder(this.formData.value).subscribe((data: any) => { 
             this.spinnerService.hide();   
-            this.alertService.success(data.text); 
+            this.alertService.success(data.text);
          }, error => {
              this.responseService.checkStatus(error);           
          });

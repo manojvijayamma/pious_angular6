@@ -80,7 +80,7 @@ export class ModalComponent {
 
           });*/
 
-          this.modalReference = this.modalService.open(content);
+          this.modalReference = this.modalService.open(content, { size: 'lg' });
           //this.modalReference = this.modalService.open(content, { size: 'lg' });
           this.modalReference.result.then((result) => {
             this.closeResult = `Closed with: ${result}`;

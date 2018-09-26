@@ -28,7 +28,24 @@
     <form [formGroup]="searchForm"  (ngSubmit)="doSearch()">
     <div class="row" >
            
-            
+            <div class="col col-xl-2 col-lg-2">
+                <div class="form-group">
+                    <div class="input-group datepicker-input">
+                        &nbsp;&nbsp;<input  class="form-control" 
+                              formControlName="title" placeholder="Order No" >                                
+                    </div>
+                        </div>
+            </div> 
+
+            <div class="col col-xl-2 col-lg-2">
+                <div class="form-group">
+                <div class="input-group datepicker-input">
+                    &nbsp;&nbsp;<input  class="form-control" 
+                          formControlName="title" placeholder="Product" >                                
+                </div>
+                        </div>
+            </div> 
+
             <div class="col col-xl-2 col-lg-2">
                     <div class="form-group">
                             <div class="input-group datepicker-input">
@@ -54,12 +71,12 @@
                             </div>
                         </div>
             </div>
-            <!--
-            <div class="col col-xl-3 col-lg-4">
+            
+            <div class="col col-xl-2 col-lg-2">
                     <div class="form-group">
                             <div class="input-group datepicker-input">
                                 <select  class='form-control'   formControlName="tyre_id" >
-                                        <option value="0">--All --</option>
+                                        <option value="">--Status --</option>
                                         <option *ngFor="let cat of tyreData" value={{cat.id}}>
                                                 {{cat.title}}
                                          </option>
@@ -67,11 +84,11 @@
                             </div>
                         </div>
                 </div> 
-                -->
+                
           
 
 
-            <div class="col col-xl-2 col-lg-4">
+            <div class="col col-xl-2 col-lg-2">
                 <div class="form-group">
                         <div class="input-group datepicker-input">
                             <button type="submit" class="btn btn-secondary">Submit Button</button>
@@ -91,10 +108,14 @@
                     <thead>
                     <tr>
                         <th>#</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Email</th>
-                        <th>User Role</th>
+                        <th>Order No</th>
+                        <th>Order Date</th>
+                        <th>Product</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th>Status</th>
                     </tr>
                     </thead>
                     <tbody>

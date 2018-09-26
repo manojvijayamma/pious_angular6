@@ -50,9 +50,11 @@ export class TyresComponent implements OnInit {
 
         //search form
         this.searchForm = this.frmBuilder.group({            
-            title:'',
-            category_id:[""],        
-            type_id : [""]  ,
+            title:[''],
+            category_id:[''],        
+            type_id :['']  ,
+            brand_id : [''] ,
+            origin_id :[''] ,
             rowsize:10,
             sortField:'Name',
             sortOrder:'ASC' ,
@@ -80,6 +82,15 @@ export class TyresComponent implements OnInit {
     doSearch(){
         //console.log(this.searchForm.value);
         this.loadGridData(1);    
+    }
+
+    resetSearch(){
+        this.searchForm.controls["title"].setValue(['']);
+        this.searchForm.controls["category_id"].setValue(['']);
+        this.searchForm.controls["brand_id"].setValue(['']);
+        this.searchForm.controls["origin_id"].setValue(['']);
+        this.searchForm.controls["type_id"].setValue(['']);
+        this.loadGridData(1);  
     }
 
     loadGridData(page){

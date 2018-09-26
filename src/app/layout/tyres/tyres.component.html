@@ -31,7 +31,7 @@
                     <div class="form-group">
                             <div class="input-group datepicker-input">
                                 &nbsp;&nbsp;<input  class="form-control" 
-                                      formControlName="title" placeholder="Title" >                                
+                                      formControlName="title" placeholder="Product" >                                
                             </div>
                         </div>
             </div> 
@@ -40,7 +40,7 @@
                 <div class="form-group">
                         <div class="input-group datepicker-input">
                             <select  class='form-control'   formControlName="category_id" >
-                                    <option value="">--All--</option>
+                                    <option value="">--Category--</option>
                                     <option *ngFor="let cat of categoryData" value={{cat.id}}>
                                             {{cat.title}}
                                      </option>
@@ -53,7 +53,7 @@
                     <div class="form-group">
                             <div class="input-group datepicker-input">
                                 <select  class='form-control'   formControlName="type_id">
-                                        <option value="">--All--</option>
+                                        <option value="">--Type--</option>
                                         <option *ngFor="let cat of typeData" value={{cat.id}}>
                                                 {{cat.title}}
                                          </option>
@@ -65,8 +65,8 @@
             <div class="col col-xl-2 col-lg-2">
                 <div class="form-group">
                         <div class="input-group datepicker-input">
-                            <select  class='form-control'   formControlName="type_id">
-                                    <option value="">--All--</option>
+                            <select  class='form-control'   formControlName="brand_id">
+                                    <option value="">--Brand--</option>
                                     <option *ngFor="let cat of brandData" value={{cat.id}}>
                                             {{cat.title}}
                                      </option>
@@ -78,8 +78,8 @@
         <div class="col col-xl-2 col-lg-2">
             <div class="form-group">
                     <div class="input-group datepicker-input">
-                        <select  class='form-control'   formControlName="type_id">
-                                <option value="">--All--</option>
+                        <select  class='form-control'   formControlName="origin_id">
+                                <option value="">--Origin--</option>
                                 <option *ngFor="let cat of originData" value={{cat.id}}>
                                         {{cat.title}}
                                  </option>
@@ -92,6 +92,7 @@
                 <div class="form-group">
                         <div class="input-group datepicker-input">
                             <button type="submit" class="btn btn-primary"><i class="fa fa-search "></i> Search</button>
+                            &nbsp;<button type="reset" class="btn btn-danger" (click)="resetSearch()"><i class="fa fa-refresh "></i> Rest</button>
                         </div>
                     </div>
         </div>
@@ -112,7 +113,11 @@
                         <th class="col-sm-2">Product</th>
                         <th class="col-sm-2">Category</th>
                         <th class="col-sm-2">Type</th>
+                        <th class="col-sm-2">Brand</th>
+                        <th class="col-sm-2">Origin</th>
                         <th class="col-sm-2">Model</th>
+                        <th class="col-sm-2">Price</th>
+                        <th class="col-sm-2">Stock</th>
                         <th class="col-sm-1">Actions</th>
                     </tr>
                     </thead>
@@ -122,7 +127,11 @@
                         <td>{{data.title}}</td>
                         <td>{{data.category.title}}</td>
                         <td>{{data.type.title}}</td>
+                        <td>{{data.brand.title}}</td>
+                        <td>{{data.origin.title}}</td>
                         <td>{{data.model}}</td>
+                        <td>{{data.price1}}</td>
+                        <td>{{data.stock}}</td>
                         <td><app-modal [title]=data.id></app-modal></td>
                     </tr>
                     
