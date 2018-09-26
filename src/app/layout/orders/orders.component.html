@@ -32,7 +32,7 @@
                 <div class="form-group">
                     <div class="input-group datepicker-input">
                         &nbsp;&nbsp;<input  class="form-control" 
-                              formControlName="title" placeholder="Order No" >                                
+                              formControlName="order_no" placeholder="Order No" >                                
                     </div>
                         </div>
             </div> 
@@ -75,7 +75,7 @@
             <div class="col col-xl-2 col-lg-2">
                     <div class="form-group">
                             <div class="input-group datepicker-input">
-                                <select  class='form-control'   formControlName="tyre_id" >
+                                <select  class='form-control'   formControlName="order_status" >
                                         <option value="">--Status --</option>
                                         <option *ngFor="let cat of tyreData" value={{cat.id}}>
                                                 {{cat.title}}
@@ -91,7 +91,8 @@
             <div class="col col-xl-2 col-lg-2">
                 <div class="form-group">
                         <div class="input-group datepicker-input">
-                            <button type="submit" class="btn btn-secondary">Submit Button</button>
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-search "></i> Search</button>
+                            &nbsp;<button type="reset" class="btn btn-danger" (click)="resetSearch()"><i class="fa fa-refresh "></i> Rest</button>
                         </div>
                     </div>
         </div>
@@ -121,9 +122,15 @@
                     <tbody>
                     <tr *ngFor="let data of gridData">
                         <th scope="row">1</th>
-                        <td>{{data.id}}</td>
-                        <td>Otto</td>
-                        <td>@mdo<app-modal [title]=data.id></app-modal></td>
+                        <td>{{data.order_no}}</td>
+                        <td>{{data.order_date}}</td>
+                        <td>{{data.tyres.title}}</td>
+                        <td>{{data.tyres.category.title}}</td>
+                        <td>{{data.price}}</td>
+                        <td>{{data.order_quantity}}</td>
+                        <td>{{data.total_price}}</td>
+                        <td>{{data.order_status}}</td>
+                        <td><app-modal [title]=data.id></app-modal></td>
                     </tr>
                     
                     </tbody>

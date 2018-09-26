@@ -15,10 +15,10 @@ import { environment } from '../../../../../environments/environment';
 })
 export class ModalComponent {
     closeResult: string;
-    formData: FormGroup; 
+   
     private modalReference : NgbModalRef;
     productImage: any;
-
+    formData : any;
     @Input() title: number; 
     event: any;
     fileToUpload: File  = null;
@@ -30,27 +30,7 @@ export class ModalComponent {
 
     ngOnInit() {
         
-        this.formData = this.frmBuilder.group({            
-            title:["", [Validators.required]],
-            category:["", [Validators.required]], 
-            type:["", [Validators.required]],   
-            pattern:["", [Validators.required]],
-            origin:["", [Validators.required]],  
-            brand:["", [Validators.required]],
-            model:["", [Validators.required]],    
-            price:["", [Validators.required]], 
-            stock:["", [Validators.required]], 
-            order_quantity:'',  
-            description:'',  
-            comment:'' ,
-            firstName:'',
-            lastName:'',
-            email:'',
-            phone:''       
-           // date1 : [""],
-           // date2 : new Date(1990, 0, 1),
-           // file : new Date(1990, 0, 1)
-        });
+
 
     }
 
@@ -60,7 +40,7 @@ export class ModalComponent {
       }
 
     doSend(){
-        console.log(this.formData.value);   
+        
         this.modalReference.dismiss();     
     }
 
@@ -107,31 +87,11 @@ export class ModalComponent {
     }
 
     loadData(){
-        this.orderService.getDetails(this.title).subscribe((data: any) => {            
+        this.orderService.getDetails(this.title).subscribe((data: any) => {      
+                     
             
-            this.formData.patchValue({
-                title: data.formData.title,
-                category:data.formData.category.title,
-                type:data.formData.type.title,
-                origin:data.formData.origin.title,
-                pattern:data.formData.pattern ? data.formData.pattern.title : '',
-                brand:data.formData.brand.title,
-                model:data.formData.model,
-                price:data.formData.price1,
-                stock:data.formData.stock,
-                order_quantity:'',  
-                description:data.formData.description,
-                comment:'',           
-                firstName:'',
-                lastName:'',
-                email:'',
-                phone:''
-
-            }); 
-            //this.imgname= require(this.imageUrl+data.formData.image);
-            console.log(data.formData.image);
             this.productImage=data.formData.image ? this.imageUrl+data.formData.image  : this.imageUrl+"sorry-image-not-available.png";
-          
+            this.formData=data.formData;
 
             this.spinnerService.hide();   
              

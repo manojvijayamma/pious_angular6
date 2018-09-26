@@ -47,7 +47,9 @@ export class OrdersComponent implements OnInit {
             
             from_date:[""],        
             to_date : [""]  ,
-            tyre_id:'',
+            order_no:'',
+            order_status:'',
+            title:'',
             sortField:'Name',
             sortOrder:'ASC' ,
             page:''          
@@ -70,6 +72,15 @@ export class OrdersComponent implements OnInit {
     doSearch(){
         //console.log(this.searchForm.value);
         this.loadGridData(1);    
+    }
+
+    resetSearch(){
+        this.searchForm.controls["from_date"].setValue(['']);
+        this.searchForm.controls["to_date"].setValue(['']);
+        this.searchForm.controls["order_no"].setValue(['']);
+        this.searchForm.controls["order_status"].setValue(['']);
+        this.searchForm.controls["title"].setValue(['']);
+        this.loadGridData(1);  
     }
 
     loadGridData(page){
