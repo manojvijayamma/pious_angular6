@@ -46,7 +46,10 @@ export class ModalComponent {
             stock:["", [Validators.required]], 
             order_quantity:'',  
             description:'',  
-            comment:''        
+            comment:''  ,
+            total_price:'' ,
+            weight:'',
+            vat:''     
            // date1 : [""],
            // date2 : new Date(1990, 0, 1),
            // file : new Date(1990, 0, 1)
@@ -79,6 +82,11 @@ export class ModalComponent {
          });
 
         this.modalReference.dismiss();     
+    }
+
+    doTotal(){
+        var total=this.formData.value.order_quantity*this.formData.value.price;
+        this.formData.patchValue({total_price:total});
     }
 
     open(content) {  
@@ -132,7 +140,9 @@ export class ModalComponent {
                 stock:data.formData.stock,
                 order_quantity:'',  
                 description:data.formData.description,
-                comment:''           
+                comment:''  ,
+                weight:data.formData.weight,
+                vat:data.formData.vat,          
                 //date1 : { year: 2018, month: 9, day: 16 },
                // date2 : { year: 2018, month: 9, day: 26 }
 

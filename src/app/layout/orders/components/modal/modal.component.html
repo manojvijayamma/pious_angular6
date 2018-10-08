@@ -9,7 +9,7 @@
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    <form role="form" [formGroup]='formData' (ngSubmit)="doSend()">
+   
     <div class="modal-body">
         
             
@@ -17,7 +17,7 @@
             <div class="col-sm-6">
                <table class="table table-striped table-bordered">
                     <tr>
-                        <th>Order No</th><td>{{formData.order_no}}</td>
+                        <th style="width:50%">Order No</th><td>{{formData.order_no}}</td>
                     </tr>
                     <tr>
                         <th>Order Date</th><td>{{formData.order_date}}</td>
@@ -26,13 +26,16 @@
                         <th>Status</th><td>{{formData.order_status}}</td>
                     </tr>
                     <tr>
-                        <th>Invoice</th><td>{{formData.invoice}}</td>
+                        <th>Invoice</th><td>
+                            <div *ngIf="showDownload" >
+                            <a href="{{invoiceUrl}}"  target="_blank">
+                            Download Invoice</a></div></td>
                     </tr>
                 </table>   
 
                 <table class="table table-striped table-bordered">
                     <tr>
-                             <th>Order Quantity</th><td>{{formData.order_quantity}}</td>
+                             <th style="width:50%">Order Quantity</th><td>{{formData.order_quantity}}</td>
                          </tr>
                          <tr>
                              <th>Order Note</th><td>{{formData.order_note}}</td>
@@ -45,16 +48,16 @@
                 
                 <table class="table table-striped table-bordered">
                     <tr>
-                        <th>Customer</th><td>{{formData.user.firstname}} {{formData.user.lastname}}</td>
+                        <th style="width:50%">Customer</th><td>{{formData.firstname}} {{formData.lastname}}</td>
                     </tr>
                     <tr>
-                        <th>Email</th><td>{{formData.user.email}}</td>
+                        <th>Email</th><td>{{formData.email}}</td>
                     </tr>
                     <tr>
-                        <th>Phone</th><td>{{formData.user.phone}}</td>
+                        <th>Phone</th><td>{{formData.phone}}</td>
                     </tr>
                     <tr>
-                        <th>Address</th><td>{{formData.user.address}}</td>
+                        <th>Address</th><td>{{formData.address}}</td>
                     </tr>
                     
                </table>
@@ -66,7 +69,7 @@
             <div class="col-sm-6">
                 <table class="table table-striped table-bordered">
                     <tr>
-                        <th>Delivery Date</th><td>{{formData.delivery_date}}</td>
+                        <th style="width:50%">Delivery Date</th><td>{{formData.delivery_date}}</td>
                     </tr>
                     <tr>
                         <th>Delivery Note</th><td>{{formData.delivery_note}}</td>
@@ -75,37 +78,37 @@
                    </table>  
                 <table class="table table-striped table-bordered">
                     <tr>
-                        <th>Product</th><td>{{formData.tyres.title}}</td>
+                        <th style="width:50%">Product</th><td>{{formData.title}}</td>
                     </tr>
                     <tr>
-                        <th>Category</th><td>{{formData.tyres.category.title}}</td>
+                        <th>Category</th><td>{{formData.category}}</td>
                     </tr>
                     <tr>
-                        <th>Type</th><td>{{formData.tyres.type.title}}</td>
+                        <th>Type</th><td>{{formData.type}}</td>
                     </tr>
                     <tr>
-                        <th>Brand</th><td>{{formData.tyres.brand.title}}</td>
+                        <th>Brand</th><td>{{formData.brand}}</td>
                     </tr>
                     <tr>
-                        <th>Origin</th><td>{{formData.tyres.origin.title}}</td>
+                        <th>Origin</th><td>{{formData.origin}}</td>
                     </tr>
                     <tr>
-                        <th>Pattern</th><td>{{formData.tyres.pattern.title}}</td>
+                        <th>Pattern</th><td>{{formData.pattern}}</td>
                     </tr>
                     <tr>
-                        <th>Model</th><td>{{formData.tyres.model}}</td>
+                        <th>Model</th><td>{{formData.model}}</td>
                     </tr>
                     <tr>
-                        <th>Description</th><td>{{formData.tyres.description}}</td>
+                        <th>Description</th><td>{{formData.description}}</td>
                     </tr>
                     <tr>
-                        <th>Price</th><td>{{formData.tyres.price}}</td>
+                        <th>Price</th><td>{{formData.price}}</td>
                     </tr>
                     <tr>
-                        <th>Weight</th><td>{{formData.tyres.wieight}}</td>
+                        <th>Weight</th><td>{{formData.weight}}</td>
                     </tr>
                     <tr>
-                        <th>Vat %</th><td>{{formData.tyres.vat}}</td>
+                        <th>Vat %</th><td>{{formData.vat}}</td>
                     </tr>
                     
                   
@@ -120,5 +123,5 @@
     <div class="modal-footer">                             
             <button type="button" class="btn btn-danger" (click)="c('Close click')"><i class="fa fa-remove"></i> Close</button>
     </div>
-</form>
+
 </ng-template>

@@ -18,6 +18,8 @@ export class ModalComponent {
    
     private modalReference : NgbModalRef;
     productImage: any;
+    invoiceUrl: any;
+    showDownload :any
     formData : any;
     @Input() title: number; 
     event: any;
@@ -91,7 +93,16 @@ export class ModalComponent {
                      
             
             this.productImage=data.formData.image ? this.imageUrl+data.formData.image  : this.imageUrl+"sorry-image-not-available.png";
+            if(data.formData.invoice){
+                this.invoiceUrl= this.imageUrl+"invoice/"+data.formData.invoice;
+                this.showDownload=true;
+            }
+
+            
+            //data.formData.tyres.pattern.title=data.formData.tyres.pattern!=null ? data.formData.tyres.pattern.title : '&nbsp; ',  
             this.formData=data.formData;
+  
+            
 
             this.spinnerService.hide();   
              
