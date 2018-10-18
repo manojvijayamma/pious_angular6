@@ -12,10 +12,11 @@
 }
 
 #gridPanel{
-    overflow-y: scroll;background-color:#fff;border-bottom:1px solid #65bbbf;
+   /* overflow-y: scroll;
+    background-color:#fff;border-bottom:1px solid #65bbbf;*/
 }
 .gridBorder{
-    border:1px solid #00979d;
+    /*border:1px solid #00979d;*/
     margin:15px;
 }
 
@@ -85,6 +86,13 @@
 
 .table th{
     vertical-align:middle;
-    background-color:#eff7f7;
+    background-color:#7de8ed;
     padding:5px 3px;
+}
+
+.table-bordered, .table-bordered td, .table-bordered th{
+    border:none;
+}
+.rowBorder{
+    border-bottom:1px solid #7de8ed;
 }

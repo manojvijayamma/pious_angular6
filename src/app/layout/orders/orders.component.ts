@@ -36,7 +36,7 @@ export class OrdersComponent implements OnInit {
 
         //update grid height
         this.sHeight=(screen.availHeight-320)+"px";
-        document.getElementById("gridPanel").style.height=this.sHeight;
+        //document.getElementById("gridPanel").style.height=this.sHeight;
         
         //pagination form
         this.pagerForm = this.frmBuilder.group({            

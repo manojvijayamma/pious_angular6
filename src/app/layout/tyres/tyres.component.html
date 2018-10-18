@@ -12,7 +12,7 @@
                        <!-- <li class="breadcrumb-item">
                             <i class="fa fa-dashboard"></i> <a href="Javascript:void(0)" [routerLink]="['/dashboard']">Dashboard</a>
                         </li> -->
-                        <li class="breadcrumb-item active" style="font-weight:bold;font-size:18px;color:#fff"><i class="fa fa-table "></i> Products</li>
+                        <li class="breadcrumb-item active" style="font-weight:bold;font-size:18px;color:#fff"> Products</li>
                         
                     </ol>
                     <div class="pull-right" style="position:absolute;top:10px;right:20px;">
@@ -109,7 +109,8 @@
                 <table class="table table-bordered">
                     <thead>
                     <tr>
-                        <th class="col-sm-1" style="width:3%">#</th>
+                        <th class="col-sm-1" style="width:3%">No</th>
+                        <th class="col-sm-1">Image</th>
                         <th class="col-sm-2">Product</th>
                         <th class="col-sm-2">Category</th>
                         <th class="col-sm-2">Type</th>
@@ -122,8 +123,10 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr *ngFor="let data of gridData;let i=index">
-                        <th scope="row">{{pager.startSI + i}}</th>
+                    <tr *ngFor="let data of gridData;let i=index" class="rowBorder">
+                        <td scope="row">{{pager.startSI + i}}</td>
+                        <td><img  *ngIf="data.image == ''" src="{{imageUrl}}sorry-image-not-available.png" style="width:80px;">
+                            <img  *ngIf="data.image != ''" src="{{imageUrl}}{{data.image}}" style="width:80px;"></td>
                         <td>{{data.title}}</td>
                         <td>{{data.category.title}}</td>
                         <td>{{data.type.title}}</td>

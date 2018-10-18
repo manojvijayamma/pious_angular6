@@ -12,7 +12,7 @@
                        <!-- <li class="breadcrumb-item">
                             <i class="fa fa-dashboard"></i> <a href="Javascript:void(0)" [routerLink]="['/dashboard']">Dashboard</a>
                         </li> -->
-                        <li class="breadcrumb-item active" style="font-weight:bold;font-size:18px;color:#fff"><i class="fa fa-table "></i> Orders</li>
+                        <li class="breadcrumb-item active" style="font-weight:bold;font-size:18px;color:#fff"> Orders</li>
                         
                     </ol>
                     <div class="pull-right" style="position:absolute;top:10px;right:20px;">
@@ -108,7 +108,7 @@
                 <table class="table table-bordered">
                     <thead>
                     <tr>
-                        <th>#</th>
+                        <th>No</th>
                         <th>Order No</th>
                         <th>Order Date</th>
                         <th>Product</th>
@@ -121,15 +121,15 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr *ngFor="let data of gridData;let i=index">
-                        <th scope="row">{{pager.startSI + i}}</th>
+                    <tr *ngFor="let data of gridData;let i=index" class="rowBorder">
+                        <td scope="row" style="padding:15px 0px;">{{pager.startSI + i}}</td>
                         <td>{{data.order_no}}</td>
                         <td>{{data.order_date}}</td>
                         <td>{{data.product}}</td>
                         <td>{{data.category}}</td>
                         <td>{{data.price}}</td>
                         <td>{{data.order_quantity}}</td>
-                        <td>{{data.total_price}}</td>
+                        <td>{{data.grand_total}}</td>
                         <td>{{data.order_status}}</td>
                         <td><app-modal [title]=data.id></app-modal></td>
                     </tr>

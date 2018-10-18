@@ -6,6 +6,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { TyreService } from '../../shared/services/tyre.service';
 import { ResponseService } from '../../shared/services/response.service';
 import { SpinnerService } from  '../../shared/services/spinner.service';
+import { environment } from '../../../environments/environment';
 
 
 @Component({
@@ -27,6 +28,7 @@ export class TyresComponent implements OnInit {
     pagerForm: FormGroup; 
     searchForm: FormGroup;
     sHeight : any;
+    readonly imageUrl = `${environment.image_url}`;
 
     constructor(private tyreService : TyreService,
         private frmBuilder: FormBuilder,
@@ -41,7 +43,7 @@ export class TyresComponent implements OnInit {
 
         //update grid height
         this.sHeight=(screen.availHeight-315)+"px";
-        document.getElementById("gridPanel").style.height=this.sHeight;
+        //document.getElementById("gridPanel").style.height=this.sHeight;
         
         //pagination form
         this.pagerForm = this.frmBuilder.group({            

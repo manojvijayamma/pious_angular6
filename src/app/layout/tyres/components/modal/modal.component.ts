@@ -48,6 +48,7 @@ export class ModalComponent {
             description:'',  
             comment:''  ,
             total_price:'' ,
+            vat_amount:'',
             weight:'',
             vat:''     
            // date1 : [""],
@@ -86,6 +87,9 @@ export class ModalComponent {
 
     doTotal(){
         var total=this.formData.value.order_quantity*this.formData.value.price;
+        var vat_amount=total*this.formData.value.vat/100;
+        this.formData.patchValue({vat_amount:vat_amount});
+        total=total+vat_amount;
         this.formData.patchValue({total_price:total});
     }
 
