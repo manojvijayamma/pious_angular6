@@ -50,7 +50,8 @@ export class ModalComponent {
             total_price:'' ,
             vat_amount:'',
             weight:'',
-            vat:''     
+            vat:'' ,
+            customer_stock:''    
            // date1 : [""],
            // date2 : new Date(1990, 0, 1),
            // file : new Date(1990, 0, 1)
@@ -146,7 +147,8 @@ export class ModalComponent {
                 description:data.formData.description,
                 comment:''  ,
                 weight:data.formData.weight,
-                vat:data.formData.vat,          
+                vat:data.formData.vat, 
+                customer_stock:data.formData.customer_stock,         
                 //date1 : { year: 2018, month: 9, day: 16 },
                // date2 : { year: 2018, month: 9, day: 26 }
 

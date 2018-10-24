@@ -39,7 +39,7 @@
 
 .modal-footer{
     padding:5px;
-    background-color:#dee2e6
+    background-color:#87ede7
 }
 
 .list-group-item{
@@ -69,11 +69,11 @@
 }
 
 .breadcrumb{
-    padding:5px;
-    background-color:#00979d;
+    padding:10px;
+    background-color:#8dc9c1;
     border-radius:0px;
     color:#fff;
-    font-size:18px;
+    font-size:25px;
 }
 
 .table td{
@@ -86,7 +86,7 @@
 
 .table th{
     vertical-align:middle;
-    background-color:#7de8ed;
+    background-color:#b5eae3;
     padding:5px 3px;
 }
 
@@ -94,5 +94,9 @@
     border:none;
 }
 .rowBorder{
-    border-bottom:1px solid #7de8ed;
+    border-bottom:1px solid #b5eae3;
 }
+.main-container{
+    margin-top:72px !important;
+}
+
