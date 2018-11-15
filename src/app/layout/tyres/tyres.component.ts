@@ -80,6 +80,16 @@ export class TyresComponent implements OnInit {
          });
     }
 
+    addToCart(event,id){
+        //alert(event.target.value);
+        this.tyreService.addToCart({stock:event.target.value,tyre_id:id}).subscribe((data: any) => { 
+            this.spinnerService.hide();   
+            //this.alertService.success(data.text);
+         }, error => {
+             this.responseService.checkStatus(error);           
+         });
+    }
+
     doPager(){
        // console.log(this.pagerForm.get('page').value);
         this.loadGridData(this.pagerForm.get('page').value); 

@@ -10,7 +10,10 @@
         </form> -->
 
         
-
+        <button class="btn btn-default btn-lg btn-link" style="font-size:36px;" (click)="openModalDialogCart()">
+            <span class="glyphicon glyphicon-comment"></span>
+          </button>
+          <span class="badge badge-notify">4</span>
 
         
     </div>
@@ -265,4 +268,79 @@
 
             </div>
         </div>
+</div>
+
+
+
+
+   
+<!-- The Modal -->
+<div class="modal" id="myModalCart" [ngStyle]="{'display':cartdisplay}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <h4 class="modal-title"><i class="fa fa-fw fa-address-card "></i>&nbsp;My Profile</h4>
+            <button type="button" class="close" data-dismiss="modal" (click)="closeModalDialogCart()" >&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <form role="form" [formGroup]='formData' (ngSubmit)="doSendCart()">
+        <div class="modal-body">
+               
+                        <div class="form-group">
+                                <div class="input-group datepicker-input">
+                                    <input  class="form-control" placeholder="First Name"
+                                          formControlName="firstname"  >
+                                    
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="input-group datepicker-input">
+                                    <input  class="form-control" placeholder="Last Name"
+                                          formControlName="lastname"  >
+                                    
+                                </div>
+                            </div>
+                
+                
+                            <div class="form-group">
+                                <div class="input-group datepicker-input">
+                                    <input class="form-control" placeholder="Email"
+                                        formControlName="email" >
+                                    
+                                </div>
+                            </div>  
+                            
+                            <div class="form-group">
+                                <div class="input-group datepicker-input">
+                                    <input  class="form-control" placeholder="Phone"
+                                          formControlName="phone"  >
+                                    
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="input-group datepicker-input">
+                                    <textarea  class="form-control" placeholder="Address"
+                                          formControlName="address"  ></textarea>
+                                    
+                                </div>
+                            </div>
+                       
+                    
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+                <button class="btn  btn-primary" type="submit" ><i class="fa fa-fw fa-save "></i>&nbsp;Save</button>
+            <button type="button" class="btn btn-danger" (click)="closeModalDialogCart()" ><i class="fa fa-fw fa-close "></i>&nbsp;Close</button>
+        </div>
+
+    </form>
+
+        </div>
+    </div>
 </div>

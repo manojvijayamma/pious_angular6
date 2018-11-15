@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { UserService } from '../../../shared/services/user.service';
+import { OrderService } from '../../../shared/services/order.service';
 import { AlertService } from '../../../shared/services/alert.service';
 import { ResponseService } from '../../../shared/services/response.service';
 import { SpinnerService } from  '../../../shared/services/spinner.service';
@@ -17,6 +18,7 @@ export class HeaderComponent implements OnInit {
     pushRightClass: string = 'push-right';
     profiledisplay='none'; 
     passworddisplay='none';
+    cartdisplay='none';
     formData: FormGroup; 
     passwordFormData: FormGroup; 
     loggedUser :any;
@@ -24,7 +26,9 @@ export class HeaderComponent implements OnInit {
     constructor(private translate: TranslateService, public router: Router, private frmBuilder: FormBuilder,  private userService : UserService,
     private alertService : AlertService,
     private responseService :ResponseService,
-    private spinnerService: SpinnerService ) {
+    private spinnerService: SpinnerService,
+    private orderService : OrderService    
+) {
 
         this.translate.addLangs(['en', 'fr', 'ur', 'es', 'it', 'fa', 'de', 'zh-CHS']);
         this.translate.setDefaultLang('en');
@@ -189,6 +193,53 @@ export class HeaderComponent implements OnInit {
     }
 
 
+    doSendCart(){
+        console.log(this.formData.value);
+        if(this.formData.value.firstname==null){
+            this.alertService.error("Enter firstname");
+            return false;
+        }
+        if(this.formData.value.lastname==null){
+            this.alertService.error("Enter lastname");
+            return false;
+        }
+        if(this.formData.value.email==null){
+            this.alertService.error("Enter email");
+            return false;
+        }
+        if(this.formData.value.phone==null){
+            this.alertService.error("Enter phone number");
+            return false;
+        }
+        if(this.formData.value.address==null){
+            this.alertService.error("Enter address");
+            return false;
+        }
+
+        this.spinnerService.show();       
+        
+        this.orderService.saveOrder(this.formData.value).subscribe((data : any)=>{
+            console.log(data);
+            if(data.text){
+                this.cartdisplay='none';
+                this.loggedUser=this.formData.value.firstname+' '+this.formData.value.lastname;
+                
+                this.alertService.success(data.text);
+                this.spinnerService.hide();
+            }  
+            else{
+                this.spinnerService.hide(); 
+            }  
+          }
+          , error => {
+           
+            this.responseService.checkStatus(error); 
+            this.spinnerService.hide();   
+            
+          });        
+    }
+
+
 
     openModalDialogProfile(){ 
 
@@ -233,6 +284,13 @@ export class HeaderComponent implements OnInit {
         this.passworddisplay='none'; //set none css after close dialog
     }
 
+    closeModalDialogCart(){
+        this.cartdisplay='none'; //set none css after close dialog
+        this.spinnerService.hide(); 
+    }
+
+
+
     changeLang(language: string) {
         this.translate.use(language);
     }
@@ -240,4 +298,36 @@ export class HeaderComponent implements OnInit {
     showSpinner(){
         this.spinnerService.show();  
     }
+
+
+    openModalDialogCart(){ 
+
+        this.spinnerService.show();    
+        this.orderService.getCart('').subscribe((data : any)=>{            
+          if(data.status=='error'){               
+              this.alertService.error(data.text);
+              this.spinnerService.hide(); 
+          }  
+          else{
+              this.cartdisplay='block'; //Set block css
+              this.passworddisplay='none';
+              this.profiledisplay='none';
+              console.log(data);
+              this.formData.setValue({
+                  firstname:data.profileData.firstname,
+                  lastname:data.profileData.lastname,
+                  email:data.profileData.email,
+                  phone:data.profileData.phone,
+                  address:data.profileData.address,
+              });
+
+              this.spinnerService.hide();   
+          }  
+        }, error => {
+         
+          this.responseService.checkStatus(error);               
+          this.spinnerService.hide(); 
+        });
+      
+  }
 }

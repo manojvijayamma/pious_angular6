@@ -119,8 +119,9 @@
                         <th class="col-sm-1">Model</th>
                         <th class="col-sm-1">Price</th>
                         <th class="col-sm-1">Stock</th>
-                        <th class="col-sm-1">Actions</th>
+                        
                         <th class="col-sm-2">Our Stock</th>
+                        <th class="col-sm-1">Actions</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -139,8 +140,10 @@
                         <td>{{data.model}}</td>
                         <td>{{data.price1}}</td>
                         <td>{{data.stock}}</td>
-                        <td><app-modal [title]=data.id></app-modal></td>
-                        <td><input class="form-control " type="text" value="{{data.customer_stock}}" (blur)="updateStock($event,data.id)" style="width:50px"></td>
+                        
+                        <td><input class="form-control " type="text" value="{{data.customer_stock}}"  style="width:50px"></td> <!--(blur)="updateStock($event,data.id)" -->
+                        <td><button type="submit" class="btn btn-success" (click)="addToCart($event,data.id)"><i class="fa fa-save"></i> Add to cart</button>
+                            </td>
                     </tr>
                     
                     </tbody>
