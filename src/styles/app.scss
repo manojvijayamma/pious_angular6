@@ -21,9 +21,9 @@
 }
 
 .modal-header{
-    background-color:#086266;
+    background-color:#ff3333; /* 086266*/
     border-radius:0px;
-    border:1px solid #086266;
+    border:1px solid #ff3333;
     color:#fff;
     padding:8px;
     font-size:18px;
@@ -31,7 +31,7 @@
 
 .modal-content{
     border-radius:0px;
-    border:1px solid #086266;
+    border:1px solid #ff3333;
 }
 .modal-body{
     padding-bottom:0px;
@@ -39,7 +39,7 @@
 
 .modal-footer{
     padding:5px;
-    background-color:#87ede7
+    background-color:#ff8080
 }
 
 .list-group-item{
@@ -48,7 +48,7 @@
     border-radius:none;
 }
 .list-group-item:hover{
-    background-color:#70d6d8;
+     background-color:#ff8080; /* #70d6d8;*/
     border-radius:0px !important;
 }
 
@@ -70,7 +70,7 @@
 
 .breadcrumb{
     padding:10px;
-    background-color:#8dc9c1;
+    background-color:#ffb3b3; /* #8dc9c1*/
     border-radius:0px;
     color:#fff;
     font-size:25px;
@@ -86,7 +86,7 @@
 
 .table th{
     vertical-align:middle;
-    background-color:#b5eae3;
+    background-color:#ffb3b3;
     padding:5px 3px;
 }
 
@@ -94,7 +94,7 @@
     border:none;
 }
 .rowBorder{
-    border-bottom:1px solid #b5eae3;
+    border-bottom:1px solid #ffb3b3;
 }
 .main-container{
     margin-top:72px !important;

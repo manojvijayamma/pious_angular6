@@ -1,4 +1,4 @@
-$topnav-background-color:  #00979d;
+$topnav-background-color:  #ff0000;
 :host {
     display: block;
 }
@@ -10,6 +10,8 @@ $topnav-background-color:  #00979d;
     bottom: 0;
     overflow: auto;
     background: $topnav-background-color;
+    background-image: linear-gradient(#ffb3b3, #990000);
+  
     text-align: center;
     color: #fff;
     padding: 3em;
@@ -88,8 +90,8 @@ $topnav-background-color:  #00979d;
         padding: 40px 0;
     }
     .user-avatar {
-        -webkit-border-radius: 50%;
+       /* -webkit-border-radius: 50%;
         border-radius: 50%;
-        border: 2px solid #fff;
+        border: 2px solid #fff;*/
     }
 }
