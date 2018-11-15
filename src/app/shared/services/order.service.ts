@@ -34,6 +34,10 @@ export class OrderService {
       return this.http.post(this.rootUrl+'order' , formData);
   }
 
+  getCart(params){
+    return  this.http.get(this.rootUrl+'cart', {params});
+  }
+
  
 
 }

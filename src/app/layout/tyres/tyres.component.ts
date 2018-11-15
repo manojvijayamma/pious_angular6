@@ -6,6 +6,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { TyreService } from '../../shared/services/tyre.service';
 import { ResponseService } from '../../shared/services/response.service';
 import { SpinnerService } from  '../../shared/services/spinner.service';
+import { AlertService } from  '../../shared/services/alert.service';
 import { environment } from '../../../environments/environment';
 
 
@@ -33,7 +34,8 @@ export class TyresComponent implements OnInit {
     constructor(private tyreService : TyreService,
         private frmBuilder: FormBuilder,
         private responseService: ResponseService,
-        private spinnerService: SpinnerService) {
+        private spinnerService: SpinnerService,
+        private alertService:AlertService) {
        
     }
 
@@ -75,6 +77,19 @@ export class TyresComponent implements OnInit {
         this.tyreService.updateStock({stock:event.target.value,tyre_id:id}).subscribe((data: any) => { 
             this.spinnerService.hide();   
             //this.alertService.success(data.text);
+         }, error => {
+             this.responseService.checkStatus(error);           
+         });
+    }
+
+    addToCart(event,id){
+        //alert(event.target.value);
+        var qty=document.getElementById("qty_"+id).value;
+        this.tyreService.addToCart({order_quantity:qty,tyre_id:id}).subscribe((data: any) => { 
+            this.spinnerService.hide();
+            document.getElementById("cartTotal").innerHTML=data.total;
+            document.getElementById("qty_"+id).value='';   
+            this.alertService.success(data.text);
          }, error => {
              this.responseService.checkStatus(error);           
          });

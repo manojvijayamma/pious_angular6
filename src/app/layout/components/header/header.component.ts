@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { UserService } from '../../../shared/services/user.service';
+import { OrderService } from '../../../shared/services/order.service';
 import { AlertService } from '../../../shared/services/alert.service';
 import { ResponseService } from '../../../shared/services/response.service';
 import { SpinnerService } from  '../../../shared/services/spinner.service';
@@ -17,14 +18,20 @@ export class HeaderComponent implements OnInit {
     pushRightClass: string = 'push-right';
     profiledisplay='none'; 
     passworddisplay='none';
+    cartdisplay='none';
     formData: FormGroup; 
     passwordFormData: FormGroup; 
     loggedUser :any;
+    cartData:any;
+    totalData:any;
+    cartDetails: FormGroup; 
 
     constructor(private translate: TranslateService, public router: Router, private frmBuilder: FormBuilder,  private userService : UserService,
     private alertService : AlertService,
     private responseService :ResponseService,
-    private spinnerService: SpinnerService ) {
+    private spinnerService: SpinnerService,
+    private orderService : OrderService    
+) {
 
         this.translate.addLangs(['en', 'fr', 'ur', 'es', 'it', 'fa', 'de', 'zh-CHS']);
         this.translate.setDefaultLang('en');
@@ -60,6 +67,13 @@ export class HeaderComponent implements OnInit {
         });
 
 
+        this.cartDetails = this.frmBuilder.group({            
+            
+            order_note : [""] ,
+
+        });
+
+
         this.userService.getProfile('').subscribe((data : any)=>{            
             if(data.status=='error'){               
                 this.alertService.error(data.text);
@@ -69,6 +83,8 @@ export class HeaderComponent implements OnInit {
                
                 this.loggedUser=data.profileData.firstname+' '+data.profileData.lastname;
                 
+                document.getElementById("cartTotal").innerHTML=data.total;
+
                 this.spinnerService.hide();   
             }  
           }, error => {
@@ -189,6 +205,33 @@ export class HeaderComponent implements OnInit {
     }
 
 
+    doSendCart(){
+        console.log(this.formData.value);
+        
+
+        this.spinnerService.show();       
+        
+        this.orderService.saveOrder(this.cartDetails.value).subscribe((data : any)=>{
+            console.log(data);
+            if(data.text){
+                this.cartdisplay='none';
+                
+                this.alertService.success(data.text);
+                this.spinnerService.hide();
+            }  
+            else{
+                this.spinnerService.hide(); 
+            }  
+          }
+          , error => {
+           
+            this.responseService.checkStatus(error); 
+            this.spinnerService.hide();   
+            
+          });        
+    }
+
+
 
     openModalDialogProfile(){ 
 
@@ -233,6 +276,13 @@ export class HeaderComponent implements OnInit {
         this.passworddisplay='none'; //set none css after close dialog
     }
 
+    closeModalDialogCart(){
+        this.cartdisplay='none'; //set none css after close dialog
+        this.spinnerService.hide(); 
+    }
+
+
+
     changeLang(language: string) {
         this.translate.use(language);
     }
@@ -240,4 +290,31 @@ export class HeaderComponent implements OnInit {
     showSpinner(){
         this.spinnerService.show();  
     }
+
+
+    openModalDialogCart(){ 
+
+        this.spinnerService.show();    
+        this.orderService.getCart('').subscribe((data : any)=>{            
+          if(data.status=='error'){               
+              this.alertService.error(data.text);
+              this.spinnerService.hide(); 
+          }  
+          else{
+              this.cartdisplay='block'; //Set block css
+              this.passworddisplay='none';
+              this.profiledisplay='none';
+              //console.log(data.gridData.data);
+              this.cartData=data.gridData.data;
+              this.totalData=data.totalData;
+
+              this.spinnerService.hide();   
+          }  
+        }, error => {
+         
+          this.responseService.checkStatus(error);               
+          this.spinnerService.hide(); 
+        });
+      
+  }
 }

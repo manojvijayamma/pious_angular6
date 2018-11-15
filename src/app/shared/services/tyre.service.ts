@@ -52,6 +52,10 @@ export class TyreService {
     return this.http.post(this.rootUrl+'updateStock' , formData);
   }
 
+  addToCart(formData){
+    return this.http.post(this.rootUrl+'cart' , formData);
+  }
+
  
 
 }
