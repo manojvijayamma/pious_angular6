@@ -35,7 +35,7 @@
 
         <a href="javascript:void(0);" class="nav-link" style="color:#fff" (click)="openModalDialogCart()">
                 <img src="assets/images/cart.png" style='height:30px;'>
-                <span id="cartTotal" class="badge badge-notify" style="position:relative;right:10px;top:-5px;color:black;font-size:18px;">4</span>
+                <span id="cartTotal" class="badge badge-notify" style="position:relative;right:10px;top:-5px;color:black;font-size:18px;">0</span>
      
         </a>
 
@@ -290,28 +290,31 @@
         </div>
 
         <!-- Modal body -->
-        <form role="form" [formGroup]='formData' (ngSubmit)="doSendCart()">
-        <div class="modal-body">
-               
+        <form role="form" [formGroup]='cartDetails' (ngSubmit)="doSendCart()">
+        <div class="modal-body" style="padding:1px;">
+            <div style="max-height:400px;overflow-x:auto">   
             <table class="table table-bordered">
                 <thead>
-                <tr>
+                <tr >
+                        <th class="col-sm-1">Delete</th>
                     <th class="col-sm-1" style="width:3%">No</th>
                     
                     <th class="col-sm-3">Product</th>                    
                     <th class="col-sm-1" style="text-align:right">Price</th>                   
                     
-                    <th class="col-sm-2" style="text-align:right">Quantity</th>
+                    <th class="col-sm-2" style="text-align:right">Qty</th>
                     <th class="col-sm-2" style="text-align:right">Total</th>
                     <th class="col-sm-2" style="text-align:right">Vat Rate</th>
-                    <th class="col-sm-2" style="text-align:right">Vat Amount</th>
-                    <th class="col-sm-2" style="text-align:right">Grant Total</th>
-                    <th class="col-sm-1">Delete</th>
+                    <th class="col-sm-2" style="text-align:right">Vat Amt</th>
+                    <th class="col-sm-2" style="text-align:right">G.Total</th>
+                    
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let data of cartData;let i=index" class="rowBorder">
-                    <td scope="row">{{ i+1}}</td>
+                <tr *ngFor="let data of cartData;let i=index" class="rowBorder" >
+                        <td><a href="javascript:void(0);" class="btn btn-success btn-sm" (click)="removeCart(data)"><i class="fa fa-remove"></i> </a>
+                        </td>
+                    <td style="padding:10px" scope="row">{{ i+1}}</td>
                     <td >{{data.title}}
                     </td>
          
@@ -322,20 +325,17 @@
                     <td style="text-align:right">{{data.vat_amount}}</td>
                     <td style="text-align:right">{{data.grant_total}}</td>
                     
-                    <td><a href="javascript:void(0);" class="btn btn-success btn-sm" (click)="addToCart($event,data.id)"><i class="fa fa-remove"></i> </a>
-                        </td>
+                    
                 </tr>
                 <tr  class="rowBorder">
-                    <td colspan="4" style="text-align:right">Oreder Total</td>
-                    <td style="text-align:right">{{totalData.total_price}}</td>
-                    <td></td>
-                    <td style="text-align:right">{{totalData.vat_amount}}</td>
-                    <td style="text-align:right">{{totalData.grant_total}}</td>
-                    <td></td>
+                    <td colspan="8" style="text-align:right"><b>Oreder Total</b></td>
+                    
+                    <td style="text-align:right"><b>{{totalData.grant_total}}</b></td>
+                    
                 </tr>
                 </tbody>
             </table>        
-            
+            </div>
             <div class="form-group row" >
                 <div class="col-sm-12">
                         <label for="inputLastname"> Note</label>

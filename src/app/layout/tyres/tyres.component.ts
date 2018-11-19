@@ -84,11 +84,11 @@ export class TyresComponent implements OnInit {
 
     addToCart(event,id){
         //alert(event.target.value);
-        var qty=document.getElementById("qty_"+id).value;
+        var qty=(<HTMLInputElement>document.getElementById("qty_"+id)).value;
         this.tyreService.addToCart({order_quantity:qty,tyre_id:id}).subscribe((data: any) => { 
             this.spinnerService.hide();
             document.getElementById("cartTotal").innerHTML=data.total;
-            document.getElementById("qty_"+id).value='';   
+            (<HTMLInputElement>document.getElementById("qty_"+id)).value='';   
             this.alertService.success(data.text);
          }, error => {
              this.responseService.checkStatus(error);           
@@ -177,6 +177,13 @@ export class TyresComponent implements OnInit {
          }, error => {
              this.responseService.checkStatus(error);           
          });
+    }
+
+    validateNumber(event){
+        if(event.target.value>0){}
+        else{
+            event.target.value='';
+        }
     }
 
     ngAfterViewInit(){

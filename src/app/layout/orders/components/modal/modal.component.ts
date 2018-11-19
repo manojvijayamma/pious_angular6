@@ -21,6 +21,7 @@ export class ModalComponent {
     invoiceUrl: any;
     showDownload :any
     formData : any;
+    orderDetails : any;
     @Input() title: number; 
     event: any;
     fileToUpload: File  = null;
@@ -101,7 +102,7 @@ export class ModalComponent {
             
             //data.formData.tyres.pattern.title=data.formData.tyres.pattern!=null ? data.formData.tyres.pattern.title : '&nbsp; ',  
             this.formData=data.formData;
-  
+            this.orderDetails=data.orderDetails;
             
 
             this.spinnerService.hide();   
