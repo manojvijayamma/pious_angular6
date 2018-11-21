@@ -290,7 +290,15 @@ export class HeaderComponent implements OnInit {
         this.translate.use(language);
     }
 
-    showSpinner(){
+    showSpinner(logo=0){
+        if(logo==1){
+            document.getElementById("panel_username").style.display="none";
+            document.getElementById("panel_logo").style.display="block";
+        }
+        else{
+            document.getElementById("panel_username").style.display="block";
+            document.getElementById("panel_logo").style.display="none";
+        }
         this.spinnerService.show();  
     }
 
@@ -338,7 +346,15 @@ export class HeaderComponent implements OnInit {
               //this.totalData=data.totalData;
 
               var index = this.cartData.indexOf(item);
-              this.cartData.splice(index, 1);  
+              this.cartData.splice(index, 1); 
+              
+              if(this.cartData.length==0){
+                document.getElementById("cartTotal").innerHTML='';
+                this.cartdisplay='none';
+              }
+              else{
+                document.getElementById("cartTotal").innerHTML=this.cartData.length;
+              }  
 
               this.spinnerService.hide();   
           }  
@@ -347,5 +363,15 @@ export class HeaderComponent implements OnInit {
           this.responseService.checkStatus(error);               
           this.spinnerService.hide(); 
         });
+  }
+
+  getTotal(){
+    var total = 0;
+    for(var i = 0; i < this.cartData.length; i++){
+        var product = this.cartData[i];
+        total = total+parseFloat(product.grant_total);
+    }
+    
+    return total;
   }
 }

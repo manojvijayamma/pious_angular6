@@ -1,0 +1,128 @@
+<button class="btn btn-primary btn-sm" (click)="open(content)" style=""><i class="fa fa-pencil-square"></i> View</button>
+
+
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title"><i class="fa fa-table "></i> Product Order</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <form role="form" [formGroup]='formData' (ngSubmit)="doSend()">
+    <div class="modal-body">
+        
+            <div class="form-group row">
+                    <div class="col-sm-8">                      
+                        <table class="table table-striped table-bordered">
+                            <tr>
+                                <td style="width:50%">Product</td><td><input style="border:none;background:none;" class="form-control" formControlName="title" readonly></td>
+                            </tr>
+                            <tr>
+                                <td style="width:50%">Category</td><td><input style="border:none;background:none;" class="form-control" formControlName="category" readonly></td>
+                            </tr>
+                            <tr>
+                                <td style="width:50%">Type</td><td><input style="border:none;background:none;" class="form-control" formControlName="type" readonly></td>
+                            </tr>
+
+                            <tr>
+                                <td style="width:50%">Brand</td><td><input style="border:none;background:none;" class="form-control" formControlName="brand" readonly></td>
+                            </tr>
+                            <tr>
+                                <td style="width:50%">Pattern</td><td><input style="border:none;background:none;" class="form-control" formControlName="pattern" readonly></td>
+                            </tr>
+
+                            <tr>
+                                <td style="width:50%">Origin</td><td><input style="border:none;background:none;" class="form-control" formControlName="origin" readonly></td>
+                            </tr>
+
+                            <tr>
+                                <td style="width:50%">Model</td><td><input style="border:none;background:none;" class="form-control" formControlName="model" readonly></td>
+                            </tr>
+
+                            <tr>
+                                <td style="width:50%">Weight</td><td><input style="border:none;background:none;" class="form-control" formControlName="weight" readonly></td>
+                            </tr>
+
+                         
+
+
+                            <tr>
+                                <td style="width:50%">Description</td><td><textarea class="form-control" formControlName="description" readonly style="height:120px;border:none;background:none;"></textarea></td>
+                            </tr>
+
+                            <tr>
+                                <td style="width:50%">Price</td><td><input style="border:none;background:none;" class="form-control" formControlName="price" readonly></td>
+                            </tr>
+
+                            <tr>
+                                <td style="width:50%">Vat %</td><td><input style="border:none;background:none;" class="form-control" formControlName="vat" readonly></td>
+                            </tr>
+
+                            <tr>
+                                <td style="width:50%">Company Stock</td><td><input style="border:none;background:none;" class="form-control" formControlName="stock" readonly></td>
+                            </tr>
+                            <tr>
+                                <td style="width:50%">Our Stock</td><td><input style="border:none;background:none;" class="form-control" formControlName="customer_stock" readonly></td>
+                            </tr>
+                            
+                            
+                          
+                       </table>                   
+                    
+
+                                
+                   </div>
+                   <div class="col-sm-4" style="background-color:#ccecea">
+                        
+                    <div class="form-group row" style="background-color:#fff">
+                        <div class="col-sm-12">
+                            <img class="img-fluid" src="{{productImage}}" style="height:150px;" >
+                        </div>    
+                    </div> 
+
+                        <div class="form-group row" >
+                                <div class="col-sm-12">
+                                        <label for="inputLastname"> Comment</label>
+                                        <textarea class="form-control" formControlName="comment"  style="height:55px;"></textarea>
+                                </div>          
+            
+                        </div>
+                        <div class="form-group row">
+                                    <div class="col-sm-12">
+                                        <label for="inputLastname"> Order Quantity</label>
+                                        <input class="form-control" formControlName="order_quantity" (keyup)="doTotal()" (blur)="doTotal()">
+                                    </div> 
+                        </div>  
+
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <label for="inputLastname"> Vat Amount</label>
+                                <input class="form-control" formControlName="vat_amount" readonly>
+                            </div> 
+                </div> 
+
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <label for="inputLastname"> Total Price</label>
+                                <input class="form-control" formControlName="total_price" readonly>
+                            </div> 
+                </div>     
+                
+                
+                                                  
+                   </div>   
+                      
+
+            </div>
+            
+
+        
+    </div>
+
+    <div class="modal-footer">
+            <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Place Order</button>                    
+            <button type="button" class="btn btn-danger" (click)="c('Close click')"><i class="fa fa-remove"></i> Close</button>
+    </div>
+</form>
+</ng-template>

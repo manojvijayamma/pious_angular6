@@ -101,13 +101,13 @@
                 <table class="table table-bordered">
                     <thead>
                     <tr>
-                        <th>No</th>
-                        <th>Order No</th>
-                        <th>Order Date</th>
+                        <th style="width:3%">No</th>
+                        <th style="width:25%">Order No</th>
+                        <th style="width:15%">Order Date</th>
                         
-                        <th>Total</th>
-                        <th>Status</th>
-                        <th>Action</th>
+                        <th style="width:15%;text-align:right">Total</th>
+                        <th style="width:10%;padding-left:15px;">Status</th>
+                        <th style="width:10%">Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -116,8 +116,8 @@
                         <td>{{data.order_no}}</td>
                         <td>{{data.order_date}}</td>
                         
-                        <td>{{data.grant_total}}</td>
-                        <td>{{data.order_status}}</td>
+                        <td style="text-align:right">{{data.grant_total}}</td>
+                        <td style="padding-left:15px;">{{data.order_status}}</td>
                         <td><app-modal [title]=data.id></app-modal></td>
                     </tr>
                     
