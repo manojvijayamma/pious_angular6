@@ -27,15 +27,8 @@
 
     <form [formGroup]="searchForm"  (ngSubmit)="doSearch()">
     <div class="row " >
-            <div class="col col-xl-6 col-lg-6">
-                    <div class="form-group">
-                            <div class="input-group datepicker-input">
-                                &nbsp;&nbsp;<input  class="form-control" 
-                                      formControlName="title" placeholder="Search Product Here" >                                
-                            </div>
-                        </div>
-            </div> 
-            <!--
+           
+            
             <div class="col col-xl-2 col-lg-2">
                 <div class="form-group">
                         <div class="input-group datepicker-input">
@@ -47,20 +40,9 @@
                             </select>                             
                         </div>
                     </div>
-            </div> 
+            </div>
 
-            <div class="col col-xl-2 col-lg-2">
-                    <div class="form-group">
-                            <div class="input-group datepicker-input">
-                                <select  class='form-control'   formControlName="type_id">
-                                        <option value="">--Type--</option>
-                                        <option *ngFor="let cat of typeData" value={{cat.id}}>
-                                                {{cat.title}}
-                                         </option>
-                                </select>                             
-                            </div>
-                        </div>
-            </div> 
+            
             
             <div class="col col-xl-2 col-lg-2">
                 <div class="form-group">
@@ -78,16 +60,52 @@
         <div class="col col-xl-2 col-lg-2">
             <div class="form-group">
                     <div class="input-group datepicker-input">
-                        <select  class='form-control'   formControlName="origin_id">
-                                <option value="">--Origin--</option>
-                                <option *ngFor="let cat of originData" value={{cat.id}}>
+                        <select  class='form-control'   formControlName="model_id">
+                                <option value="">--Model--</option>
+                                <option *ngFor="let cat of modelData" value={{cat.model}}>
+                                        {{cat.model}}
+                                 </option>
+                        </select>                             
+                    </div>
+                </div>
+        </div>
+
+
+        <div class="col col-xl-2 col-lg-2">
+            <div class="form-group">
+                    <div class="input-group datepicker-input">
+                        <select  class='form-control'   formControlName="size_id">
+                                <option value="">--Size--</option>
+                                <option *ngFor="let cat of sizeData" value={{cat.id}}>
                                         {{cat.title}}
                                  </option>
                         </select>                             
                     </div>
                 </div>
         </div>
-    -->
+        <!--
+        <div class="col col-xl-2 col-lg-2">
+            <div class="form-group">
+                    <div class="input-group datepicker-input">
+                        <select  class='form-control'   formControlName="type_id">
+                                <option value="">--Type--</option>
+                                <option *ngFor="let cat of typeData" value={{cat.id}}>
+                                        {{cat.title}}
+                                 </option>
+                        </select>                             
+                    </div>
+                </div>
+    </div> -->
+
+    <div class="col col-xl-2 col-lg-2">
+        <div class="form-group">
+                <div class="input-group datepicker-input">
+                    &nbsp;&nbsp;<input  class="form-control" 
+                          formControlName="title" placeholder="Search Product Here" >                                
+                </div>
+            </div>
+</div> 
+    
         <div class="col col-xl-2 col-lg-2">
                 <div class="form-group">
                         <div class="input-group datepicker-input">

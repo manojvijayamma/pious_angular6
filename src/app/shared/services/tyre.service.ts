@@ -48,6 +48,14 @@ export class TyreService {
     return  this.http.get(this.rootUrl+'origin');
   }
 
+  getModel(){             
+    return  this.http.get(this.rootUrl+'model');
+  }
+
+  getSize(){             
+    return  this.http.get(this.rootUrl+'size');
+  }
+
   updateStock(formData){
     return this.http.post(this.rootUrl+'updateStock' , formData);
   }

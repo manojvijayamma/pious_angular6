@@ -74,7 +74,7 @@ export class HeaderComponent implements OnInit {
         });
 
         this.totalData={total_price:0,vat_amount:0,grant_total:0};
-
+        this.cartData=[];
 
         this.userService.getProfile('').subscribe((data : any)=>{            
             if(data.status=='error'){               
