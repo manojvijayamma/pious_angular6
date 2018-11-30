@@ -1,5 +1,6 @@
 <nav class="navbar navbar-expand-lg fixed-top">
-    <a class="navbar-brand" href="#" style="font-size:30px;"><img src="assets/images/logo.png" width="100%" style="height:50px;" class="user-avatar" /> </a>
+    <a id="panel_username" class="navbar-brand" href="#" style="font-size:30px;" (click)="showSpinner(0)">{{loggedUser}} </a>
+    <a id="panel_logo" class="navbar-brand" href="#"  style="display:none;" (click)="showSpinner(0)"><img class="mainimage" src="assets/images/logosmall.png" style="height:50px;"  alt=""/> </a>
     <button class="navbar-toggler" type="button" (click)="toggleSidebar()">
         <!-- <span class="navbar-toggler-icon"></span> -->
         <i class="fa fa-bars text-muted" aria-hidden="true"></i>
@@ -35,17 +36,21 @@
 
         <a href="javascript:void(0);" class="nav-link" style="color:#fff" (click)="openModalDialogCart()">
                 <img src="assets/images/cart.png" style='height:30px;'>
+<<<<<<< HEAD
                 <span id="cartTotal" class="badge badge-notify" style="position:relative;right:10px;top:-5px;color:black;font-size:18px;">0</span>
+=======
+                <span id="cartTotal" class="badge badge-notify" style="position:relative;right:10px;top:-5px;color:black;font-size:18px;"></span>
+>>>>>>> c9e84474cf4497283857be8b9bb2a7dbd89bdefb
      
         </a>
 
-        <a class="nav-link" style="color:#fff" [routerLink]="['/tyres']" [routerLinkActive]="['router-link-active']" (click)="showSpinner()">
+        <a class="nav-link" style="color:#fff" [routerLink]="['/tyres']" [routerLinkActive]="['router-link-active']" (click)="showSpinner(1)">
             
                 <i class="fa fa-table "></i> Products
          
         </a> 
        &nbsp;
-       <a class="nav-link" style="color:#fff" [routerLink]="['/orders']" [routerLinkActive]="['router-link-active']" (click)="showSpinner()">
+       <a class="nav-link" style="color:#fff" [routerLink]="['/orders']" [routerLinkActive]="['router-link-active']" (click)="showSpinner(1)">
        
         <i class="fa fa-list "></i> Orders
       
@@ -279,7 +284,7 @@
 
    
 <!-- The Modal -->
-<div class="modal" id="myModalCart" [ngStyle]="{'display':cartdisplay}" style="width:100%;">
+<div class="modal" id="myModalCart" [ngStyle]="{'display':cartdisplay}" >
     <div class="modal-dialog modal-lg" >
         <div class="modal-content">
 
@@ -290,28 +295,32 @@
         </div>
 
         <!-- Modal body -->
-        <form role="form" [formGroup]='formData' (ngSubmit)="doSendCart()">
-        <div class="modal-body">
-               
-            <table class="table table-bordered">
+        <form role="form" [formGroup]='cartDetails' (ngSubmit)="doSendCart()">
+        <div class="modal-body" style="padding:1px;">
+            <div style="max-height:400px;overflow-x:auto" >   
+                <div class="table-responsive">
+                <table class="table table-bordered">
                 <thead>
-                <tr>
-                    <th class="col-sm-1" style="width:3%">No</th>
+                <tr >
+                    <th style="width:3%">Delete</th>
+                    <th  style="width:3%">No</th>
                     
-                    <th class="col-sm-3">Product</th>                    
-                    <th class="col-sm-1" style="text-align:right">Price</th>                   
+                    <th style="width:3%">Product</th>                    
+                    <th  style="width:3%;text-align:right">Price</th>                   
                     
-                    <th class="col-sm-2" style="text-align:right">Quantity</th>
-                    <th class="col-sm-2" style="text-align:right">Total</th>
-                    <th class="col-sm-2" style="text-align:right">Vat Rate</th>
-                    <th class="col-sm-2" style="text-align:right">Vat Amount</th>
-                    <th class="col-sm-2" style="text-align:right">Grant Total</th>
-                    <th class="col-sm-1">Delete</th>
+                    <th  style="width:3%;text-align:right">Qty</th>
+                    <th  style="width:3%;text-align:right">Total</th>
+                    <th  style="width:3%;text-align:right">Vat Rate</th>
+                    <th  style="width:3%;text-align:right">Vat Amt</th>
+                    <th  style="width:3%;text-align:right">G.Total</th>
+                    
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let data of cartData;let i=index" class="rowBorder">
-                    <td scope="row">{{ i+1}}</td>
+                <tr *ngFor="let data of cartData;let i=index" class="rowBorder" >
+                        <td><a href="javascript:void(0);" class="btn btn-success btn-sm" (click)="removeCart(data)"><i class="fa fa-remove"></i> </a>
+                        </td>
+                    <td style="padding:10px" scope="row">{{ i+1}}</td>
                     <td >{{data.title}}
                     </td>
          
@@ -322,20 +331,17 @@
                     <td style="text-align:right">{{data.vat_amount}}</td>
                     <td style="text-align:right">{{data.grant_total}}</td>
                     
-                    <td><a href="javascript:void(0);" class="btn btn-success btn-sm" (click)="addToCart($event,data.id)"><i class="fa fa-remove"></i> </a>
-                        </td>
+                    
                 </tr>
                 <tr  class="rowBorder">
-                    <td colspan="4" style="text-align:right">Oreder Total</td>
-                    <td style="text-align:right">{{totalData.total_price}}</td>
-                    <td></td>
-                    <td style="text-align:right">{{totalData.vat_amount}}</td>
-                    <td style="text-align:right">{{totalData.grant_total}}</td>
-                    <td></td>
+                    <td colspan="8" style="text-align:right"><b>Oreder Total</b></td>
+                    
+                    <td style="text-align:right"><b>{{ getTotal() }}</b></td>
+                    
                 </tr>
                 </tbody>
-            </table>        
-            
+            </table> </div>       
+            </div>
             <div class="form-group row" >
                 <div class="col-sm-12">
                         <label for="inputLastname"> Note</label>
@@ -348,7 +354,8 @@
 
         <!-- Modal footer -->
         <div class="modal-footer">
-                <button class="btn  btn-primary" type="submit" ><i class="fa fa-fw fa-save "></i>&nbsp;Place Order</button>
+
+            <button class="btn  btn-primary" type="submit" ><i class="fa fa-fw fa-save "></i>&nbsp;Place Order</button>
             <button type="button" class="btn btn-danger" (click)="closeModalDialogCart()" ><i class="fa fa-fw fa-close "></i>&nbsp;Close</button>
         </div>
 

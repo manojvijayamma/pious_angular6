@@ -65,4 +65,19 @@ export class UserService {
       return  this.http.get(this.rootUrl+'profile', {params});
   }
 
+  getAddressBook(searchData){
+      
+        let params = new HttpParams();       
+        for (let key in searchData) {
+          params=params.append(key, searchData[key]);
+        }           
+        return  this.http.get(this.rootUrl+'addressBook', {params});
+  }
+
+  getAddressBookDetails(id){    
+    return  this.http.get(this.rootUrl+'addressBook/'+id);
+  }
+
+  
+
 }

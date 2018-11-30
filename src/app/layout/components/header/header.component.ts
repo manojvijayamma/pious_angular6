@@ -73,6 +73,8 @@ export class HeaderComponent implements OnInit {
 
         });
 
+        this.totalData={total_price:0,vat_amount:0,grant_total:0};
+        this.cartData=[];
 
         this.userService.getProfile('').subscribe((data : any)=>{            
             if(data.status=='error'){               
@@ -217,6 +219,7 @@ export class HeaderComponent implements OnInit {
                 this.cartdisplay='none';
                 
                 this.alertService.success(data.text);
+                document.getElementById("cartTotal").innerHTML='';
                 this.spinnerService.hide();
             }  
             else{
@@ -287,7 +290,15 @@ export class HeaderComponent implements OnInit {
         this.translate.use(language);
     }
 
-    showSpinner(){
+    showSpinner(logo=0){
+        if(logo==1){
+            document.getElementById("panel_username").style.display="none";
+            document.getElementById("panel_logo").style.display="block";
+        }
+        else{
+            document.getElementById("panel_username").style.display="block";
+            document.getElementById("panel_logo").style.display="none";
+        }
         this.spinnerService.show();  
     }
 
@@ -301,13 +312,14 @@ export class HeaderComponent implements OnInit {
               this.spinnerService.hide(); 
           }  
           else{
-              this.cartdisplay='block'; //Set block css
-              this.passworddisplay='none';
-              this.profiledisplay='none';
+              if(data.gridData.total>0){
+                this.cartdisplay='block'; //Set block css
+                 this.passworddisplay='none';
+                this.profiledisplay='none';
               //console.log(data.gridData.data);
-              this.cartData=data.gridData.data;
-              this.totalData=data.totalData;
-
+                this.cartData=data.gridData.data;
+                this.totalData=data.totalData;
+              }  
               this.spinnerService.hide();   
           }  
         }, error => {
@@ -316,5 +328,50 @@ export class HeaderComponent implements OnInit {
           this.spinnerService.hide(); 
         });
       
+  }
+
+  removeCart(item){
+        this.spinnerService.show();    
+        this.orderService.removeCart(item.id).subscribe((data : any)=>{            
+          if(data.status=='error'){               
+              this.alertService.error(data.text);
+              this.spinnerService.hide(); 
+          }  
+          else{
+              this.cartdisplay='block'; //Set block css
+              this.passworddisplay='none';
+              this.profiledisplay='none';
+              //console.log(data.gridData.data);
+              //this.cartData=data.gridData.data;
+              //this.totalData=data.totalData;
+
+              var index = this.cartData.indexOf(item);
+              this.cartData.splice(index, 1); 
+              
+              if(this.cartData.length==0){
+                document.getElementById("cartTotal").innerHTML='';
+                this.cartdisplay='none';
+              }
+              else{
+                document.getElementById("cartTotal").innerHTML=this.cartData.length;
+              }  
+
+              this.spinnerService.hide();   
+          }  
+        }, error => {
+         
+          this.responseService.checkStatus(error);               
+          this.spinnerService.hide(); 
+        });
+  }
+
+  getTotal(){
+    var total = 0;
+    for(var i = 0; i < this.cartData.length; i++){
+        var product = this.cartData[i];
+        total = total+parseFloat(product.grant_total);
+    }
+    
+    return total;
   }
 }

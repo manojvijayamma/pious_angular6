@@ -37,14 +37,7 @@
                         </div>
             </div> 
 
-            <div class="col col-xl-2 col-lg-2">
-                <div class="form-group">
-                <div class="input-group datepicker-input">
-                    &nbsp;&nbsp;<input  class="form-control" 
-                          formControlName="title" placeholder="Product" >                                
-                </div>
-                        </div>
-            </div> 
+       
 
             <div class="col col-xl-2 col-lg-2">
                     <div class="form-group">
@@ -108,16 +101,13 @@
                 <table class="table table-bordered">
                     <thead>
                     <tr>
-                        <th>No</th>
-                        <th>Order No</th>
-                        <th>Order Date</th>
-                        <th>Product</th>
-                        <th>Category</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Total</th>
-                        <th>Status</th>
-                        <th>Action</th>
+                        <th style="width:3%">No</th>
+                        <th style="width:25%">Order No</th>
+                        <th style="width:15%">Order Date</th>
+                        
+                        <th style="width:15%;text-align:right">Total</th>
+                        <th style="width:10%;padding-left:15px;">Status</th>
+                        <th style="width:10%">Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -125,12 +115,9 @@
                         <td scope="row" style="padding:15px 0px;">{{pager.startSI + i}}</td>
                         <td>{{data.order_no}}</td>
                         <td>{{data.order_date}}</td>
-                        <td>{{data.product}}</td>
-                        <td>{{data.category}}</td>
-                        <td>{{data.price}}</td>
-                        <td>{{data.order_quantity}}</td>
-                        <td>{{data.grand_total}}</td>
-                        <td>{{data.order_status}}</td>
+                        
+                        <td style="text-align:right">{{data.grant_total}}</td>
+                        <td style="padding-left:15px;">{{data.order_status}}</td>
                         <td><app-modal [title]=data.id></app-modal></td>
                     </tr>
                     

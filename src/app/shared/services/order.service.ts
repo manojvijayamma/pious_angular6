@@ -38,6 +38,10 @@ export class OrderService {
     return  this.http.get(this.rootUrl+'cart', {params});
   }
 
+  removeCart(params){
+    return  this.http.get(this.rootUrl+'cart/'+params);
+  }
+
  
 
 }

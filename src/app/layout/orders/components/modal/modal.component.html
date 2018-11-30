@@ -25,52 +25,10 @@
                     <tr>
                         <td>Status</td><td>{{formData.order_status}}</td>
                     </tr>
-                    <tr>
-                        <td>Invoice</td><td>
-                            <div *ngIf="showDownload" >
-                            <a href="{{invoiceUrl}}"  target="_blank">
-                            Download Invoice</a></div></td>
-                    </tr>
+                    
                 </table>   
 
-                <table class="table table-striped table-bordered">
-                    <tr>
-                        <td style="width:50%">Order Price</td><td>{{formData.price}}</td>
-                    </tr>    
-                    <tr>
-                             <td style="width:50%">Order Quantity</td><td>{{formData.order_quantity}}</td>
-                         </tr>
-                        
-                         <tr>
-                             <td>Total Amount</td><td>{{formData.total_price}}</td>
-                         </tr>
-                         <tr>
-                            <td style="width:50%">Vat Amount</td><td>{{formData.vat_amount}}</td>
-                        </tr>
-                        <tr>
-                            <td style="width:50%">Grand Total</td><td>{{formData.grand_total}}</td>
-                        </tr>
-                         <tr>
-                            <td>Order Note</td><td>{{formData.order_note}}</td>
-                        </tr>
-                     </table>
-                    
-                
-                <table class="table table-striped table-bordered">
-                    <tr>
-                        <td style="width:50%">Customer</td><td>{{formData.firstname}} {{formData.lastname}}</td>
-                    </tr>
-                    <tr>
-                        <td>Email</td><td>{{formData.email}}</td>
-                    </tr>
-                    <tr>
-                        <td>Phone</td><td>{{formData.phone}}</td>
-                    </tr>
-                    <tr>
-                        <td>Address</td><td>{{formData.address}}</td>
-                    </tr>
-                    
-               </table>
+ 
               
 
 
@@ -84,46 +42,63 @@
                     <tr>
                         <td>Delivery Note</td><td>{{formData.delivery_note}}</td>
                     </tr>
+                    <tr>
+                            <td>Invoice</td><td>
+                                <div *ngIf="showDownload" >
+                                <a href="{{invoiceUrl}}"  target="_blank">
+                                Download Invoice</a></div></td>
+                        </tr>
+
+                        <tr>
+                                <td>Order Total</td><td>{{formData.grant_total}}</td>
+                            </tr>
                     
                    </table>  
-                <table class="table table-striped table-bordered">
-                    <tr>
-                        <td style="width:50%">Product</td><td>{{formData.title}}</td>
-                    </tr>
-                    <tr>
-                        <td>Category</td><td>{{formData.category}}</td>
-                    </tr>
-                    <tr>
-                        <td>Type</td><td>{{formData.type}}</td>
-                    </tr>
-                    <tr>
-                        <td>Brand</td><td>{{formData.brand}}</td>
-                    </tr>
-                    <tr>
-                        <td>Origin</td><td>{{formData.origin}}</td>
-                    </tr>
-                    <tr>
-                        <td>Pattern</td><td>{{formData.pattern}}</td>
-                    </tr>
-                    <tr>
-                        <td>Model</td><td>{{formData.model}}</td>
-                    </tr>
-                    <tr>
-                        <td>Description</td><td>{{formData.description}}</td>
-                    </tr>
-                    <tr>
-                        <td>Price</td><td>{{formData.price}}</td>
-                    </tr>
-                    <tr>
-                        <td>Weight</td><td>{{formData.weight}}</td>
-                    </tr>
-                    <tr>
-                        <td>Vat %</td><td>{{formData.vat}}</td>
-                    </tr>
-                    
-                  
-               </table>
+               
             </div>
+        </div>
+
+        <div class="form-group row ">
+                <div class="table-responsive">
+                <table class="table table-bordered">
+                        <thead>
+                        <tr >
+                            <th  style="width:3%">No</th>
+                            
+                            <th style="width:15%">Product</th>                    
+                            <th  style="width:10%;text-align:right">Price</th>                   
+                            
+                            <th  style="width:10%;text-align:right">Quantity</th>
+                            <th  style="width:10%;text-align:right">Total</th>
+                            <th  style="width:10%;text-align:right">Vat Rate</th>
+                            <th  style="width:10%;text-align:right">Vat Amt</th>
+                            <th  style="width:10%;text-align:right">G. Total</th>
+                            
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let data of orderDetails;let i=index" class="rowBorder" >
+                            <td scope="row">{{ i+1}}</td>
+                            <td >{{data.title}}
+                            </td>
+                 
+                            <td style="text-align:right">{{data.price}}</td>
+                            <td style="text-align:right">{{data.order_quantity}}</td>
+                            <td style="text-align:right">{{data.total_price}}</td>
+                            <td style="text-align:right">{{data.vat_rate}}%</td>
+                            <td style="text-align:right">{{data.vat_amount}}</td>
+                            <td style="text-align:right">{{data.grant_total}}</td>
+                            
+                           
+                        </tr>
+                     
+                        </tbody>
+                    </table> </div>
+
+        </div>
+        <div class="form-group row">
+                {{formData.order_note}}
+
         </div>
             
 

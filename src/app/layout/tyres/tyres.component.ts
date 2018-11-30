@@ -21,8 +21,10 @@ export class TyresComponent implements OnInit {
     categoryData : any;
     typeData : any;  
     brandData : any; 
-    originData : any;   
-    pager : any;  
+    originData : any;
+    modelData : any;      
+    pager : any; 
+    sizeData : any; 
     //pager: {startSI:'',endSI:'',totalRecords:'',totalPages:'',prev:'',next:'',page:''};    
     //pager : any;
     
@@ -59,6 +61,8 @@ export class TyresComponent implements OnInit {
             type_id :['']  ,
             brand_id : [''] ,
             origin_id :[''] ,
+            model_id :[''] ,
+            size_id : [''] ,
             rowsize:10,
             sortField:'Name',
             sortOrder:'ASC' ,
@@ -69,6 +73,8 @@ export class TyresComponent implements OnInit {
         this.loadType();
         this.loadBrand();
         this.loadOrigin();
+        this.loadModel();
+        this.loadSize();
         this.loadGridData(1);
         
     }
@@ -116,6 +122,8 @@ export class TyresComponent implements OnInit {
         this.searchForm.controls["brand_id"].setValue(['']);
         this.searchForm.controls["origin_id"].setValue(['']);
         this.searchForm.controls["type_id"].setValue(['']);
+        this.searchForm.controls["model_id"].setValue(['']);
+        this.searchForm.controls["size_id"].setValue(['']);
         this.loadGridData(1);  
     }
 
@@ -177,6 +185,35 @@ export class TyresComponent implements OnInit {
          }, error => {
              this.responseService.checkStatus(error);           
          });
+    }
+
+    loadModel(){
+        this.tyreService.getModel().subscribe((data: any) => {            
+             
+            this.modelData = data.models;           
+                
+            
+         }, error => {
+             this.responseService.checkStatus(error);           
+         });
+    }
+
+    loadSize(){
+        this.tyreService.getSize().subscribe((data: any) => {            
+             
+            this.sizeData = data.size;           
+                
+            
+         }, error => {
+             this.responseService.checkStatus(error);           
+         });
+    }
+
+    validateNumber(event){
+        if(event.target.value>0){}
+        else{
+            event.target.value='';
+        }
     }
 
     ngAfterViewInit(){
