@@ -36,11 +36,7 @@
 
         <a href="javascript:void(0);" class="nav-link" style="color:#fff" (click)="openModalDialogCart()">
                 <img src="assets/images/cart.png" style='height:30px;'>
-<<<<<<< HEAD
-                <span id="cartTotal" class="badge badge-notify" style="position:relative;right:10px;top:-5px;color:black;font-size:18px;">0</span>
-=======
                 <span id="cartTotal" class="badge badge-notify" style="position:relative;right:10px;top:-5px;color:black;font-size:18px;"></span>
->>>>>>> c9e84474cf4497283857be8b9bb2a7dbd89bdefb
      
         </a>
 
@@ -334,11 +330,24 @@
                     
                 </tr>
                 <tr  class="rowBorder">
-                    <td colspan="8" style="text-align:right"><b>Oreder Total</b></td>
+                    <td colspan="8" style="text-align:right"><b>Sub Total</b></td>
                     
                     <td style="text-align:right"><b>{{ getTotal() }}</b></td>
                     
                 </tr>
+                <tr  class="rowBorder">
+                    <td colspan="8" style="text-align:right"><b>Vat Total</b></td>
+                    
+                    <td style="text-align:right"><b>{{ getTotal() }}</b></td>
+                    
+                </tr>
+                <tr  class="rowBorder">
+                    <td colspan="8" style="text-align:right"><b>Grand Total</b></td>
+                    
+                    <td style="text-align:right"><b>{{ getTotal() }}</b></td>
+                    
+                </tr>
+               
                 </tbody>
             </table> </div>       
             </div>

@@ -366,12 +366,16 @@ export class HeaderComponent implements OnInit {
   }
 
   getTotal(){
-    var total = 0;
+    var sub_total = 0;
+    var vat_total = 0;
+    var grant_total = 0;
     for(var i = 0; i < this.cartData.length; i++){
         var product = this.cartData[i];
-        total = total+parseFloat(product.grant_total);
+        sub_total = sub_total+parseFloat(product.total_price);
+        vat_total = vat_total+parseFloat(product.vat_amount);
+        grant_total = grant_total+parseFloat(product.grant_total);
     }
     
-    return total;
+    return [sub_total,vat_total,grant_total];
   }
 }
