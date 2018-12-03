@@ -376,6 +376,6 @@ export class HeaderComponent implements OnInit {
         grant_total = grant_total+parseFloat(product.grant_total);
     }
     
-    return [sub_total,vat_total,grant_total];
+    return [sub_total.toFixed(2),vat_total.toFixed(2),grant_total.toFixed(2)];
   }
 }
