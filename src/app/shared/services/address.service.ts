@@ -37,7 +37,7 @@ export class AddressService {
 
   getAddressOption(id){
     
-    return  this.http.get(this.rootUrl+'addressOption/'+id);
+    return  this.http.get(this.rootUrl+'addressAll'+id);
   }
 
  

@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
- //api_url: 'http://localhost/workshop/tms-laravel/public/api/',
-  api_url: 'http://localhost:8080/pious/tms_laravel/public/api/',
+ api_url: 'http://localhost/workshop/tms-laravel/public/api/',
+  //api_url: 'http://localhost:8080/pious/tms_laravel/public/api/',
   image_url:'http://localhost:8080/pious/tms_laravel/public/uploads/',
 };

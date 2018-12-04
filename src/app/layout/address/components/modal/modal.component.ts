@@ -125,8 +125,9 @@ export class ModalComponent {
             
             this.formData.patchValue({
                 id: data.formData.id,
-                address: data.formData.address,               
-                pin:data.formData.brand.pin
+                address: data.formData.address, 
+                city: data.formData.city,               
+                pin:data.formData.pin
                
 
             }); 

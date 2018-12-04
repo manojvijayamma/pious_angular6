@@ -357,25 +357,27 @@
                 </tbody>
             </table> </div>       
             </div>
-            <div class="form-group row" >
-                <div class="col-sm-12">
-                        <label for="inputLastname"> Lom</label>
-                        <input type="text" class="form-control" formControlName="lom"  style="height:55px;">
+            <div class="form-group row" style="padding:10px;">
+                <div class="col-sm-6">
+                        
+                        <label for="inputLastname"> Delivery Address</label>
+                        <select  class='form-control'   formControlName="delivery_id" >
+                            <option value="">--Address--</option>
+                            <option *ngFor="let cat of addressData" value={{cat.id}}>
+                                    {{cat.address}} {{cat.city}} {{cat.pin}}
+                             </option>
+                    </select>   
+
+
+                    <label for="inputLastname"> LPO Number</label>
+                        <input type="text" class="form-control" formControlName="lom"  >
                 </div>
 
-                <div class="col-sm-12">
+                <div class="col-sm-6">
                         <label for="inputLastname"> Note</label>
-                        <textarea class="form-control" formControlName="order_note"  style="height:55px;"></textarea>
+                        <textarea class="form-control" formControlName="order_note"  style="height:100px;"></textarea>
                 </div> 
-                <div class="col-sm-12">
-                    <label for="inputLastname"> Delivery Address</label>
-                    <select  class='form-control'   formControlName="delivery_id" >
-                        <option value="">--Address--</option>
-                        <option *ngFor="let cat of addressData" value={{cat.id}}>
-                                {{cat.address}} {{cat.city}} {{cat.pin}}
-                         </option>
-                </select>                             
-                </div>          
+                        
 
         </div>
                     

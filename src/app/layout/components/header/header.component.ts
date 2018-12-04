@@ -341,7 +341,8 @@ export class HeaderComponent implements OnInit {
             }  
             else{              
                   
-                  this.addressData=data.gridData.data;                 
+                this.addressData=data.gridData;   
+                console.log(this.addressData);              
                 
                 this.spinnerService.hide();   
             }  
