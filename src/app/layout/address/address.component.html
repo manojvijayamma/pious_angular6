@@ -1,0 +1,87 @@
+
+
+<div  class="gridBorder">
+    
+
+    <div class="row" >
+                <div class="col-xl-12" >
+                   <!-- <h2 class="page-header">
+                        {{heading}}
+                    </h2> -->
+                    <ol class="breadcrumb">
+                       <!-- <li class="breadcrumb-item">
+                            <i class="fa fa-dashboard"></i> <a href="Javascript:void(0)" [routerLink]="['/dashboard']">Dashboard</a>
+                        </li> -->
+                        <li class="breadcrumb-item active" style="color:#000"> Address Book</li>
+                        
+                    </ol>
+                    <div class="pull-right" style="position:absolute;top:10px;right:20px;">
+                        <app-modal ></app-modal>
+                   </div>                 
+                    <!--<app-date-picker [dateName]="'from_date'"></app-date-picker>
+                    <app-date-picker [dateName]="'to_date'"></app-date-picker>-->
+
+                </div>
+    </div>
+
+
+    
+    
+
+            
+    <div class="row" >
+        <div class="col col-xl-12 col-lg-12">
+            
+            <div id="gridPanel">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th style="width:3%" >No</th>
+                        
+                        <th style="width:25%">Address</th>
+                        <th style="width:8%">City</th>
+                      
+                        <th style="width:8%">Pin</th>
+                        
+                        <th style="width:10%;text-align:center">View</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let data of gridData;let i=index" class="rowBorder">
+                        <td scope="row">{{pager.startSI + i}}</td>
+                        <td>
+                        {{data.address}}
+                        </td>
+                       
+                        <td>{{data.city}}</td>                       
+                        <td>{{data.pin}}</td>
+                       
+                  
+                        
+                        
+                       
+                        <td style="text-align:center"><app-modal [title]=data.id></app-modal>
+                            </td>
+                    </tr>
+                    
+                    </tbody>
+                </table>
+            </div>
+
+            <form [formGroup]="pagerForm" >
+            <table class="table table-bordered table-striped table-condensed cf pagefont" style="margin-bottom:2px;">
+                <tr>
+                <td class="col-sm-6" style="width:70%">Displaying <b>{{pager.startSI}}</b> to <b>{{pager.endSI}}</b> of <b>{{pager.totalRecords}}</b> records </td>
+                <td class="text-center col-sm-6">Total pages : <b>{{pager.totalPages}}</b></td>
+                <td class="col-sm-1"><a href="javascript:void(0)" (click)="pagination(1)"><img src="assets/images/page_first.gif" ></a></td>
+                <td class="col-sm-1"><a href="javascript:void(0)" (click)="pagination(pager.prev)"><img src="assets/images/page_prev.gif" ></a></td>
+                <td class="col-sm-1" style="padding:8px 5px;"><input type="text" class="form-control " style="width:50px;height:25px;" (keyup)="doPager()" (blur)="doPager()"  formControlName="page" ></td>
+                <td class="col-sm-1"><a href="javascript:void(0)" (click)="pagination(pager.next)"><img src="assets/images/page_next.gif" ></a></td>
+                <td class="col-sm-1"><a href="javascript:void(0)" (click)="pagination(pager.totalPages)"><img src="assets/images/page_last.gif" ></a></td>
+                </tr>
+            </table> 
+        </form>
+        </div>
+      
+    </div>
+</div>

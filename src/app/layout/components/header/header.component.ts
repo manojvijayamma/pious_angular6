@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { UserService } from '../../../shared/services/user.service';
 import { OrderService } from '../../../shared/services/order.service';
+import {AddressService } from '../../../shared/services/address.service';
 import { AlertService } from '../../../shared/services/alert.service';
 import { ResponseService } from '../../../shared/services/response.service';
 import { SpinnerService } from  '../../../shared/services/spinner.service';
@@ -23,6 +24,7 @@ export class HeaderComponent implements OnInit {
     passwordFormData: FormGroup; 
     loggedUser :any;
     cartData:any;
+    addressData:any;
     totalData:any;
     cartDetails: FormGroup; 
 
@@ -30,7 +32,8 @@ export class HeaderComponent implements OnInit {
     private alertService : AlertService,
     private responseService :ResponseService,
     private spinnerService: SpinnerService,
-    private orderService : OrderService    
+    private orderService : OrderService  ,
+    private addressService: AddressService  
 ) {
 
         this.translate.addLangs(['en', 'fr', 'ur', 'es', 'it', 'fa', 'de', 'zh-CHS']);
@@ -68,13 +71,14 @@ export class HeaderComponent implements OnInit {
 
 
         this.cartDetails = this.frmBuilder.group({            
-            
+            lom: [""] ,
             order_note : [""] ,
-
+            delivery_id: [""] ,
         });
 
         this.totalData={total_price:0,vat_amount:0,grant_total:0};
         this.cartData=[];
+        this.addressData=[];
 
         this.userService.getProfile('').subscribe((data : any)=>{            
             if(data.status=='error'){               
@@ -305,7 +309,8 @@ export class HeaderComponent implements OnInit {
 
     openModalDialogCart(){ 
 
-        this.spinnerService.show();    
+        this.spinnerService.show();  
+
         this.orderService.getCart('').subscribe((data : any)=>{            
           if(data.status=='error'){               
               this.alertService.error(data.text);
@@ -327,6 +332,24 @@ export class HeaderComponent implements OnInit {
           this.responseService.checkStatus(error);               
           this.spinnerService.hide(); 
         });
+
+
+        this.addressService.getAddressOption('').subscribe((data : any)=>{            
+            if(data.status=='error'){               
+                this.alertService.error(data.text);
+                this.spinnerService.hide(); 
+            }  
+            else{              
+                  
+                  this.addressData=data.gridData.data;                 
+                
+                this.spinnerService.hide();   
+            }  
+          }, error => {
+           
+            this.responseService.checkStatus(error);               
+            this.spinnerService.hide(); 
+          });
       
   }
 

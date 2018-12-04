@@ -20,6 +20,7 @@ import { ResponseService } from './shared/services/response.service';
 import { SpinnerService } from './shared/services/spinner.service';
 import { AlertService } from './shared/services/alert.service';
 import { TyreService } from './shared/services/tyre.service';
+import { AddressService } from './shared/services/address.service';
 import { OrderService } from './shared/services/order.service';
 
 
@@ -53,7 +54,7 @@ export const createTranslateLoader = (http: HttpClient) => {
         AppRoutingModule
     ],
     declarations: [AppComponent],
-    providers: [UserService, ResponseService,SpinnerService, AuthGuard, TyreService, AlertService, OrderService,
+    providers: [UserService, ResponseService,SpinnerService, AuthGuard, TyreService, AlertService, OrderService, AddressService,
         {
             provide : HTTP_INTERCEPTORS,
             useClass : AuthInterceptor,

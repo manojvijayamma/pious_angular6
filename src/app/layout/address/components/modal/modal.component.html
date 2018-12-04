@@ -1,0 +1,56 @@
+<button class="btn btn-primary btn-sm" (click)="open(content)" style=""><i class="fa fa-pencil-square"></i> Edit</button>
+
+
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title"><i class="fa fa-table "></i>Product Details</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <form role="form" [formGroup]='formData' (ngSubmit)="doSend()">
+    <div class="modal-body">
+        
+            <div class="form-group row">
+                    <div class="col-sm-12">                      
+                                    
+                        <div class="form-group row" >
+                            <div class="col-sm-12">
+                                    <label for="inputLastname"> Address</label>
+                                    <textarea class="form-control" formControlName="address"  style="height:55px;"></textarea>
+                            </div>          
+        
+                    </div>
+                    <div class="form-group row">
+                                <div class="col-sm-12">
+                                    <label for="inputLastname"> City</label>
+                                    <input class="form-control" formControlName="city" >
+                                </div> 
+                    </div>  
+
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <label for="inputLastname"> Pin</label>
+                            <input class="form-control" formControlName="pin" >
+                        </div> 
+            </div> 
+
+                   
+
+                                
+                   </div>
+                   
+
+            </div>
+            
+
+        
+    </div>
+
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Submit</button>      
+            <button type="button" class="btn btn-danger" (click)="c('Close click')"><i class="fa fa-remove"></i> Close</button>
+    </div>
+</form>
+</ng-template>
