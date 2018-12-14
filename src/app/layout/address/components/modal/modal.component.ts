@@ -37,7 +37,8 @@ export class ModalComponent {
             id:'',          
             address:["", [Validators.required]],
             city:["", [Validators.required]], 
-            pin:["", [Validators.required]],   
+            pin:["", [Validators.required]], 
+            google_location:[],  
         
         });
 
@@ -127,8 +128,8 @@ export class ModalComponent {
                 id: data.formData.id,
                 address: data.formData.address, 
                 city: data.formData.city,               
-                pin:data.formData.pin
-               
+                pin:data.formData.pin,
+                google_location:data.formData.google_location
 
             }); 
            

@@ -33,6 +33,9 @@ export class TyresComponent implements OnInit {
     sHeight : any;
     readonly imageUrl = `${environment.image_url}`;
 
+    Enquirydisplay='none';
+    EnquiryFormData: FormGroup; 
+
     constructor(private tyreService : TyreService,
         private frmBuilder: FormBuilder,
         private responseService: ResponseService,
@@ -69,6 +72,12 @@ export class TyresComponent implements OnInit {
             page:''          
         });
 
+        this.EnquiryFormData = this.frmBuilder.group({            
+            comment:[null],  
+            product_id:[null],                 
+                   
+        });
+
         this.loadCategory();
         this.loadType();
         this.loadBrand();
@@ -100,6 +109,8 @@ export class TyresComponent implements OnInit {
              this.responseService.checkStatus(error);           
          });
     }
+
+   
 
     doPager(){
        // console.log(this.pagerForm.get('page').value);
@@ -219,4 +230,44 @@ export class TyresComponent implements OnInit {
     ngAfterViewInit(){
         this.spinnerService.hide();       
     }
+
+
+    doSendEnquiry(){
+        //console.log(this.EnquiryFormData.value);
+        
+        if(this.EnquiryFormData.value.comment==null){
+            this.alertService.error("Enter comment");
+            return false;
+        }      
+
+
+        this.spinnerService.show();          
+        
+        this.tyreService.sendEnquiry(this.EnquiryFormData.value).subscribe((data : any)=>{
+            console.log(data);
+            if(data.status=='error'){               
+                this.alertService.error(data.text);
+                this.spinnerService.hide();
+            }  
+            else{
+                this.Enquirydisplay='none';
+                this.alertService.success(data.text);
+                this.spinnerService.hide();
+            }  
+          }, error => {
+           
+            this.responseService.checkStatus(error);   
+            
+          });        
+    }
+
+    openModalDialogEnquiry(event,id){
+        this.Enquirydisplay='block'; //Set block css 
+        this.EnquiryFormData.controls["product_id"].setValue(id);       
+    }
+
+    closeModalDialogEnquiry(){
+        this.Enquirydisplay='none'; //set none css after close dialog
+    }
+
 }
