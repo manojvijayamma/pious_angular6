@@ -144,9 +144,11 @@
                     </thead>
                     <tbody>
                     <tr *ngFor="let data of gridData;let i=index" class="rowBorder">
-                        <td scope="row" style="padding:15px 0px;">{{pager.startSI + i}}</td>
-                        <td>
-                        {{data.description}}
+                        <td scope="row">{{pager.startSI + i}}</td>
+                        <td><div style="float:left"><img  *ngIf="data.image == ''" src="{{imageUrl}}sorry-image-not-available.png" style="width:80px;">
+                            <img  *ngIf="data.image != ''" src="{{imageUrl}}{{data.image}}" style="width:80px;">
+                        </div>
+                        <div style="float:left;position:relative;top:30px;">{{data.description}}</div>
                         </td>
                        
                         <td>{{data.model}}</td>                       
@@ -156,8 +158,8 @@
                         <td></td>
                   
                         
-                        <td  align="right"><input class="form-control " type="text" value=""   style="width:100px;height:28px;" id="qty_{{data.id}}" (keyup)="validateNumber($event)"></td> <!--(blur)="updateStock($event,data.id)" -->
-                        <td style="text-align:center;"><button type="submit" class="btn btn-primary btn-sm" (click)="addToCart($event,data.id)"><i class="fa fa-save"></i> Add to cart</button>
+                        <td  align="right"><input class="form-control " type="text" value=""   style="width:100px" id="qty_{{data.id}}" (keyup)="validateNumber($event)"></td> <!--(blur)="updateStock($event,data.id)" -->
+                        <td style="text-align:center"><button type="submit" class="btn btn-primary btn-sm" (click)="addToCart($event,data.id)"><i class="fa fa-save"></i> Add to cart</button>
                         </td>
                         <td style="text-align:center"><app-modal [title]=data.id></app-modal>
                             </td>

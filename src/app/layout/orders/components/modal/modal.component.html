@@ -91,15 +91,46 @@
                             
                            
                         </tr>
+
+                        <tr  class="rowBorder">
+                            <td colspan="7" style="text-align:right"><b>Sub Total</b></td>
+                            
+                            <td style="text-align:right"><b>{{ getTotal()[0] }}</b></td>
+                            
+                        </tr>
+                        <tr  class="rowBorder">
+                            <td colspan="7" style="text-align:right"><b>Vat Total</b></td>
+                            
+                            <td style="text-align:right"><b>{{ getTotal()[1] }}</b></td>
+                            
+                        </tr>
+                        <tr  class="rowBorder">
+                            <td colspan="7" style="text-align:right"><b>Grand Total</b></td>
+                            
+                            <td style="text-align:right"><b>{{ getTotal()[2] }}</b></td>
+                            
+                        </tr>
                      
                         </tbody>
                     </table> </div>
 
-        </div>
-        <div class="form-group row">
-                {{formData.order_note}}
+                    
 
         </div>
+
+
+        <div class="form-group row" style="padding:5px;">
+              Note:  {{formData.order_note}}
+
+        </div>
+        <div class="form-group row" style="padding:5px;">
+           LPM Number:  {{formData.lom}}
+
+        </div>
+        <div class="form-group row" style="padding:5px;">
+            Delivery Address:  {{formData.address}},  {{formData.city}},  {{formData.pin}}
+ 
+         </div>
             
 
         

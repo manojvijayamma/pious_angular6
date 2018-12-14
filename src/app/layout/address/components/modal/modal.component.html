@@ -1,10 +1,10 @@
-<button class="btn btn-primary btn-sm" (click)="open(content)" style=""><i class="fa fa-pencil-square"></i> Edit</button>
+<button class="btn btn-primary btn-sm" (click)="open(content)" style=""><i class="fa fa-pencil-square"></i>{{linkText}}</button>
 
 
 
 <ng-template #content let-c="close" let-d="dismiss">
     <div class="modal-header">
-        <h4 class="modal-title"><i class="fa fa-table "></i>Product Details</h4>
+        <h4 class="modal-title"><i class="fa fa-table "></i>Address Book</h4>
         <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>

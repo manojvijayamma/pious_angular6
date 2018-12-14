@@ -20,6 +20,7 @@ export class ModalComponent {
     private modalReference : NgbModalRef;
 
     @Input() title: number; 
+    @Input() linkText: string; 
     event: any;
     fileToUpload: File  = null;
     productImage: any;
@@ -70,6 +71,8 @@ export class ModalComponent {
         this.addressService.saveAddress(this.formData.value).subscribe((data: any) => { 
             this.spinnerService.hide();   
             this.alertService.success(data.text);
+            
+
          }, error => {
              this.responseService.checkStatus(error);           
          });
@@ -109,6 +112,7 @@ export class ModalComponent {
             return 'by pressing ESC';
         } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
             return 'by clicking on a backdrop';
+
         } else {
             return  `with: ${reason}`;
         }

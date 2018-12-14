@@ -213,7 +213,11 @@ export class HeaderComponent implements OnInit {
 
     doSendCart(){
         console.log(this.formData.value);
-        
+        if(this.cartDetails.value.delivery_id==''){
+            this.alertService.error("Please select delivery address");
+            return false;
+        }
+
 
         this.spinnerService.show();       
         
