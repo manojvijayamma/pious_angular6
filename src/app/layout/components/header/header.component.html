@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg fixed-top">
-    <a id="panel_username" class="navbar-brand" href="#" style="font-size:30px;" (click)="showSpinner(0)">{{loggedUser}} </a>
-    <a id="panel_logo" class="navbar-brand" href="#"  style="display:none;" (click)="showSpinner(0)"><img class="mainimage" src="assets/images/logosmall.png" style="height:50px;"  alt=""/> </a>
+    <!--<a id="panel_username" class="navbar-brand" href="#" style="font-size:30px;" (click)="showSpinner(0)">{{loggedUser}} </a>-->
+    <a id="panel_logo" class="navbar-brand" href="#"  ><img class="mainimage" src="assets/images/logosmall.png" style="height:50px;"  alt=""/> </a> <!-- style="display:none;" (click)="showSpinner(0)" -->
     <button class="navbar-toggler" type="button" (click)="toggleSidebar()">
         <!-- <span class="navbar-toggler-icon"></span> -->
         <i class="fa fa-bars text-muted" aria-hidden="true"></i>
@@ -327,7 +327,7 @@
                     </td>
          
                     <td style="text-align:right">{{data.price}}</td>
-                    <td style="text-align:right">{{data.order_quantity}}</td>
+                    <td style="text-align:right">{{data.order_quantity}} {{data.promo_quantity}}</td>
                     <td style="text-align:right">{{data.total_price}}</td>
                     <td style="text-align:right">{{data.vat_rate}}</td>
                     <td style="text-align:right">{{data.vat_amount}}</td>

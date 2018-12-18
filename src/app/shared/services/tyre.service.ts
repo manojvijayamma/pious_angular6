@@ -64,6 +64,10 @@ export class TyreService {
     return this.http.post(this.rootUrl+'cart' , formData);
   }
 
+  sendEnquiry(formData){
+    return this.http.post(this.rootUrl+'enquiry' , formData);
+  }
+
  
 
 }
