@@ -52,8 +52,8 @@ export class TyreService {
     return  this.http.get(this.rootUrl+'model');
   }
 
-  getSize(){             
-    return  this.http.get(this.rootUrl+'size');
+  getPattern(){             
+    return  this.http.get(this.rootUrl+'pattern');
   }
 
   updateStock(formData){

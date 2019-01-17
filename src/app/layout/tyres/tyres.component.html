@@ -87,9 +87,9 @@
         <div class="col col-xl-2 col-lg-2">
             <div class="form-group">
                     <div class="input-group datepicker-input">
-                        <select  class='form-control'   formControlName="size_id">
-                                <option value="">--Size--</option>
-                                <option *ngFor="let cat of sizeData" value={{cat.id}}>
+                        <select  class='form-control'   formControlName="pattern_id">
+                                <option value="">--Pattern--</option>
+                                <option *ngFor="let cat of patternData" value={{cat.id}}>
                                         {{cat.title}}
                                  </option>
                         </select>                             
@@ -131,9 +131,13 @@
                         <th style="width:3%" >No</th>
                         <th style="width:3%;text-align:center">View</th>
                         <th style="width:30%">Description</th>
-                        <th style="width:8%">Model</th>
+                        <th style="width:4%">Group</th>
+                        <th style="width:4%">Category</th>
+                        <th style="width:4%">Model</th>
+                        <th style="width:4%">Brand</th>
+                        <th style="width:4%">Pattern</th>
                       
-                        <th style="width:8%">Origin</th>
+                        <th style="width:4%">Origin</th>
                         <th style="width:8%;text-align:right" >Stock</th>
                         <th style="width:8%;text-align:right">Price</th>
                         
@@ -150,8 +154,11 @@
                         <td>
                         {{data.description}}
                         </td>
-                       
-                        <td>{{data.model}}</td>                       
+                        <td>{{data.type.title}}</td> 
+                        <td>{{data.category.title}}</td> 
+                        <td>{{data.model}}</td> 
+                        <td>{{data.brand.title}}</td>
+                        <td>{{data.pattern.title}}</td>                      
                         <td>{{data.origin.title}}</td>
                         <td align="right">{{data.stock}}</td>
                         <td align="right">{{data.price1}}</td>

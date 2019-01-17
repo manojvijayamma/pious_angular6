@@ -58,7 +58,7 @@ export class OrdersComponent implements OnInit {
 
         this.loadGridData(1);
 
-        this.statusData=['pending','hold','delivered','rejected'];
+        this.statusData=['Pending','Hold','Delivered','Rejected'];
         
     }
 
