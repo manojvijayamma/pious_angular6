@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg fixed-top">
     <!--<a id="panel_username" class="navbar-brand" href="#" style="font-size:30px;" (click)="showSpinner(0)">{{loggedUser}} </a>-->
-    <a id="panel_logo" class="navbar-brand" href="#"  ><img class="mainimage" src="assets/images/logosmall.png" style="height:50px;"  alt=""/> </a> <!-- style="display:none;" (click)="showSpinner(0)" -->
+    <a id="panel_logo" class="navbar-brand" href="#"  ><img class="mainimage" src="assets/images/Logonew.png" style="height:50px;"  alt=""/> </a> <!-- style="display:none;" (click)="showSpinner(0)" -->
     <button class="navbar-toggler" type="button" (click)="toggleSidebar()">
         <!-- <span class="navbar-toggler-icon"></span> -->
         <i class="fa fa-bars text-muted" aria-hidden="true"></i>
@@ -34,25 +34,25 @@
           </div>
         -->
 
-        <a href="javascript:void(0);" class="nav-link" style="color:#fff" (click)="openModalDialogCart()">
+        <a href="javascript:void(0);" class="nav-link" style="color:#4F4141" (click)="openModalDialogCart()">
                 <img src="assets/images/cart.png" style='height:30px;'>
                 <span id="cartTotal" class="badge badge-notify" style="position:relative;right:10px;top:-5px;color:black;font-size:18px;"></span>
      
         </a>
 
-        <a class="nav-link" style="color:#fff" [routerLink]="['/tyres']" [routerLinkActive]="['router-link-active']" (click)="showSpinner(1)">
+        <a class="nav-link" style="color:#4F4141" [routerLink]="['/tyres']" [routerLinkActive]="['router-link-active']" (click)="showSpinner(1)">
             
                 <i class="fa fa-table "></i> Products
          
         </a> 
        &nbsp;
-       <a class="nav-link" style="color:#fff" [routerLink]="['/orders']" [routerLinkActive]="['router-link-active']" (click)="showSpinner(1)">
+       <a class="nav-link" style="color:#4F4141" [routerLink]="['/orders']" [routerLinkActive]="['router-link-active']" (click)="showSpinner(1)">
        
         <i class="fa fa-list "></i> Orders
       
     </a> 
 
-    <a class="nav-link" style="color:#fff" [routerLink]="['/address']" [routerLinkActive]="['router-link-active']" (click)="showSpinner(1)">
+    <a class="nav-link" style="color:#4F4141" [routerLink]="['/address']" [routerLinkActive]="['router-link-active']" (click)="showSpinner(1)">
             
         <i class="fa fa-table "></i> Address Book
  
@@ -122,17 +122,17 @@
                     </li> -->
                     
                     <li class="nav-item dropdown" ngbDropdown>
-                        <a href="javascript:void(0)" class="nav-link" ngbDropdownToggle>
+                        <a href="javascript:void(0)" class="nav-link" style="color:#4F4141" ngbDropdownToggle>
                             <i class="fa fa-user"></i> {{loggedUser}} <b class="caret"></b>
                         </a>
 
                         <div class="dropdown-menu-right" ngbDropdownMenu>  
                 
-                            <a href="javascript:void();" (click)="openModalDialogProfile()"   class="list-group-item"><li><i class="fa fa-fw fa-user"></i> Profile</li></a>
+                            <a href="javascript:void();" (click)="openModalDialogProfile()"   class="list-group-item" style="color:#4F4141"><li><i class="fa fa-fw fa-user"></i> Profile</li></a>
                             <li class="dropdown-divider"></li>
-                            <a href="javascript:void();" (click)="openModalDialogPassword()" class="list-group-item"><li><i class="fa fa-fw fa-key"></i> Password</li></a>
+                            <a href="javascript:void();" (click)="openModalDialogPassword()" class="list-group-item" style="color:#4F4141"><li><i class="fa fa-fw fa-key"></i> Password</li></a>
                             <li class="dropdown-divider"></li>
-                            <a href="javascript:void();" (click)="onLoggedout()" class="list-group-item"><li><i class="fa fa-fw fa-sign-out"></i>Logout</li></a>
+                            <a href="javascript:void();" (click)="onLoggedout()" class="list-group-item" style="color:#4F4141"><li><i class="fa fa-fw fa-sign-out"></i>Logout</li></a>
                           </div>
 
                    
