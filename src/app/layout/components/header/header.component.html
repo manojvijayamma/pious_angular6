@@ -34,27 +34,23 @@
           </div>
         -->
 
-        <a href="javascript:void(0);" class="nav-link" style="color:#4F4141" (click)="openModalDialogCart()">
-                <img src="assets/images/cart.png" style='height:30px;'>
-                <span id="cartTotal" class="badge badge-notify" style="position:relative;right:10px;top:-5px;color:black;font-size:18px;"></span>
      
-        </a>
 
-        <a class="nav-link" style="color:#4F4141" [routerLink]="['/tyres']" [routerLinkActive]="['router-link-active']" (click)="showSpinner(1)">
+        <a class="nav-link" style="color:#CE2026" [routerLink]="['/tyres']" [routerLinkActive]="['router-link-active']" (click)="showSpinner(1)">
             
-                <i class="fa fa-table "></i> Products
+            <img src="assets/images/icons8-tire-96.png" style="height:30px;"> Products
          
         </a> 
        &nbsp;
-       <a class="nav-link" style="color:#4F4141" [routerLink]="['/orders']" [routerLinkActive]="['router-link-active']" (click)="showSpinner(1)">
+       <a class="nav-link" style="color:#CE2026" [routerLink]="['/orders']" [routerLinkActive]="['router-link-active']" (click)="showSpinner(1)">
        
-        <i class="fa fa-list "></i> Orders
+        <img src="assets/images/icons8-todo-list-96.png" style="height:30px;"> Orders
       
     </a> 
 
-    <a class="nav-link" style="color:#4F4141" [routerLink]="['/address']" [routerLinkActive]="['router-link-active']" (click)="showSpinner(1)">
+    <a class="nav-link" style="color:#CE2026" [routerLink]="['/address']" [routerLinkActive]="['router-link-active']" (click)="showSpinner(1)">
             
-        <i class="fa fa-table "></i> Address Book
+        <img src="assets/images/icons8-address-96.png" style="height:30px;"> Address Book
  
 </a> 
 
@@ -123,7 +119,7 @@
                     
                     <li class="nav-item dropdown" ngbDropdown>
                         <a href="javascript:void(0)" class="nav-link" style="color:#4F4141" ngbDropdownToggle>
-                            <i class="fa fa-user"></i> {{loggedUser}} <b class="caret"></b>
+                            <i class="fa fa-user" ></i> {{loggedUser}} <b class="caret"></b>
                         </a>
 
                         <div class="dropdown-menu-right" ngbDropdownMenu>  
@@ -139,8 +135,15 @@
                     </li>
                 </ul>
 
+                <a href="javascript:void(0);" class="nav-link" style="color:#CE2026" (click)="openModalDialogCart()">
+                    <img src="assets/images/icons8-shopping-cart-96.png" style='height:30px;'>
+                    <span id="cartTotal" class="badge badge-notify" style="position:relative;right:10px;top:-5px;color:#CE2026;font-size:18px;"></span>
+         
+            </a>
+
                   
 </nav>
+
 
 
 

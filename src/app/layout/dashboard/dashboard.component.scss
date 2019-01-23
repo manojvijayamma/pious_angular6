@@ -2,10 +2,7 @@
 
 
 
-.myh1 {
-	font-size: 18pt;
-	color: #0099FF;
-}
+
 .mainim {
 	background-color: #FFFFFF;
 }
@@ -13,27 +10,13 @@
 	width: 100%;
 	height: auto;
 	text-align: center;
+	margin-top:0px;
 }
 
 
-.hecont {
-	background-color: #f1979d;
-	padding-top: 25px;
-	padding-bottom: 25px;
-}
-.hetext1 {
-	text-align: center;
-	font-size: 30pt;
-	font-weight: bold;
-	padding-bottom: 20px;
-}
-.hetext2 {
-	text-align: center;
-	font-size: 18pt;
-	color: #025b5a;
-	font-weight: bold;
-	padding-bottom: 20px;
-}
+
+
+
 .hetext3 {
 	text-align: center;
 	font-size: 19pt;
@@ -54,16 +37,8 @@
 	padding-bottom: 50px;
 	padding-top: 50px;
 }
-.myh1 {
-	background-color: #00aeef;
-	text-align: center;
-	color: #FFFFFF;
-	font-weight: bold;
-	font-size: 22pt;
-}
-.mycolbor {
-	border: 2px solid #c7efe4;
-}
+
+
 .sectext {
 	text-align: center;
 	font-size: 11pt;
@@ -93,26 +68,14 @@
 
 
 .hecont {
-	background-color: #fb8289;
+	background-color: #EEF0E4;
 	padding-top: 25px;
 	padding-bottom: 25px;
 }
 
-.hetext2 {
-	text-align: center;
-	font-size: 18pt;
-	color: #7f0108;
-	font-weight: bold;
-	padding-bottom: 20px;
-}
 
-.myh1 {
-	background-color: #ef729b;
-	text-align: center;
-	color: #FFFFFF;
-	font-weight: bold;
-	font-size: 22pt;
-}
+
+
 
 .myh2 {
 	background-color: #9e131a;
@@ -122,6 +85,31 @@
 	font-size: 22pt;
 }
 
+
+
+.hetext1 {
+	text-align: center;
+	font-size: 30pt;
+	font-weight: normal;
+	padding-bottom: 0px;
+	line-height: 50px;
+	color: #2F2E2E;
+}
+.hetext2 {
+	text-align: center;
+	font-size: 13pt;
+	color: #2F2E2E;
+	font-weight: normal;
+	padding-bottom: 50px;
+}
 .mycolbor {
-	border: 2px solid #ffcdd0;
+
+}
+.myh1 {
+	text-align: center;
+	color: #2F2E2E;
+	font-weight: normal;
+	font-size: 19pt;
+	padding-top: 10px;
+	padding-bottom: 10px;
 }
