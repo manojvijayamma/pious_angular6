@@ -1,4 +1,4 @@
-import { Component,Input } from '@angular/core';
+import { Component,Input,ViewChild, ElementRef, NgZone } from '@angular/core';
 import { NgbModal, ModalDismissReasons, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -9,6 +9,8 @@ import { SpinnerService } from  '../../../../shared/services/spinner.service';
 import { AlertService } from  '../../../../shared/services/alert.service';
 import { environment } from '../../../../../environments/environment';
 
+import { GooglePlaceDirective } from 'ngx-google-places-autocomplete/ngx-google-places-autocomplete.directive';
+
 @Component({
     selector: 'app-modal',
     templateUrl: './modal.component.html',
@@ -18,6 +20,11 @@ export class ModalComponent {
     closeResult: string;
     formData: FormGroup; 
     private modalReference : NgbModalRef;
+
+    
+    lat: number = 51.678418;
+    lng: number = 7.809007;
+    @ViewChild('places') places: GooglePlaceDirective;
 
     @Input() title: number; 
     event: any;
@@ -140,6 +147,10 @@ export class ModalComponent {
          }, error => {
              this.responseService.checkStatus(error);           
          });
+    }
+
+    public handleAddressChange() {
+       
     }
 
 }

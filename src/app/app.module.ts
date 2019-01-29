@@ -23,6 +23,9 @@ import { TyreService } from './shared/services/tyre.service';
 import { AddressService } from './shared/services/address.service';
 import { OrderService } from './shared/services/order.service';
 
+//import { AgmCoreModule } from '@agm/core';
+//import { GooglePlaceModule } from "ngx-google-places-autocomplete";
+
 
 
 // AoT requires an exported function for factories
@@ -44,6 +47,8 @@ export const createTranslateLoader = (http: HttpClient) => {
         HttpClientModule,
         FormsModule, 
         ReactiveFormsModule,
+       
+        
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,
