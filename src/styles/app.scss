@@ -21,13 +21,13 @@ body{
 }
 .gridBorder{
     /*border:1px solid #00979d;*/
-    margin:15px;
+    margin:20px 0px 0px 0px;
 }
 
 .modal-header{
-    background-color:#d26067; /* 086266*/
+    background-color:#2F2E2E; /* 086266*/
     border-radius:0px;
-    border:1px solid #d26067;
+    border:1px solid #2F2E2E;
     color:#fff;
     padding:8px;
     font-size:18px;
@@ -35,7 +35,7 @@ body{
 
 .modal-content{
     border-radius:0px;
-    border:1px solid #d26067;
+    border:1px solid #2F2E2E;
 }
 .modal-body{
     padding-bottom:0px;
@@ -43,7 +43,7 @@ body{
 
 .modal-footer{
     padding:5px;
-    background-color:#fb8289
+    background-color:#2F2E2E
 }
 
 .list-group-item{
@@ -52,7 +52,7 @@ body{
     border-radius:none;
 }
 .list-group-item:hover{
-     background-color:#ff8080; /* #70d6d8;*/
+     background-color:#2F2E2E; /* #70d6d8;*/
     border-radius:0px !important;
 }
 
@@ -75,7 +75,8 @@ body{
 /* page heading */
 .breadcrumb{
     padding:10px;
-    background-color:#fda0a5; /* #8dc9c1*/
+    
+    background-color:#2F2E2E; /* #8dc9c1*/
     border-radius:0px;
     color:#fff;
     font-size:25px;
@@ -91,15 +92,16 @@ body{
 
 .table th{
     vertical-align:middle;
-    background-color:#ffc1c4;
+    background-color:#2F2E2E;
     padding:5px 3px;
+    color:#fff;
 }
 
 .table-bordered, .table-bordered td, .table-bordered th{
     border:none;
 }
 .rowBorder{
-    border-bottom:1px solid #fdc2c6;
+    border-bottom:1px solid #2F2E2E;
 }
 .main-container{
     margin-top:72px !important;
