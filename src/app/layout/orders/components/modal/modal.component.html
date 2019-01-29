@@ -69,7 +69,7 @@
                             <th  style="width:10%;text-align:right">Price</th>                   
                             
                             <th  style="width:10%;text-align:right">Ord. Qty</th>
-                            <th  style="width:10%;text-align:right">Promo Qty</th>
+                            <th  style="width:10%;text-align:right">Pro. Qty</th>
                             <th  style="width:10%;text-align:right">Total Qty</th>
                             <th  style="width:10%;text-align:right">Total</th>
                             <th  style="width:10%;text-align:right">Vat Rate</th>
@@ -95,21 +95,45 @@
                             
                            
                         </tr>
+
+                        <tr  class="rowBorder">
+                            <td colspan="9" style="text-align:right"><b>Sub Total</b></td>
+                            
+                            <td style="text-align:right"><b>{{ getTotal()[0] }}</b></td>
+                            
+                        </tr>
+                        <tr  class="rowBorder">
+                            <td colspan="9" style="text-align:right"><b>Vat Total</b></td>
+                            
+                            <td style="text-align:right"><b>{{ getTotal()[1] }}</b></td>
+                            
+                        </tr>
+                        <tr  class="rowBorder">
+                            <td colspan="9" style="text-align:right"><b>Grand Total</b></td>
+                            
+                            <td style="text-align:right"><b>{{ getTotal()[2] }}</b></td>
+                            
+                        </tr>
                      
                         </tbody>
                     </table> </div>
 
-        </div>
-        <div class="form-group row">
-                {{formData.order_note}}
+                    
 
         </div>
-        <div class="form-group row">
+
+
+        <div class="form-group row" style="padding:5px;">
+              Note:  {{formData.order_note}}
+
+        </div>
+       
+        <div class="form-group row" style="padding:5px;">
                 LPO Number :   {{formData.lom}}
 
         </div>
-        <div class="form-group row">
-              Delivery Address :   {{formData.address}} {{formData.city}} {{formData.pin}} {{formData.google_location}}
+        <div class="form-group row" style="padding:5px;">
+              Delivery Address :   {{formData.address}} {{formData.city}} {{formData.pin}}<br> {{formData.google_location}}
 
         </div>
             

@@ -1,0 +1,188 @@
+
+
+<div  class="gridBorder">
+    
+
+    <div class="row" >
+                <div class="col-xl-12" >
+                   <!-- <h2 class="page-header">
+                        {{heading}}
+                    </h2> -->
+                    <ol class="breadcrumb">
+                       <!-- <li class="breadcrumb-item">
+                            <i class="fa fa-dashboard"></i> <a href="Javascript:void(0)" [routerLink]="['/dashboard']">Dashboard</a>
+                        </li> -->
+                        <li class="breadcrumb-item active" style="color:#000"> Products</li>
+                        
+                    </ol>
+                    <div class="pull-right" style="position:absolute;top:10px;right:20px;">
+                       <!-- <app-modal ></app-modal>  -->
+                   </div>                 
+                    <!--<app-date-picker [dateName]="'from_date'"></app-date-picker>
+                    <app-date-picker [dateName]="'to_date'"></app-date-picker>-->
+
+                </div>
+    </div>
+
+
+    <form [formGroup]="searchForm"  (ngSubmit)="doSearch()">
+    <div class="row " >
+           
+            
+            <div class="col col-xl-2 col-lg-2">
+                <div class="form-group">
+                        <div class="input-group datepicker-input">
+                            <select  class='form-control'   formControlName="category_id" >
+                                    <option value="">--Category--</option>
+                                    <option *ngFor="let cat of categoryData" value={{cat.id}}>
+                                            {{cat.title}}
+                                     </option>
+                            </select>                             
+                        </div>
+                    </div>
+            </div>
+
+            
+            
+            <div class="col col-xl-2 col-lg-2">
+                <div class="form-group">
+                        <div class="input-group datepicker-input">
+                            <select  class='form-control'   formControlName="brand_id">
+                                    <option value="">--Brand--</option>
+                                    <option *ngFor="let cat of brandData" value={{cat.id}}>
+                                            {{cat.title}}
+                                     </option>
+                            </select>                             
+                        </div>
+                    </div>
+        </div>
+
+        <div class="col col-xl-2 col-lg-2">
+            <div class="form-group">
+                    <div class="input-group datepicker-input">
+                        <select  class='form-control'   formControlName="model_id">
+                                <option value="">--Model--</option>
+                                <option *ngFor="let cat of modelData" value={{cat.model}}>
+                                        {{cat.model}}
+                                 </option>
+                        </select>                             
+                    </div>
+                </div>
+        </div>
+
+
+        <div class="col col-xl-2 col-lg-2">
+            <div class="form-group">
+                    <div class="input-group datepicker-input">
+                        <select  class='form-control'   formControlName="size_id">
+                                <option value="">--Size--</option>
+                                <option *ngFor="let cat of sizeData" value={{cat.id}}>
+                                        {{cat.title}}
+                                 </option>
+                        </select>                             
+                    </div>
+                </div>
+        </div>
+        <!--
+        <div class="col col-xl-2 col-lg-2">
+            <div class="form-group">
+                    <div class="input-group datepicker-input">
+                        <select  class='form-control'   formControlName="type_id">
+                                <option value="">--Type--</option>
+                                <option *ngFor="let cat of typeData" value={{cat.id}}>
+                                        {{cat.title}}
+                                 </option>
+                        </select>                             
+                    </div>
+                </div>
+    </div> -->
+
+    <div class="col col-xl-2 col-lg-2">
+        <div class="form-group">
+                <div class="input-group datepicker-input">
+                    &nbsp;&nbsp;<input  class="form-control" 
+                          formControlName="title" placeholder="Search Product Here" >                                
+                </div>
+            </div>
+</div> 
+    
+        <div class="col col-xl-2 col-lg-2">
+                <div class="form-group">
+                        <div class="input-group datepicker-input">
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-search "></i> Search</button>
+                            &nbsp;<button type="reset" class="btn btn-danger" (click)="resetSearch()"><i class="fa fa-refresh "></i> Rest</button>
+                        </div>
+                    </div>
+        </div>
+
+    </div>  
+    </form>
+    
+
+            
+    <div class="row" >
+        <div class="col col-xl-12 col-lg-12">
+            
+            <div id="gridPanel">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th style="width:3%" >No</th>
+                        
+                        <th style="width:25%">Description</th>
+                        <th style="width:8%">Model</th>
+                      
+                        <th style="width:8%">Origin</th>
+                        <th style="width:8%;text-align:right" >Stock</th>
+                        <th style="width:8%;text-align:right">Price</th>
+                        
+                        <th style="width:8%;text-align:right">Promotion</th>
+                        <th style="width:10%;text-align:right">Order Qty</th>
+                        <th style="width:10%;text-align:center">Cart</th>
+                        <th style="width:10%;text-align:center">View</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let data of gridData;let i=index" class="rowBorder">
+                        <td scope="row">{{pager.startSI + i}}</td>
+                        <td><div style="float:left"><img  *ngIf="data.image == ''" src="{{imageUrl}}sorry-image-not-available.png" style="width:80px;">
+                            <img  *ngIf="data.image != ''" src="{{imageUrl}}{{data.image}}" style="width:80px;">
+                        </div>
+                        <div style="float:left;position:relative;top:30px;">{{data.description}}</div>
+                        </td>
+                       
+                        <td>{{data.model}}</td>                       
+                        <td>{{data.origin.title}}</td>
+                        <td align="right">{{data.stock}}</td>
+                        <td align="right">{{data.price1}}</td>
+                        <td></td>
+                  
+                        
+                        <td  align="right"><input class="form-control " type="text" value=""   style="width:100px" id="qty_{{data.id}}" (keyup)="validateNumber($event)"></td> <!--(blur)="updateStock($event,data.id)" -->
+                        <td style="text-align:center"><button type="submit" class="btn btn-primary btn-sm" (click)="addToCart($event,data.id)"><i class="fa fa-save"></i> Add to cart</button>
+                        </td>
+                        <td style="text-align:center"><app-modal [title]=data.id></app-modal>
+                            </td>
+                    </tr>
+                    
+                    </tbody>
+                </table>
+            </div>
+
+            <form [formGroup]="pagerForm" >
+            <table class="table table-bordered table-striped table-condensed cf pagefont" style="margin-bottom:2px;">
+                <tr>
+                <td class="col-sm-6" style="width:70%">Displaying <b>{{pager.startSI}}</b> to <b>{{pager.endSI}}</b> of <b>{{pager.totalRecords}}</b> records </td>
+                <td class="text-center col-sm-6">Total pages : <b>{{pager.totalPages}}</b></td>
+                <td class="col-sm-1"><a href="javascript:void(0)" (click)="pagination(1)"><img src="assets/images/page_first.gif" ></a></td>
+                <td class="col-sm-1"><a href="javascript:void(0)" (click)="pagination(pager.prev)"><img src="assets/images/page_prev.gif" ></a></td>
+                <td class="col-sm-1" style="padding:8px 5px;"><input type="text" class="form-control " style="width:50px;height:25px;" (keyup)="doPager()" (blur)="doPager()"  formControlName="page" ></td>
+                <td class="col-sm-1"><a href="javascript:void(0)" (click)="pagination(pager.next)"><img src="assets/images/page_next.gif" ></a></td>
+                <td class="col-sm-1"><a href="javascript:void(0)" (click)="pagination(pager.totalPages)"><img src="assets/images/page_last.gif" ></a></td>
+                </tr>
+            </table> 
+        </form>
+        </div>
+      
+    </div>
+</div>

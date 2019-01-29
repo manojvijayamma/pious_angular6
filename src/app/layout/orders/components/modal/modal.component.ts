@@ -111,4 +111,18 @@ export class ModalComponent {
              this.responseService.checkStatus(error);           
          });
     }
+
+    getTotal(){
+        var sub_total = 0;
+        var vat_total = 0;
+        var grant_total = 0;
+        for(var i = 0; i < this.orderDetails.length; i++){
+            var product = this.orderDetails[i];
+            sub_total = sub_total+parseFloat(product.total_price);
+            vat_total = vat_total+parseFloat(product.vat_amount);
+            grant_total = grant_total+parseFloat(product.grant_total);
+        }
+        
+        return [sub_total.toFixed(2),vat_total.toFixed(2),grant_total.toFixed(2)];
+      }
 }

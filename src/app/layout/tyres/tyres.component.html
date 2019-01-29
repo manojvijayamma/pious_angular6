@@ -42,7 +42,7 @@
                 </div>
     </div> 
 
-            <div class="col col-xl-2 col-lg-2">
+           <!-- <div class="col col-xl-2 col-lg-2">
                 <div class="form-group">
                         <div class="input-group datepicker-input">
                             <select  class='form-control'   formControlName="category_id" >
@@ -53,7 +53,7 @@
                             </select>                             
                         </div>
                     </div>
-            </div>
+            </div> -->
 
             
             
@@ -83,22 +83,22 @@
                 </div>
         </div>
 
-
+        <!--
         <div class="col col-xl-2 col-lg-2">
             <div class="form-group">
                     <div class="input-group datepicker-input">
-                        <select  class='form-control'   formControlName="size_id">
-                                <option value="">--Size--</option>
-                                <option *ngFor="let cat of sizeData" value={{cat.id}}>
+                        <select  class='form-control'   formControlName="pattern_id">
+                                <option value="">--Pattern--</option>
+                                <option *ngFor="let cat of patternData" value={{cat.id}}>
                                         {{cat.title}}
                                  </option>
                         </select>                             
                     </div>
                 </div>
-        </div>
+        </div> -->
 
 
-    <div class="col col-xl-2 col-lg-2">
+    <div class="col col-xl-3 col-lg-3">
         <div class="form-group">
                 <div class="input-group datepicker-input">
                     &nbsp;&nbsp;<input  class="form-control" 
@@ -130,10 +130,14 @@
                     <tr>
                         <th style="width:3%" >No</th>
                         <th style="width:3%;text-align:center">View</th>
-                        <th style="width:25%">Description</th>
-                        <th style="width:8%">Model</th>
+                        <th style="width:30%">Description</th>
+                        <th style="width:4%">Group</th>
+                        <!--<th style="width:4%">Category</th> -->
+                        <th style="width:4%">Model</th>
+                        <th style="width:4%">Brand</th>
+                        <!--<th style="width:4%">Pattern</th> -->
                       
-                        <th style="width:8%">Origin</th>
+                        <th style="width:4%">Origin</th>
                         <th style="width:8%;text-align:right" >Stock</th>
                         <th style="width:8%;text-align:right">Price</th>
                         
@@ -145,15 +149,16 @@
                     </thead>
                     <tbody>
                     <tr *ngFor="let data of gridData;let i=index" class="rowBorder">
-                        <td scope="row">{{pager.startSI + i}}</td>
+                        <td scope="row" style="padding:15px 0px;">{{pager.startSI + i}}</td>
                         <td style="text-align:center"><app-modal [title]=data.id></app-modal></td>
-                        <td><div style="float:left"><img  *ngIf="data.image == ''" src="{{imageUrl}}sorry-image-not-available.png" style="width:80px;">
-                            <img  *ngIf="data.image != ''" src="{{imageUrl}}{{data.image}}" style="width:80px;">
-                        </div>
-                        <div style="float:left;position:relative;top:30px;">{{data.description}}</div>
+                        <td>
+                        {{data.description}}
                         </td>
-                       
-                        <td>{{data.model}}</td>                       
+                        <td>{{data.type.title}}</td> 
+                       <!-- <td>{{data.category.title}}</td> -->
+                        <td>{{data.model}}</td> 
+                        <td>{{data.brand.title}}</td>
+                       <!-- <td>{{data.pattern.title}}</td> -->                     
                         <td>{{data.origin.title}}</td>
                         <td align="right">{{data.stock}}</td>
                         <td align="right">{{data.price1}}</td>
@@ -162,8 +167,8 @@
                         
                         <td  align="right"><input class="form-control " type="text" value=""   style="width:100px" id="qty_{{data.id}}" (keyup)="validateNumber($event)"></td> <!--(blur)="updateStock($event,data.id)" -->
                         <td style="text-align:center">
-                            <button *ngIf="data.stock >0" type="submit" class="btn btn-primary btn-sm" (click)="addToCart($event,data.id)"><i class="fa fa-save"></i> Add to cart</button>
-                            <button *ngIf="data.stock ==0" type="submit" class="btn btn-primary btn-sm" (click)="openModalDialogEnquiry($event,data.id)"><i class="fa fa-save"></i> Enquiry</button>
+                            <button *ngIf="data.stock >0" type="submit" class="btn btn-primary btn-sm" (click)="addToCart($event,data.id)"> Add to cart</button>
+                            <button *ngIf="data.stock ==0" type="submit" class="btn btn-danger btn-sm" (click)="openModalDialogEnquiry($event,data.id)"><i class="fa fa-save"></i> Enquiry</button>
                         </td>
                        
                     </tr>
@@ -210,8 +215,8 @@
                    
                                 <div class="form-group">
                                     <div class="input-group datepicker-input">
-                                        <input  type="Enquiry" class="form-control" placeholder="your comment"
-                                              formControlName="comment"  >
+                                        <textarea   class="form-control" placeholder="your comment"
+                                              formControlName="comment"  ></textarea>
                                         
                                     </div>
                                 </div>                                                               

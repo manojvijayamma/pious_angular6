@@ -24,7 +24,7 @@ export class TyresComponent implements OnInit {
     originData : any;
     modelData : any;      
     pager : any; 
-    sizeData : any; 
+    patternData : any; 
     //pager: {startSI:'',endSI:'',totalRecords:'',totalPages:'',prev:'',next:'',page:''};    
     //pager : any;
     
@@ -65,7 +65,7 @@ export class TyresComponent implements OnInit {
             brand_id : [''] ,
             origin_id :[''] ,
             model_id :[''] ,
-            size_id : [''] ,
+            pattern_id : [''] ,
             rowsize:10,
             sortField:'Name',
             sortOrder:'ASC' ,
@@ -83,7 +83,7 @@ export class TyresComponent implements OnInit {
         this.loadBrand();
         this.loadOrigin();
         this.loadModel();
-        this.loadSize();
+        this.loadPattern();
         this.loadGridData(1);
         
     }
@@ -134,7 +134,7 @@ export class TyresComponent implements OnInit {
         this.searchForm.controls["origin_id"].setValue(['']);
         this.searchForm.controls["type_id"].setValue(['']);
         this.searchForm.controls["model_id"].setValue(['']);
-        this.searchForm.controls["size_id"].setValue(['']);
+        this.searchForm.controls["pattern_id"].setValue(['']);
         this.loadGridData(1);  
     }
 
@@ -209,10 +209,10 @@ export class TyresComponent implements OnInit {
          });
     }
 
-    loadSize(){
-        this.tyreService.getSize().subscribe((data: any) => {            
+    loadPattern(){
+        this.tyreService.getPattern().subscribe((data: any) => {            
              
-            this.sizeData = data.size;           
+            this.patternData = data.pattern;           
                 
             
          }, error => {
@@ -252,6 +252,7 @@ export class TyresComponent implements OnInit {
             else{
                 this.Enquirydisplay='none';
                 this.alertService.success(data.text);
+                this.EnquiryFormData.controls["comment"].setValue(['']);
                 this.spinnerService.hide();
             }  
           }, error => {
