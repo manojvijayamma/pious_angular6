@@ -1,18 +1,72 @@
+
+
+
 <nav class="navbar navbar-expand-lg fixed-top">
     <!--<a id="panel_username" class="navbar-brand" href="#" style="font-size:30px;" (click)="showSpinner(0)">{{loggedUser}} </a>-->
-    <a id="panel_logo" class="navbar-brand" href="#"  ><img class="mainimage" src="assets/images/Logonew.png" style="height:50px;"  alt=""/> </a> <!-- style="display:none;" (click)="showSpinner(0)" -->
+    <a id="panel_logo" class="navbar-brand" href="#"  ><img class="mainimage " src="assets/images/logo_jan.png" style="height:50px;"  alt=""/> </a> <!-- style="display:none;" (click)="showSpinner(0)" -->
     <button class="navbar-toggler" type="button" (click)="toggleSidebar()">
         <!-- <span class="navbar-toggler-icon"></span> -->
         <i class="fa fa-bars text-muted" aria-hidden="true"></i>
     </button>
-    <div class="collapse navbar-collapse">
-        <!--<form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="{{ 'Search' | translate }}" >
-        </form> -->
+    <div class="collapse navbar-collapse " id="menu_nav" >
+        
 
         
-    
+        <ul class="navbar-nav mr-auto navbar-right" >
+            <li class="nav-item">
+                <a class="nav-link" style="color:#CE2026" [routerLink]="['/tyres']" [routerLinkActive]="['router-link-active']" (click)="showSpinner(1)">
+            
+                    <img src="assets/images/icons8-tire-96.png" style="height:30px;"> Products
+                 
+                </a>
+            </li>
+      
+            <li class="nav-item">
+                <a class="nav-link" style="color:#CE2026" [routerLink]="['/orders']" [routerLinkActive]="['router-link-active']" (click)="showSpinner(1)">
+       
+                    <img src="assets/images/icons8-todo-list-96.png" style="height:30px;"> Orders
+                  
+                </a> 
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="color:#CE2026" [routerLink]="['/address']" [routerLinkActive]="['router-link-active']" (click)="showSpinner(1)">
+            
+                    <img src="assets/images/icons8-address-96.png" style="height:30px;"> Address Book
+             
+            </a> 
+            </li>
+
+            <li class="nav-item dropdown" ngbDropdown>
+                <a href="javascript:void(0)" class="nav-link" style="color:#4F4141" ngbDropdownToggle>
+                    <i class="fa fa-user" ></i> {{loggedUser}} <b class="caret"></b>
+                </a>
+
+                <div class="dropdown-menu-right" ngbDropdownMenu>  
+        
+                    <a href="javascript:void();" (click)="openModalDialogProfile()"   class="list-group-item" style="color:#4F4141"><li><i class="fa fa-fw fa-user"></i> Profile</li></a>
+                    <li class="dropdown-divider"></li>
+                    <a href="javascript:void();" (click)="openModalDialogPassword()" class="list-group-item" style="color:#4F4141"><li><i class="fa fa-fw fa-key"></i> Password</li></a>
+                    <li class="dropdown-divider"></li>
+                    <a href="javascript:void();" (click)="onLoggedout()" class="list-group-item" style="color:#4F4141"><li><i class="fa fa-fw fa-sign-out"></i>Logout</li></a>
+                  </div>
+
+           
+            </li>
+
+            <li>
+                <a href="javascript:void(0);" class="nav-link" style="color:#CE2026" (click)="openModalDialogCart()">
+                    <img src="assets/images/icons8-shopping-cart-96.png" style='height:30px;'>
+                    <span id="cartTotal" class="badge badge-notify" style="position:relative;right:10px;top:-5px;color:#CE2026;font-size:18px;"></span>
+         
+                 </a>
+            </li>
+
+          </ul>
           
+          <ul class="navbar-nav mr-auto">
+                     
+            
+          </ul>
 
         
     </div>
@@ -36,110 +90,12 @@
 
      
 
-        <a class="nav-link" style="color:#CE2026" [routerLink]="['/tyres']" [routerLinkActive]="['router-link-active']" (click)="showSpinner(1)">
-            
-            <img src="assets/images/icons8-tire-96.png" style="height:30px;"> Products
-         
-        </a> 
-       &nbsp;
-       <a class="nav-link" style="color:#CE2026" [routerLink]="['/orders']" [routerLinkActive]="['router-link-active']" (click)="showSpinner(1)">
-       
-        <img src="assets/images/icons8-todo-list-96.png" style="height:30px;"> Orders
-      
-    </a> 
-
-    <a class="nav-link" style="color:#CE2026" [routerLink]="['/address']" [routerLinkActive]="['router-link-active']" (click)="showSpinner(1)">
-            
-        <img src="assets/images/icons8-address-96.png" style="height:30px;"> Address Book
- 
-</a> 
 
 
-                  <ul class="navbar-nav ml-auto">
-                    <!--
-                    <li class="nav-item dropdown" ngbDropdown>
-                        <a class="nav-link" href="javascript:void(0)" ngbDropdownToggle>
-                            <i class="fa fa-envelope"></i> <b class="caret"></b><span class="sr-only">(current)</span>
-                        </a>
-                        <ul class="dropdown-menu-right messages" ngbDropdownMenu>
-                            <li class="media">
-                                <img class="d-flex align-self-center mr-3"
-                                    src="http://i.huffpost.com/gadgets/slideshows/461162/slide_461162_6224974_sq50.jpg" alt="Generic placeholder image"
-                                >
-                                <div class="media-body">
-                                    <h5 class="mt-0 mb-1">John Smith</h5>
-                                    <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                    <p class="last"> Lorem ipsum dolor sit amet, consectetur...</p>
-                                </div>
-                            </li>
-                            <li class="media">
-                                <img class="d-flex align-self-center mr-3"
-                                    src="http://i.huffpost.com/gadgets/slideshows/461162/slide_461162_6224974_sq50.jpg"
-                                    alt="Generic placeholder image"
-                                >
-                                <div class="media-body">
-                                    <h5 class="mt-0 mb-1">John Smith</h5>
-                                    <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                    <p class="last"> Lorem ipsum dolor sit amet, consectetur...</p>
-                                </div>
-                            </li>
-                            <li class="media">
-                                <img class="d-flex align-self-center mr-3"
-                                    src="http://i.huffpost.com/gadgets/slideshows/461162/slide_461162_6224974_sq50.jpg"
-                                    alt="Generic placeholder image"
-                                />
-                                <div class="media-body">
-                                    <h5 class="mt-0 mb-1">John Smith</h5>
-                                    <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                    <p class="last"> Lorem ipsum dolor sit amet, consectetur...</p>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown" ngbDropdown>
-                        <a href="javascript:void(0)" class="nav-link" ngbDropdownToggle>
-                            <i class="fa fa-bell"></i> <b class="caret"></b><span class="sr-only">(current)</span>
-                        </a>
-                        <div class="dropdown-menu-right" ngbDropdownMenu>
-                            <a href="javascript:void(0)" class="dropdown-item">
-                                {{ 'Pending Task' | translate }} <span class="badge badge-info">6</span>
-                            </a>
-                            <a href="javascript:void(0)" class="dropdown-item">
-                                {{ 'In queue' | translate }} <span class="badge badge-info"> 13</span>
-                            </a>
-                            <a href="javascript:void(0)" class="dropdown-item">
-                                {{ 'Mail' | translate }} <span class="badge badge-info"> 45</span>
-                            </a>
-                            <li class="dropdown-divider"></li>
-                            <a href="javascript:void(0)" class="dropdown-item">
-                                {{ 'View All' | translate }}
-                            </a>
-                        </div>
-                    </li> -->
-                    
-                    <li class="nav-item dropdown" ngbDropdown>
-                        <a href="javascript:void(0)" class="nav-link" style="color:#4F4141" ngbDropdownToggle>
-                            <i class="fa fa-user" ></i> {{loggedUser}} <b class="caret"></b>
-                        </a>
 
-                        <div class="dropdown-menu-right" ngbDropdownMenu>  
-                
-                            <a href="javascript:void();" (click)="openModalDialogProfile()"   class="list-group-item" style="color:#4F4141"><li><i class="fa fa-fw fa-user"></i> Profile</li></a>
-                            <li class="dropdown-divider"></li>
-                            <a href="javascript:void();" (click)="openModalDialogPassword()" class="list-group-item" style="color:#4F4141"><li><i class="fa fa-fw fa-key"></i> Password</li></a>
-                            <li class="dropdown-divider"></li>
-                            <a href="javascript:void();" (click)="onLoggedout()" class="list-group-item" style="color:#4F4141"><li><i class="fa fa-fw fa-sign-out"></i>Logout</li></a>
-                          </div>
+                  
 
-                   
-                    </li>
-                </ul>
-
-                <a href="javascript:void(0);" class="nav-link" style="color:#CE2026" (click)="openModalDialogCart()">
-                    <img src="assets/images/icons8-shopping-cart-96.png" style='height:30px;'>
-                    <span id="cartTotal" class="badge badge-notify" style="position:relative;right:10px;top:-5px;color:#CE2026;font-size:18px;"></span>
-         
-            </a>
+               
 
                   
 </nav>

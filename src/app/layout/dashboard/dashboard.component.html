@@ -1,8 +1,20 @@
 <div style="border:15px solid #2F2E2E;margin-top:25px;"></div>
 <div [@routerTransition] >
 
-    <div class="mainim"><img class="mainimage" src="assets/images/ARROYO-TAMAROCK-MT-WALLPAPER.jpg"   alt=""/></div>
 
+  <ngb-carousel *ngIf="images">
+    <ng-template ngbSlide *ngFor="let image of images">
+      <img [src]="image" alt="Random first slide">
+     
+    </ng-template>
+    
+  </ngb-carousel>
+
+
+
+
+
+   
     <div class="heconttyre" ng-style="{'background-image':'url(assets/images/redback.png)'}"><img src="assets/images/tyremainimage.png"   alt="" class="brimage1"/></div>
 
 

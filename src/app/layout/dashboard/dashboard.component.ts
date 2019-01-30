@@ -16,6 +16,7 @@ export class DashboardComponent implements OnInit {
 
     dashboardData: any;
     headerData:any;
+    images = ['assets/images/1.jpg','assets/images/2.jpg','assets/images/3.jpg'];
     constructor(private userService : UserService, private router: Router, private responseService: ResponseService) {
        
     }

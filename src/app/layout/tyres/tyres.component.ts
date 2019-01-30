@@ -49,7 +49,7 @@ export class TyresComponent implements OnInit {
         this.spinnerService.show();
 
         //update grid height
-        this.sHeight=(screen.availHeight-315)+"px";
+        this.sHeight=(screen.availHeight-335)+"px";
         //document.getElementById("gridPanel").style.height=this.sHeight;
         
         //pagination form

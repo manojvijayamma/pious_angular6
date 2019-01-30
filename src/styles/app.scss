@@ -13,11 +13,13 @@
 
 body{
     font-size:12px;
+    /*overflow: hidden;*/
 }
 
 #gridPanel{
    /* overflow-y: scroll;
     background-color:#fff;border-bottom:1px solid #65bbbf;*/
+    margin:0px 5px;
 }
 .gridBorder{
     /*border:1px solid #00979d;*/

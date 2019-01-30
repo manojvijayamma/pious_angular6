@@ -27,6 +27,7 @@ export class HeaderComponent implements OnInit {
     addressData:any;
     totalData:any;
     cartDetails: FormGroup; 
+    menuToggle:boolean;
 
     constructor(private translate: TranslateService, public router: Router, private frmBuilder: FormBuilder,  private userService : UserService,
     private alertService : AlertService,
@@ -53,7 +54,7 @@ export class HeaderComponent implements OnInit {
     }
 
     ngOnInit() {
-        
+        this.menuToggle=false;
         this.formData = this.frmBuilder.group({            
             email:[null, [Validators.required,Validators.minLength(3),Validators.maxLength(15)]],                 
             firstname : [""] ,
@@ -112,8 +113,17 @@ export class HeaderComponent implements OnInit {
     }
 
     toggleSidebar() {
-        const dom: any = document.querySelector('body');
-        dom.classList.toggle(this.pushRightClass);
+
+        if(this.menuToggle==true){
+            document.getElementById("menu_nav").style.display = "none"; 
+            this.menuToggle=false;
+        } 
+        else{
+            document.getElementById("menu_nav").style.display = "block"; 
+            this.menuToggle=true;
+        }   
+        //const dom: any = document.querySelector('body');
+        //dom.classList.toggle(this.pushRightClass);
     }
 
     rltAndLtr() {
