@@ -65,6 +65,10 @@ export class UserService {
       return  this.http.get(this.rootUrl+'profile', {params});
   }
 
+  logout(){     
+    return this.http.get(this.rootUrl+'logout' );
+}
+
 
 
   

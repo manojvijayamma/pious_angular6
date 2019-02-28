@@ -4,7 +4,7 @@
 
 <ng-template #content let-c="close" let-d="dismiss">
     <div class="modal-header">
-        <h4 class="modal-title"><i class="fa fa-table "></i>Product Details</h4>
+        <h4 class="modal-title"><i class="fa fa-table "></i>Stock Details</h4>
         <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -30,9 +30,9 @@
                             <tr>
                                 <td style="width:50%">Brand</td><td><input style="border:none;background:none;" class="form-control" formControlName="brand" readonly></td>
                             </tr>
-                            <!--<tr>
+                            <tr>
                                 <td style="width:50%">Pattern</td><td><input style="border:none;background:none;" class="form-control" formControlName="pattern" readonly></td>
-                            </tr>-->
+                            </tr>
 
                             <tr>
                                 <td style="width:50%">Origin</td><td><input style="border:none;background:none;" class="form-control" formControlName="origin" readonly></td>

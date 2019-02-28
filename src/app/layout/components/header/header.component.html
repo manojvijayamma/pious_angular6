@@ -16,7 +16,7 @@
             <li class="nav-item">
                 <a class="nav-link" style="color:#CE2026" [routerLink]="['/tyres']" [routerLinkActive]="['router-link-active']" (click)="showSpinner(1)">
             
-                    <img src="assets/images/icons8-tire-96.png" style="height:30px;"> Products
+                    <img src="assets/images/icons8-tire-96.png" style="height:30px;"> Stock Details
                  
                 </a>
             </li>
@@ -24,14 +24,14 @@
             <li class="nav-item">
                 <a class="nav-link" style="color:#CE2026" [routerLink]="['/orders']" [routerLinkActive]="['router-link-active']" (click)="showSpinner(1)">
        
-                    <img src="assets/images/icons8-todo-list-96.png" style="height:30px;"> Orders
+                    <img src="assets/images/icons8-todo-list-96.png" style="height:30px;"> Order Status
                   
                 </a> 
             </li>
             <li class="nav-item">
                 <a class="nav-link" style="color:#CE2026" [routerLink]="['/address']" [routerLinkActive]="['router-link-active']" (click)="showSpinner(1)">
             
-                    <img src="assets/images/icons8-address-96.png" style="height:30px;"> Address Book
+                    <img src="assets/images/icons8-address-96.png" style="height:30px;"> Delivery Locations
              
             </a> 
             </li>
@@ -271,6 +271,7 @@
                     
                     <th  style="width:3%;text-align:right">Qty</th>
                     <th  style="width:3%;text-align:right">Total</th>
+                    <th  style="width:3%;text-align:right">Disc</th>
                     <th  style="width:3%;text-align:right">Vat Rate</th>
                     <th  style="width:3%;text-align:right">Vat Amt</th>
                     <th  style="width:3%;text-align:right">G.Total</th>
@@ -288,6 +289,7 @@
                     <td style="text-align:right">{{data.price}}</td>
                     <td style="text-align:right">{{data.order_quantity}} {{data.promo_quantity}}</td>
                     <td style="text-align:right">{{data.total_price}}</td>
+                    <td style="text-align:right">{{data.discount_amount}}</td>
                     <td style="text-align:right">{{data.vat_rate}}</td>
                     <td style="text-align:right">{{data.vat_amount}}</td>
                     <td style="text-align:right">{{data.grant_total}}</td>
@@ -295,21 +297,27 @@
                     
                 </tr>
                 <tr  class="rowBorder">
-                    <td colspan="8" style="text-align:right"><b>Sub Total</b></td>
+                    <td colspan="9" style="text-align:right"><b>Sub Total (G. Total + Disc - Vat )</b></td>
                     
                     <td style="text-align:right"><b>{{ getTotal()[0] }}</b></td>
                     
                 </tr>
-                <tr  class="rowBorder">
-                    <td colspan="8" style="text-align:right"><b>Vat Total</b></td>
+                <tr  class="rowBorder" >
+                    <td colspan="9" style="text-align:right"><b>Discount Total</b></td>
                     
-                    <td style="text-align:right"><b>{{ getTotal()[1] }}</b></td>
+                    <td style="text-align:right"><b>-{{ getTotal()[3] }}</b></td>
                     
                 </tr>
                 <tr  class="rowBorder">
-                    <td colspan="8" style="text-align:right"><b>Grand Total</b></td>
+                    <td colspan="9" style="text-align:right"><b>Vat Total</b></td>
                     
-                    <td style="text-align:right"><b>{{ getTotal()[2] }}</b></td>
+                    <td style="text-align:right"><b>+{{ getTotal()[1] }}</b></td>
+                    
+                </tr>
+                <tr  class="rowBorder">
+                    <td colspan="9" style="text-align:right"><b>Grand Total</b></td>
+                    
+                    <td style="text-align:right"><b>{{ getTotal()[4] }}</b></td>
                     
                 </tr>
                

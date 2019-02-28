@@ -231,7 +231,6 @@ export class TyresComponent implements OnInit {
         this.spinnerService.hide();       
     }
 
-
     doSendEnquiry(){
         //console.log(this.EnquiryFormData.value);
         
