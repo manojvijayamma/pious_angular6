@@ -82,7 +82,7 @@
                         <tbody>
                         <tr *ngFor="let data of orderDetails;let i=index" class="rowBorder" >
                             <td scope="row">{{ i+1}}</td>
-                            <td >{{data.title}}
+                            <td >{{data.title}} {{data.description}}
                             </td>
                  
                             <td style="text-align:right">{{data.price}}</td>

@@ -29,6 +29,7 @@ export class HeaderComponent implements OnInit {
     totalData:any;
     cartDetails: FormGroup; 
     menuToggle:boolean;
+    placeorderButton=1;
 
     constructor(private translate: TranslateService, public router: Router, private frmBuilder: FormBuilder,  private userService : UserService,
     private alertService : AlertService,
@@ -242,7 +243,7 @@ export class HeaderComponent implements OnInit {
             return false;
         }
 
-
+        this.placeorderButton=0;
         this.spinnerService.show();       
         
         this.orderService.saveOrder(this.cartDetails.value).subscribe((data : any)=>{
@@ -253,15 +254,19 @@ export class HeaderComponent implements OnInit {
                 this.alertService.success(data.text);
                 document.getElementById("cartTotal").innerHTML='';
                 this.spinnerService.hide();
+                this.placeorderButton=1;
+                window.location.reload();
             }  
             else{
                 this.spinnerService.hide(); 
+                this.placeorderButton=1;
             }  
           }
           , error => {
            
             this.responseService.checkStatus(error); 
-            this.spinnerService.hide();   
+            this.spinnerService.hide();
+            this.placeorderButton=1;   
             
           });        
     }

@@ -290,7 +290,7 @@
                     <td style="text-align:right">{{data.order_quantity}} {{data.promo_quantity}}</td>
                     <td style="text-align:right">{{data.total_price}}</td>
                     <td style="text-align:right">{{data.discount_amount}}</td>
-                    <td style="text-align:right">{{data.vat_rate}}</td>
+                    <td style="text-align:right">{{data.vat_rate}} %</td>
                     <td style="text-align:right">{{data.vat_amount}}</td>
                     <td style="text-align:right">{{data.grant_total}}</td>
                     
@@ -353,7 +353,7 @@
         <!-- Modal footer -->
         <div class="modal-footer">
 
-            <button class="btn  btn-primary" type="submit" ><i class="fa fa-fw fa-save "></i>&nbsp;Place Order</button>
+            <button class="btn  btn-primary" type="submit" [disabled]="placeorderButton!=1"><i class="fa fa-fw fa-save "></i>&nbsp;Place Order</button>
             <button type="button" class="btn btn-danger" (click)="closeModalDialogCart()" ><i class="fa fa-fw fa-close "></i>&nbsp;Close</button>
         </div>
 
