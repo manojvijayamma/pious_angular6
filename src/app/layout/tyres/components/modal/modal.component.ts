@@ -23,6 +23,7 @@ export class ModalComponent {
     event: any;
     fileToUpload: File  = null;
     productImage: any;
+    patternImage: any;
     readonly imageUrl = `${environment.image_url}`;
 
     constructor(private modalService: NgbModal, private frmBuilder: FormBuilder, public router: Router, private tyreService : TyreService,
@@ -156,6 +157,7 @@ export class ModalComponent {
             //this.imgname= require(this.imageUrl+data.formData.image);
             console.log(data.formData.image);
             this.productImage=data.formData.image ? this.imageUrl+data.formData.image  : this.imageUrl+"sorry-image-not-available.png";
+            this.patternImage=data.formData.pattern ? this.imageUrl+data.formData.pattern.image  : this.imageUrl+"sorry-image-not-available.png";
           
             
             this.spinnerService.hide();   

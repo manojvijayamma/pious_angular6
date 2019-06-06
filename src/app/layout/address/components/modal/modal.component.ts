@@ -9,7 +9,7 @@ import { SpinnerService } from  '../../../../shared/services/spinner.service';
 import { AlertService } from  '../../../../shared/services/alert.service';
 import { environment } from '../../../../../environments/environment';
 
-import { GooglePlaceDirective } from 'ngx-google-places-autocomplete/ngx-google-places-autocomplete.directive';
+//import { GooglePlaceDirective } from 'ngx-google-places-autocomplete/ngx-google-places-autocomplete.directive';
 
 @Component({
     selector: 'app-modal',
@@ -24,7 +24,7 @@ export class ModalComponent {
     
     lat: number = 51.678418;
     lng: number = 7.809007;
-    @ViewChild('places') places: GooglePlaceDirective;
+   // @ViewChild('places') places: GooglePlaceDirective;
 
     @Input() title: number; 
     @Input() linkText: string; 

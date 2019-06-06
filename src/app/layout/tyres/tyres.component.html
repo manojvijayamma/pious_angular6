@@ -12,7 +12,7 @@
                        <!-- <li class="breadcrumb-item">
                             <i class="fa fa-dashboard"></i> <a href="Javascript:void(0)" [routerLink]="['/dashboard']">Dashboard</a>
                         </li> -->
-                        <li class="breadcrumb-item active" style="color:#000"> Products</li>
+                        <li class="breadcrumb-item " style="">Stock Details</li>
                         
                     </ol>
                     <div class="pull-right" style="position:absolute;top:10px;right:20px;">
@@ -154,21 +154,24 @@
                         <td>
                         {{data.description}}
                         </td>
-                        <td>{{data.type.title}}</td> 
+                        <td>{{data.type}}</td> 
                        <!-- <td>{{data.category.title}}</td> -->
                         <td>{{data.model}}</td> 
-                        <td>{{data.brand.title}}</td>
+                        <td>{{data.brand}}</td>
                        <!-- <td>{{data.pattern.title}}</td> -->                     
-                        <td>{{data.origin.title}}</td>
-                        <td align="right">{{data.stock}}</td>
+                        <td>{{data.origin}}</td>
+                        <td align="right"><span  *ngIf="data.stock >0">{{data.stock}}</span>
+                            <span  *ngIf="data.stock==0" style="color:red;">No Stock</span></td>
                         <td align="right">{{data.price1}}</td>
-                        <td align="right">{{data.promo_buy}} <span *ngIf="data.promo_get >0"> + </span>{{data.promo_get}}</td>
+                        <td align="right"><span *ngIf="data.promo_buy>0">{{data.promo_buy}}</span> <span *ngIf="data.promo_get>0"> + {{data.promo_get}}</span></td>
                   
                         
-                        <td  align="right"><input class="form-control " type="text" value=""   style="width:100px" id="qty_{{data.id}}" (keyup)="validateNumber($event)"></td> <!--(blur)="updateStock($event,data.id)" -->
+                        <td  align="right"><div *ngIf="data.stock >0"><input class="form-control " type="text" value=""   style="width:100px" id="qty_{{data.id}}" (keyup)="validateNumber($event)"  ></div></td> <!--(blur)="updateStock($event,data.id)" -->
                         <td style="text-align:center">
-                            <button *ngIf="data.stock >0" type="submit" class="btn btn-primary btn-sm" (click)="addToCart($event,data.id)"> Add to cart</button>
-                            <button *ngIf="data.stock ==0" type="submit" class="btn btn-danger btn-sm" (click)="openModalDialogEnquiry($event,data.id)"><i class="fa fa-save"></i> Enquiry</button>
+                            
+                                    <button *ngIf="data.stock >0 && data.price1 >0" type="submit" class="btn btn-primary btn-sm" (click)="addToCart($event,data)"> Add to cart</button>
+                                    <button *ngIf="data.stock ==0" type="submit" class="btn btn-danger btn-sm" (click)="openModalDialogEnquiry($event,data.id)"><i class="fa fa-save"></i> Enquiry</button>
+                              
                         </td>
                        
                     </tr>
@@ -212,14 +215,23 @@
             <!-- Modal body -->
             <form role="form" [formGroup]='EnquiryFormData' (ngSubmit)="doSendEnquiry()">
             <div class="modal-body">
-                   
+
+                                <div class="form-group">
+                                    <div class="input-group datepicker-input">
+                                        <input type="text"  class="form-control" placeholder="Quantity"
+                                            formControlName="quantity" (keyup)="validateNumber($event)" />
+                                        
+                                    </div>
+                                </div> 
                                 <div class="form-group">
                                     <div class="input-group datepicker-input">
                                         <textarea   class="form-control" placeholder="your comment"
                                               formControlName="comment"  ></textarea>
                                         
                                     </div>
-                                </div>                                                               
+                                </div> 
+                                
+                                
                            
                         
             </div>

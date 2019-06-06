@@ -9,12 +9,12 @@ $topnav-background-color:  #fff;
     right: 0;
     bottom: 0;
     overflow: auto;
-    background: $topnav-background-color;
-    background-image: linear-gradient(#fff, #9e1a2d);
+    background: #2F2E2E;
+    /*background-image: linear-gradient(#fff, #9e1a2d);*/
   
     text-align: center;
     color: #fff;
-    padding: 3em;
+    
     .col-lg-4 {
         padding: 0;
     }

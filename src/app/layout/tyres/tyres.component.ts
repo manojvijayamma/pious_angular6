@@ -25,6 +25,7 @@ export class TyresComponent implements OnInit {
     modelData : any;      
     pager : any; 
     patternData : any; 
+    qty:any;
     //pager: {startSI:'',endSI:'',totalRecords:'',totalPages:'',prev:'',next:'',page:''};    
     //pager : any;
     
@@ -49,7 +50,7 @@ export class TyresComponent implements OnInit {
         this.spinnerService.show();
 
         //update grid height
-        this.sHeight=(screen.availHeight-315)+"px";
+        this.sHeight=(screen.availHeight-335)+"px";
         //document.getElementById("gridPanel").style.height=this.sHeight;
         
         //pagination form
@@ -73,7 +74,8 @@ export class TyresComponent implements OnInit {
         });
 
         this.EnquiryFormData = this.frmBuilder.group({            
-            comment:[null],  
+            comment:[null], 
+            quantity: [null],
             product_id:[null],                 
                    
         });
@@ -97,17 +99,34 @@ export class TyresComponent implements OnInit {
          });
     }
 
-    addToCart(event,id){
+    addToCart(event,cartItem,stock){
+        var id=cartItem.id;
+        var stock=cartItem.stock;
         //alert(event.target.value);
-        var qty=(<HTMLInputElement>document.getElementById("qty_"+id)).value;
-        this.tyreService.addToCart({order_quantity:qty,tyre_id:id}).subscribe((data: any) => { 
+        this.qty=(<HTMLInputElement>document.getElementById("qty_"+id)).value;
+        if(this.qty>stock){
+           // this.alertService.error("Requested quantity is not availalbe."); 
+        }
+        this.tyreService.addToCart({order_quantity:this.qty,tyre_id:id}).subscribe((data: any) => { 
             this.spinnerService.hide();
+            
             document.getElementById("cartTotal").innerHTML=data.total;
-            (<HTMLInputElement>document.getElementById("qty_"+id)).value='';   
-            this.alertService.success(data.text);
+            (<HTMLInputElement>document.getElementById("qty_"+id)).value=''; 
+            if(data.status=='success'){  
+                this.alertService.success(data.text);
+                let updateItem = this.gridData.find(this.findIndexToUpdate, cartItem.id);                
+                let index = this.gridData.indexOf(updateItem);                
+                this.gridData[index].stock = cartItem.initial_stock-data.cart_quantity;
+            }    
+            else
+                this.alertService.error(data.text);    
          }, error => {
              this.responseService.checkStatus(error);           
          });
+    }
+
+    findIndexToUpdate(newItem) { 
+        return newItem.id === this;
     }
 
    
@@ -231,10 +250,13 @@ export class TyresComponent implements OnInit {
         this.spinnerService.hide();       
     }
 
-
     doSendEnquiry(){
         //console.log(this.EnquiryFormData.value);
-        
+        if(this.EnquiryFormData.value.quantity==null){
+            this.alertService.error("Enter quantity");
+            return false;
+        } 
+
         if(this.EnquiryFormData.value.comment==null){
             this.alertService.error("Enter comment");
             return false;

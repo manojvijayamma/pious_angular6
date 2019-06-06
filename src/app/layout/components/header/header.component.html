@@ -3,7 +3,7 @@
 
 <nav class="navbar navbar-expand-lg fixed-top">
     <!--<a id="panel_username" class="navbar-brand" href="#" style="font-size:30px;" (click)="showSpinner(0)">{{loggedUser}} </a>-->
-    <a id="panel_logo" class="navbar-brand" href="#"  ><img class="mainimage" src="assets/images/Logonew.png" style="height:50px;"  alt=""/> </a> <!-- style="display:none;" (click)="showSpinner(0)" -->
+    <a id="panel_logo" class="navbar-brand" href="#"  ><img class="mainimage " src="assets/images/logo_jan.png" style="height:50px;"  alt=""/> </a> <!-- style="display:none;" (click)="showSpinner(0)" -->
     <button class="navbar-toggler" type="button" (click)="toggleSidebar()">
         <!-- <span class="navbar-toggler-icon"></span> -->
         <i class="fa fa-bars text-muted" aria-hidden="true"></i>
@@ -16,7 +16,7 @@
             <li class="nav-item">
                 <a class="nav-link" style="color:#CE2026" [routerLink]="['/tyres']" [routerLinkActive]="['router-link-active']" (click)="showSpinner(1)">
             
-                    <img src="assets/images/icons8-tire-96.png" style="height:30px;"> Products
+                    <img src="assets/images/icons8-tire-96.png" style="height:30px;"> Stock Details
                  
                 </a>
             </li>
@@ -24,22 +24,18 @@
             <li class="nav-item">
                 <a class="nav-link" style="color:#CE2026" [routerLink]="['/orders']" [routerLinkActive]="['router-link-active']" (click)="showSpinner(1)">
        
-                    <img src="assets/images/icons8-todo-list-96.png" style="height:30px;"> Orders
+                    <img src="assets/images/icons8-todo-list-96.png" style="height:30px;"> Order Status
                   
                 </a> 
             </li>
             <li class="nav-item">
                 <a class="nav-link" style="color:#CE2026" [routerLink]="['/address']" [routerLinkActive]="['router-link-active']" (click)="showSpinner(1)">
             
-                    <img src="assets/images/icons8-address-96.png" style="height:30px;"> Address Book
+                    <img src="assets/images/icons8-address-96.png" style="height:30px;"> Delivery Locations
              
             </a> 
             </li>
-          </ul>
-          
-          <ul class="navbar-nav ml-auto">
-           
-            
+
             <li class="nav-item dropdown" ngbDropdown>
                 <a href="javascript:void(0)" class="nav-link" style="color:#4F4141" ngbDropdownToggle>
                     <i class="fa fa-user" ></i> {{loggedUser}} <b class="caret"></b>
@@ -64,7 +60,13 @@
          
                  </a>
             </li>
-        </ul>
+
+          </ul>
+          
+          <ul class="navbar-nav mr-auto">
+                     
+            
+          </ul>
 
         
     </div>
@@ -269,6 +271,7 @@
                     
                     <th  style="width:3%;text-align:right">Qty</th>
                     <th  style="width:3%;text-align:right">Total</th>
+                    <th  style="width:3%;text-align:right">Disc</th>
                     <th  style="width:3%;text-align:right">Vat Rate</th>
                     <th  style="width:3%;text-align:right">Vat Amt</th>
                     <th  style="width:3%;text-align:right">G.Total</th>
@@ -286,28 +289,35 @@
                     <td style="text-align:right">{{data.price}}</td>
                     <td style="text-align:right">{{data.order_quantity}} {{data.promo_quantity}}</td>
                     <td style="text-align:right">{{data.total_price}}</td>
-                    <td style="text-align:right">{{data.vat_rate}}</td>
+                    <td style="text-align:right">{{data.discount_amount}}</td>
+                    <td style="text-align:right">{{data.vat_rate}} %</td>
                     <td style="text-align:right">{{data.vat_amount}}</td>
                     <td style="text-align:right">{{data.grant_total}}</td>
                     
                     
                 </tr>
                 <tr  class="rowBorder">
-                    <td colspan="8" style="text-align:right"><b>Sub Total</b></td>
+                    <td colspan="9" style="text-align:right"><b>Sub Total (G. Total + Disc - Vat )</b></td>
                     
                     <td style="text-align:right"><b>{{ getTotal()[0] }}</b></td>
                     
                 </tr>
-                <tr  class="rowBorder">
-                    <td colspan="8" style="text-align:right"><b>Vat Total</b></td>
+                <tr  class="rowBorder" >
+                    <td colspan="9" style="text-align:right"><b>Discount Total</b></td>
                     
-                    <td style="text-align:right"><b>{{ getTotal()[1] }}</b></td>
+                    <td style="text-align:right"><b>-{{ getTotal()[3] }}</b></td>
                     
                 </tr>
                 <tr  class="rowBorder">
-                    <td colspan="8" style="text-align:right"><b>Grand Total</b></td>
+                    <td colspan="9" style="text-align:right"><b>Vat Total</b></td>
                     
-                    <td style="text-align:right"><b>{{ getTotal()[2] }}</b></td>
+                    <td style="text-align:right"><b>+{{ getTotal()[1] }}</b></td>
+                    
+                </tr>
+                <tr  class="rowBorder">
+                    <td colspan="9" style="text-align:right"><b>Grand Total</b></td>
+                    
+                    <td style="text-align:right"><b>{{ getTotal()[4] }}</b></td>
                     
                 </tr>
                
@@ -343,7 +353,7 @@
         <!-- Modal footer -->
         <div class="modal-footer">
 
-            <button class="btn  btn-primary" type="submit" ><i class="fa fa-fw fa-save "></i>&nbsp;Place Order</button>
+            <button class="btn  btn-primary" type="submit" [disabled]="placeorderButton!=1"><i class="fa fa-fw fa-save "></i>&nbsp;Place Order</button>
             <button type="button" class="btn btn-danger" (click)="closeModalDialogCart()" ><i class="fa fa-fw fa-close "></i>&nbsp;Close</button>
         </div>
 

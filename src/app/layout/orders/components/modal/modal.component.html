@@ -4,7 +4,7 @@
 
 <ng-template #content let-c="close" let-d="dismiss">
     <div class="modal-header">
-        <h4 class="modal-title"><i class="fa fa-table "></i> Order Details</h4>
+        <h4 class="modal-title"><i class="fa fa-table "></i> Order Status</h4>
         <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -72,6 +72,7 @@
                             <th  style="width:10%;text-align:right">Pro. Qty</th>
                             <th  style="width:10%;text-align:right">Total Qty</th>
                             <th  style="width:10%;text-align:right">Total</th>
+                            <th  style="width:10%;text-align:right">Disc.</th>
                             <th  style="width:10%;text-align:right">Vat Rate</th>
                             <th  style="width:10%;text-align:right">Vat Amt</th>
                             <th  style="width:10%;text-align:right">G. Total</th>
@@ -81,7 +82,7 @@
                         <tbody>
                         <tr *ngFor="let data of orderDetails;let i=index" class="rowBorder" >
                             <td scope="row">{{ i+1}}</td>
-                            <td >{{data.title}}
+                            <td >{{data.title}} {{data.description}}
                             </td>
                  
                             <td style="text-align:right">{{data.price}}</td>
@@ -89,6 +90,7 @@
                             <td style="text-align:right">{{data.promo_quantity}}</td>
                             <td style="text-align:right">{{data.total_quantity}}</td>
                             <td style="text-align:right">{{data.total_price}}</td>
+                            <td style="text-align:right">{{data.discount_amount}}</td>
                             <td style="text-align:right">{{data.vat_rate}}%</td>
                             <td style="text-align:right">{{data.vat_amount}}</td>
                             <td style="text-align:right">{{data.grant_total}}</td>
@@ -97,21 +99,27 @@
                         </tr>
 
                         <tr  class="rowBorder">
-                            <td colspan="9" style="text-align:right"><b>Sub Total</b></td>
+                            <td colspan="10" style="text-align:right"><b>Sub Total(G. Total + Disc. - Vat.)</b></td>
                             
                             <td style="text-align:right"><b>{{ getTotal()[0] }}</b></td>
                             
                         </tr>
                         <tr  class="rowBorder">
-                            <td colspan="9" style="text-align:right"><b>Vat Total</b></td>
+                            <td colspan="10" style="text-align:right"><b>Discount</b></td>
                             
-                            <td style="text-align:right"><b>{{ getTotal()[1] }}</b></td>
+                            <td style="text-align:right"><b>-{{ getTotal()[3] }}</b></td>
                             
                         </tr>
                         <tr  class="rowBorder">
-                            <td colspan="9" style="text-align:right"><b>Grand Total</b></td>
+                            <td colspan="10" style="text-align:right"><b>Vat Total</b></td>
                             
-                            <td style="text-align:right"><b>{{ getTotal()[2] }}</b></td>
+                            <td style="text-align:right"><b>+{{ getTotal()[1] }}</b></td>
+                            
+                        </tr>
+                        <tr  class="rowBorder">
+                            <td colspan="10" style="text-align:right"><b>Grand Total</b></td>
+                            
+                            <td style="text-align:right"><b>{{ getTotal()[4] }}</b></td>
                             
                         </tr>
                      

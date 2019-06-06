@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { HttpClient, HttpClientModule, HttpErrorResponse } from '@angular/common/http';
 
 import { UserService } from '../../../shared/services/user.service';
 import { OrderService } from '../../../shared/services/order.service';
@@ -28,6 +29,7 @@ export class HeaderComponent implements OnInit {
     totalData:any;
     cartDetails: FormGroup; 
     menuToggle:boolean;
+    placeorderButton=1;
 
     constructor(private translate: TranslateService, public router: Router, private frmBuilder: FormBuilder,  private userService : UserService,
     private alertService : AlertService,
@@ -133,7 +135,20 @@ export class HeaderComponent implements OnInit {
 
     onLoggedout() {
         localStorage.removeItem('isLoggedin');
-        this.router.navigateByUrl('/login');
+
+        this.userService.logout().subscribe((data : any)=>{
+            
+            
+            
+          },
+          (err : HttpErrorResponse)=>{
+              
+            
+          });
+
+          this.router.navigateByUrl('/login'); 
+
+        
     }
 
 
@@ -228,7 +243,7 @@ export class HeaderComponent implements OnInit {
             return false;
         }
 
-
+        this.placeorderButton=0;
         this.spinnerService.show();       
         
         this.orderService.saveOrder(this.cartDetails.value).subscribe((data : any)=>{
@@ -239,15 +254,19 @@ export class HeaderComponent implements OnInit {
                 this.alertService.success(data.text);
                 document.getElementById("cartTotal").innerHTML='';
                 this.spinnerService.hide();
+                this.placeorderButton=1;
+                window.location.reload();
             }  
             else{
                 this.spinnerService.hide(); 
+                this.placeorderButton=1;
             }  
           }
           , error => {
            
             this.responseService.checkStatus(error); 
-            this.spinnerService.hide();   
+            this.spinnerService.hide();
+            this.placeorderButton=1;   
             
           });        
     }
@@ -407,13 +426,17 @@ export class HeaderComponent implements OnInit {
     var sub_total = 0;
     var vat_total = 0;
     var grant_total = 0;
+    var discount_total=0;
+    var total_with_vat=0;
     for(var i = 0; i < this.cartData.length; i++){
         var product = this.cartData[i];
         sub_total = sub_total+parseFloat(product.total_price);
+        discount_total = discount_total+parseFloat(product.discount_amount);
         vat_total = vat_total+parseFloat(product.vat_amount);
+        total_with_vat = total_with_vat+parseFloat(product.total_with_vat);
         grant_total = grant_total+parseFloat(product.grant_total);
     }
     
-    return [sub_total.toFixed(2),vat_total.toFixed(2),grant_total.toFixed(2)];
+    return [sub_total.toFixed(2),vat_total.toFixed(2),total_with_vat.toFixed(2),discount_total.toFixed(2),grant_total.toFixed(2)];
   }
 }
