@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
     
     loginFrm: FormGroup; 
     isLoginError : boolean = false;
-
+    
     @Input() hideSpinner: boolean;
     @Output() hideSpinnerChanged: EventEmitter<boolean> = new EventEmitter();
     
