@@ -61,6 +61,7 @@ export class LoginComponent implements OnInit {
             }
             if(data.result.token){
                 localStorage.setItem('userToken',data.result.token);
+                localStorage.setItem('session_lifetime', data.result.session_lifetime);
                 localStorage.setItem('isLoggedin', 'true');
                 this.router.navigate(['/dashboard']);
             }  
