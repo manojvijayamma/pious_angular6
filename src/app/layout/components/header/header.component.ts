@@ -28,8 +28,11 @@ export class HeaderComponent implements OnInit {
     addressData:any;
     totalData:any;
     cartDetails: FormGroup; 
+    enquiryDetails: FormGroup; 
     menuToggle:boolean;
     placeorderButton=1;
+    enquiryData:any;
+    enquirydisplay='none';
 
     constructor(private translate: TranslateService, public router: Router, private frmBuilder: FormBuilder,  private userService : UserService,
     private alertService : AlertService,
@@ -272,6 +275,39 @@ export class HeaderComponent implements OnInit {
     }
 
 
+    doSendEnquiry(){
+        console.log(this.formData.value);
+       
+
+        this.placeorderButton=0;
+        this.spinnerService.show();       
+        
+        this.orderService.saveEnquiry().subscribe((data : any)=>{
+            console.log(data);
+            if(data.text){
+                this.enquirydisplay='none';
+                
+                this.alertService.success(data.text);
+                document.getElementById("enquiryTotal").innerHTML='';
+                this.spinnerService.hide();
+                this.placeorderButton=1;
+                window.location.reload();
+            }  
+            else{
+                this.spinnerService.hide(); 
+                this.placeorderButton=1;
+            }  
+          }
+          , error => {
+           
+            this.responseService.checkStatus(error); 
+            this.spinnerService.hide();
+            this.placeorderButton=1;   
+            
+          });        
+    }
+
+
 
     openModalDialogProfile(){ 
 
@@ -321,6 +357,11 @@ export class HeaderComponent implements OnInit {
         this.spinnerService.hide(); 
     }
 
+    closeModalDialogEnquiry(){
+        this.enquirydisplay='none'; //set none css after close dialog
+        this.spinnerService.hide(); 
+    }
+
 
 
     changeLang(language: string) {
@@ -354,6 +395,7 @@ export class HeaderComponent implements OnInit {
                 this.cartdisplay='block'; //Set block css
                  this.passworddisplay='none';
                 this.profiledisplay='none';
+                this.enquirydisplay='none';
               //console.log(data.gridData.data);
                 this.cartData=data.gridData.data;
                 this.totalData=data.totalData;
@@ -398,6 +440,7 @@ export class HeaderComponent implements OnInit {
               this.cartdisplay='block'; //Set block css
               this.passworddisplay='none';
               this.profiledisplay='none';
+              this.enquirydisplay='none';
               //console.log(data.gridData.data);
               //this.cartData=data.gridData.data;
               //this.totalData=data.totalData;
@@ -439,4 +482,75 @@ export class HeaderComponent implements OnInit {
     
     return [sub_total.toFixed(2),vat_total.toFixed(2),total_with_vat.toFixed(2),discount_total.toFixed(2),grant_total.toFixed(2)];
   }
+
+
+  openModalDialogEnquiry(){ 
+
+    this.spinnerService.show();  
+
+    this.orderService.getEnquiry('').subscribe((data : any)=>{            
+      if(data.status=='error'){               
+          this.alertService.error(data.text);
+          this.spinnerService.hide(); 
+      }  
+      else{
+          if(data.gridData.total>0){
+            this.enquirydisplay='block'; //Set block css
+             this.passworddisplay='none';
+            this.profiledisplay='none';
+            this.cartdisplay='none';
+          //console.log(data.gridData.data);
+            this.enquiryData=data.gridData.data;
+            
+          }  
+          this.spinnerService.hide();   
+      }  
+    }, error => {
+     
+      this.responseService.checkStatus(error);               
+      this.spinnerService.hide(); 
+    });
+
+
+
+  
+    }
+
+
+    removeEnquiry(item){
+        this.spinnerService.show();    
+        this.orderService.removeEnquiry(item.id).subscribe((data : any)=>{            
+          if(data.status=='error'){               
+              this.alertService.error(data.text);
+              this.spinnerService.hide(); 
+          }  
+          else{
+              this.enquirydisplay='block'; //Set block css
+              this.passworddisplay='none';
+              this.profiledisplay='none';
+              this.cartdisplay='none';
+              //console.log(data.gridData.data);
+              //this.cartData=data.gridData.data;
+              //this.totalData=data.totalData;
+
+              var index = this.cartData.indexOf(item);
+              this.cartData.splice(index, 1); 
+              
+              if(this.cartData.length==0){
+                document.getElementById("cartTotal").innerHTML='';
+                this.enquirydisplay='none';
+              }
+              else{
+                document.getElementById("cartTotal").innerHTML=this.cartData.length;
+              }  
+
+              this.spinnerService.hide();   
+          }  
+        }, error => {
+         
+          this.responseService.checkStatus(error);               
+          this.spinnerService.hide(); 
+        });
+    }
+
 }
