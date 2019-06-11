@@ -22,10 +22,12 @@ export class TyresComponent implements OnInit {
     typeData : any;  
     brandData : any; 
     originData : any;
-    modelData : any;      
+    modelData : any;
+    locationData: any;      
     pager : any; 
     patternData : any; 
     qty:any;
+   
     //pager: {startSI:'',endSI:'',totalRecords:'',totalPages:'',prev:'',next:'',page:''};    
     //pager : any;
     
@@ -70,7 +72,8 @@ export class TyresComponent implements OnInit {
             rowsize:10,
             sortField:'Name',
             sortOrder:'ASC' ,
-            page:''          
+            page:''  ,
+            location_id:localStorage.getItem('default_location')        
         });
 
         this.EnquiryFormData = this.frmBuilder.group({            
@@ -85,6 +88,7 @@ export class TyresComponent implements OnInit {
         this.loadBrand();
         this.loadOrigin();
         this.loadModel();
+        this.loadLocations();        
         this.loadPattern();
         this.loadGridData(1);
         
@@ -107,7 +111,7 @@ export class TyresComponent implements OnInit {
         if(this.qty>stock){
            // this.alertService.error("Requested quantity is not availalbe."); 
         }
-        this.tyreService.addToCart({order_quantity:this.qty,tyre_id:id}).subscribe((data: any) => { 
+        this.tyreService.addToCart({order_quantity:this.qty,tyre_id:id,location_id:localStorage.getItem('default_location')}).subscribe((data: any) => { 
             this.spinnerService.hide();
             
             document.getElementById("cartTotal").innerHTML=data.total;
@@ -228,6 +232,17 @@ export class TyresComponent implements OnInit {
          });
     }
 
+    loadLocations(){
+        this.tyreService.getLocations().subscribe((data: any) => {            
+             
+            this.locationData = data.locations;           
+                
+            
+         }, error => {
+             this.responseService.checkStatus(error);           
+         });
+    }
+
     loadPattern(){
         this.tyreService.getPattern().subscribe((data: any) => {            
              
@@ -291,6 +306,10 @@ export class TyresComponent implements OnInit {
 
     closeModalDialogEnquiry(){
         this.Enquirydisplay='none'; //set none css after close dialog
+    }
+
+    updateDefaultLocation(){
+        localStorage.setItem('default_location',this.searchForm.value.location_id);
     }
 
 }

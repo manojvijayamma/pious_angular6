@@ -52,6 +52,10 @@ export class TyreService {
     return  this.http.get(this.rootUrl+'model');
   }
 
+  getLocations(){             
+    return  this.http.get(this.rootUrl+'location');
+  }
+
   getPattern(){             
     return  this.http.get(this.rootUrl+'pattern');
   }

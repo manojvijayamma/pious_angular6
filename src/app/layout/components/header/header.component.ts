@@ -94,6 +94,7 @@ export class HeaderComponent implements OnInit {
             else{
                
                 this.loggedUser=data.profileData.firstname+' '+data.profileData.lastname;
+                localStorage.setItem('default_location',data.profileData.default_location);
                 
                 document.getElementById("cartTotal").innerHTML=data.total;
 

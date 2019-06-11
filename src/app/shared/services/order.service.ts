@@ -50,7 +50,8 @@ export class OrderService {
     return  this.http.get(this.rootUrl+'enquiry/'+params);
   }
 
-  saveEnquiry(formData){
+  saveEnquiry(){
+    var formData=[];
     return this.http.post(this.rootUrl+'enquiry' , formData);
   }
 

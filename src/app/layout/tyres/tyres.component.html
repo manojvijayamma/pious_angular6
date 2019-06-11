@@ -27,7 +27,20 @@
 
     <form [formGroup]="searchForm"  (ngSubmit)="doSearch()">
     <div class="row " >
-           
+        
+        <div class="col col-xl-2 col-lg-2">
+            <div class="form-group">
+                    <div class="input-group datepicker-input">
+                        <select  class='form-control'   formControlName="location_id" (change)="updateDefaultLocation()">
+                                <option value="">--Location--</option>
+                                <option *ngFor="let cat of locationData" value={{cat.id}}  >
+                                        {{cat.title}}
+                                 </option>
+                        </select>                             
+                    </div>
+                </div>
+    </div>
+
                    
         <div class="col col-xl-2 col-lg-2">
             <div class="form-group">
