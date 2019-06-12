@@ -68,10 +68,24 @@ export class TyreService {
     return this.http.post(this.rootUrl+'cart' , formData);
   }
 
-  sendEnquiry(formData){
-    return this.http.post(this.rootUrl+'enquiry' , formData);
+
+  getEnquiry(params){
+    return  this.http.get(this.rootUrl+'enquiryCart', {params});
   }
 
+  removeEnquiry(params){
+    return  this.http.get(this.rootUrl+'enquiryCart/'+params);
+  }
+
+  sendEnquiry(formData){
+    return this.http.post(this.rootUrl+'enquiryCart' , formData);
+  }
+
+
+  saveEnquiry(){
+    var formData=[];
+    return this.http.post(this.rootUrl+'enquiry' , formData);
+  }
  
 
 }

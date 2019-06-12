@@ -41,20 +41,6 @@ export class OrderService {
   removeCart(params){
     return  this.http.get(this.rootUrl+'cart/'+params);
   }
-
-  getEnquiry(params){
-    return  this.http.get(this.rootUrl+'enquiry', {params});
-  }
-
-  removeEnquiry(params){
-    return  this.http.get(this.rootUrl+'enquiry/'+params);
-  }
-
-  saveEnquiry(){
-    var formData=[];
-    return this.http.post(this.rootUrl+'enquiry' , formData);
-  }
-
  
 
 }

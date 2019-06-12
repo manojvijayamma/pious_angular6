@@ -10,6 +10,7 @@ import {AddressService } from '../../../shared/services/address.service';
 import { AlertService } from '../../../shared/services/alert.service';
 import { ResponseService } from '../../../shared/services/response.service';
 import { SpinnerService } from  '../../../shared/services/spinner.service';
+import { TyreService } from '../../../shared/services/tyre.service';
 
 @Component({
     selector: 'app-header',
@@ -39,7 +40,8 @@ export class HeaderComponent implements OnInit {
     private responseService :ResponseService,
     private spinnerService: SpinnerService,
     private orderService : OrderService  ,
-    private addressService: AddressService  
+    private addressService: AddressService  ,
+    private tyreService: TyreService
 ) {
 
         this.translate.addLangs(['en', 'fr', 'ur', 'es', 'it', 'fa', 'de', 'zh-CHS']);
@@ -60,6 +62,7 @@ export class HeaderComponent implements OnInit {
 
     ngOnInit() {
         this.menuToggle=false;
+
         this.formData = this.frmBuilder.group({            
             email:[null, [Validators.required,Validators.minLength(3),Validators.maxLength(15)]],                 
             firstname : [""] ,
@@ -68,6 +71,14 @@ export class HeaderComponent implements OnInit {
             address : [""] ,
 
         });
+
+
+        this.enquiryDetails = this.frmBuilder.group({            
+            email:[null],                 
+            
+
+        });
+
 
         this.passwordFormData = this.frmBuilder.group({            
             current_password:[null, [Validators.required,Validators.minLength(3),Validators.maxLength(15)]],                 
@@ -283,7 +294,7 @@ export class HeaderComponent implements OnInit {
         this.placeorderButton=0;
         this.spinnerService.show();       
         
-        this.orderService.saveEnquiry().subscribe((data : any)=>{
+        this.tyreService.saveEnquiry().subscribe((data : any)=>{
             console.log(data);
             if(data.text){
                 this.enquirydisplay='none';
@@ -489,7 +500,7 @@ export class HeaderComponent implements OnInit {
 
     this.spinnerService.show();  
 
-    this.orderService.getEnquiry('').subscribe((data : any)=>{            
+    this.tyreService.getEnquiry('').subscribe((data : any)=>{            
       if(data.status=='error'){               
           this.alertService.error(data.text);
           this.spinnerService.hide(); 
@@ -520,7 +531,7 @@ export class HeaderComponent implements OnInit {
 
     removeEnquiry(item){
         this.spinnerService.show();    
-        this.orderService.removeEnquiry(item.id).subscribe((data : any)=>{            
+        this.tyreService.removeEnquiry(item.id).subscribe((data : any)=>{            
           if(data.status=='error'){               
               this.alertService.error(data.text);
               this.spinnerService.hide(); 

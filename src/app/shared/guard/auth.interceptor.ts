@@ -15,22 +15,21 @@ export class AuthInterceptor implements HttpInterceptor {
 
         if (localStorage.getItem('userToken') != null) {  
             
-            /*
+            
 
             // for customer wise session lifetime 
             // 1min=60*1000ms
             var curDateTime=new Date().getTime();
-            var lastAccessTime=parseInt(localStorage.getItem('lastAccessTime'));
+            var lastAccessTime=parseInt(localStorage.getItem('lastAccessTime'))+(parseInt(localStorage.getItem('session_lifetime'))*60*1000);
             var diff =(curDateTime-lastAccessTime) / 1000;
             diff /= 60;
             diff=Math.abs(Math.round(diff));
-            if(diff<=0){
+            if(diff>0){
                 this.router.navigate(['/login']);
-                return false;
-            }
-            
+                
+            }            
             localStorage.setItem('lastAccessTime', new Date().getTime().toString());
-            */
+            
                     
             const clonedreq = req.clone({
                 headers: req.headers.set("Authorization", "Bearer " + localStorage.getItem('userToken'))
