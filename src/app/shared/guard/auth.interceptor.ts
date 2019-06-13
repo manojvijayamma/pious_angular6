@@ -15,20 +15,9 @@ export class AuthInterceptor implements HttpInterceptor {
 
         if (localStorage.getItem('userToken') != null) {  
             
-            
+            this.checkSessionLife();
+            localStorage.setItem("lastAccessTime", new Date().getTime());           
 
-            // for customer wise session lifetime 
-            // 1min=60*1000ms
-            var curDateTime=new Date().getTime();
-            var lastAccessTime=parseInt(localStorage.getItem('lastAccessTime'))+(parseInt(localStorage.getItem('session_lifetime'))*60*1000);
-            var diff =(curDateTime-lastAccessTime) / 1000;
-            diff /= 60;
-            diff=Math.abs(Math.round(diff));
-            if(diff>0){
-                this.router.navigate(['/login']);
-                
-            }            
-            localStorage.setItem('lastAccessTime', new Date().getTime().toString());
             
                     
             const clonedreq = req.clone({
@@ -42,6 +31,34 @@ export class AuthInterceptor implements HttpInterceptor {
         }
     }
 
+
+
+    checkSessionLife() {
+        
+        if(localStorage.getItem("lastAccessTime")!=null){
+            
+                var lastAccessTime=localStorage.getItem("lastAccessTime");
+    
+                    
+                var life = 2;
+                var curDateTime=new Date().getTime();
+                var newDate = new Date(parseInt(lastAccessTime)+life*60*1000);
+                //alert(newDate);
+            
+                var diff =(curDateTime-newDate) / 1000;
+                diff /= 60;
+                //alert(diff);
+                // diff=Math.abs(Math.round(diff));
+    
+                if(diff>0){
+                    this.router.navigate(['/login']);
+                    
+                } 
+    
+                
+        }    
+    
+    }
 
 
 }
