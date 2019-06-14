@@ -108,6 +108,7 @@ export class HeaderComponent implements OnInit {
                 localStorage.setItem('default_location',data.profileData.default_location);
                 
                 document.getElementById("cartTotal").innerHTML=data.total;
+                document.getElementById("enquiryTotal").innerHTML=data.enquirytotal;
 
                 this.spinnerService.hide();   
             }  
@@ -545,15 +546,15 @@ export class HeaderComponent implements OnInit {
               //this.cartData=data.gridData.data;
               //this.totalData=data.totalData;
 
-              var index = this.cartData.indexOf(item);
-              this.cartData.splice(index, 1); 
+              var index = this.enquiryData.indexOf(item);
+              this.enquiryData.splice(index, 1); 
               
-              if(this.cartData.length==0){
-                document.getElementById("cartTotal").innerHTML='';
+              if(this.enquiryData.length==0){
+                document.getElementById("enquiryTotal").innerHTML='';
                 this.enquirydisplay='none';
               }
               else{
-                document.getElementById("cartTotal").innerHTML=this.cartData.length;
+                document.getElementById("enquiryTotal").innerHTML=this.enquiryData.length;
               }  
 
               this.spinnerService.hide();   

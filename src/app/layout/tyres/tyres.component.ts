@@ -290,6 +290,9 @@ export class TyresComponent implements OnInit {
                 this.Enquirydisplay='none';
                 this.alertService.success(data.text);
                 this.EnquiryFormData.controls["comment"].setValue(['']);
+                if(data.enquirytotal>0){
+                    document.getElementById("enquiryTotal").innerHTML=data.enquirytotal;
+                }    
                 this.spinnerService.hide();
             }  
           }, error => {

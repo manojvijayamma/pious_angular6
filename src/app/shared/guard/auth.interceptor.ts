@@ -16,7 +16,7 @@ export class AuthInterceptor implements HttpInterceptor {
         if (localStorage.getItem('userToken') != null) {  
             
             this.checkSessionLife();
-            localStorage.setItem("lastAccessTime", new Date().getTime());           
+            localStorage.setItem("lastAccessTime", new Date().getTime().toString());           
 
             
                     
@@ -35,14 +35,14 @@ export class AuthInterceptor implements HttpInterceptor {
 
     checkSessionLife() {
         
-        if(localStorage.getItem("lastAccessTime")!=null){
+        if(localStorage.getItem("lastAccessTime")!=null && localStorage.getItem("session_lifetime")!=null){
             
                 var lastAccessTime=localStorage.getItem("lastAccessTime");
     
                     
-                var life = 2;
+                var life = localStorage.getItem("session_lifetime");
                 var curDateTime=new Date().getTime();
-                var newDate = new Date(parseInt(lastAccessTime)+life*60*1000);
+                var newDate = new Date(parseInt(lastAccessTime)+parseInt(life)*60*1000).getTime();
                 //alert(newDate);
             
                 var diff =(curDateTime-newDate) / 1000;

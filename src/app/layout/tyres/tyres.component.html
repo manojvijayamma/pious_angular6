@@ -153,7 +153,7 @@
                         <th style="width:4%">Origin</th>
                         <th style="width:8%;text-align:right" >Stock</th>
                         <th style="width:8%;text-align:right">Price</th>
-                        
+                        <th style="width:8%;text-align:right">Discount</th>
                         <th style="width:8%;text-align:right">Promotion</th>
                         <th style="width:10%;text-align:right">Order Qty</th>
                         <th style="width:10%;text-align:center">Cart</th>
@@ -176,6 +176,7 @@
                         <td align="right"><span  *ngIf="data.stock >0">{{data.stock}}</span>
                             <span  *ngIf="data.stock==0" style="color:red;">No Stock</span></td>
                         <td align="right">{{data.price1}}</td>
+                        <td align="right">{{data.total_discount_text}}</td>
                         <td align="right"><span *ngIf="data.promo_buy>0">{{data.promo_buy}}</span> <span *ngIf="data.promo_get>0"> + {{data.promo_get}}</span></td>
                   
                         
