@@ -73,7 +73,7 @@ export class TyresComponent implements OnInit {
             sortField:'Name',
             sortOrder:'ASC' ,
             page:''  ,
-            location_id:localStorage.getItem('default_location')        
+            location_id:[parseInt(localStorage.getItem('default_location'))]       
         });
 
         this.EnquiryFormData = this.frmBuilder.group({            

@@ -7,6 +7,8 @@ export const environment = {
   production: false,
    //api_url: 'http://localhost/workshop/laravel/tms-laravel/public/api/',
   //api_url: 'http://localhost:8080/pious/tms_laravel/public/api/',
-  api_url: 'http://store.safeertyres.com/storeApp/demo/public/api/',
+  //api_url: 'http://store.safeertyres.com/storeApp/demo/public/api/',
+
+  api_url: 'http://localhost/laravel/safeertyres/public/index.php/api/',
   image_url:'http://store.safeertyres.com/storeApp/demo/public/uploads/',
 };

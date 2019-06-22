@@ -51,6 +51,10 @@ export class AuthInterceptor implements HttpInterceptor {
                 // diff=Math.abs(Math.round(diff));
     
                 if(diff>0){
+                    localStorage.setItem('userToken',null);
+                    localStorage.setItem('isLoggedin',null);
+                    localStorage.removeItem('isLoggedin');
+                    localStorage.removeItem('userToken');
                     this.router.navigate(['/login']);
                     
                 } 
