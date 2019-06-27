@@ -292,7 +292,7 @@
                         <td><a href="javascript:void(0);" class="btn btn-success btn-sm" (click)="removeCart(data)"><i class="fa fa-remove"></i> </a>
                         </td>
                     <td style="padding:10px" scope="row">{{ i+1}}</td>
-                    <td >{{data.title}}
+                    <td >{{data.title}} - <span style="color:red">{{data.location}}</span>
                     </td>
          
                     <td style="text-align:right">{{data.price}}</td>
@@ -413,7 +413,7 @@
                         <td><a href="javascript:void(0);" class="btn btn-success btn-sm" (click)="removeEnquiry(data)"><i class="fa fa-remove"></i> </a>
                         </td>
                     <td style="padding:10px" scope="row">{{ i+1}}</td>
-                    <td >{{data.title}}
+                    <td >{{data.title}} 
                     </td>
          
                     <td style="text-align:right">{{data.quantity}}</td>
